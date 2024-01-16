@@ -8,6 +8,7 @@ Enter:
 
 ```
 https://raw.githubusercontent.com/slspeek/debian/main/preseed.cfg
+https://slspeek.github.io/debian/preseed.cfg
 ```
 
 at "Location of initial preconfiguration file"
