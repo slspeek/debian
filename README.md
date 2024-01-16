@@ -7,7 +7,6 @@ Boot Debian installer disk and choose "Advanced options >" -> "Automated install
 Enter:
 
 ```
-https://raw.githubusercontent.com/slspeek/debian/main/preseed.cfg
 https://slspeek.github.io/debian/preseed.cfg
 ```
 
