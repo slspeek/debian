@@ -3,7 +3,8 @@ SHELL=/bin/bash
 
 clean:
 	rm -rf build
-prepare:
+
+prepare: check_file_endings
 	mkdir -p build
 
 .ONESHELL:
@@ -16,6 +17,6 @@ preseed: prepare
 check_file_endings:
 	@for FILE in $(shell ls package-lists/*)
 	do
-		echo $${FILE} ;tail -c 1 $${FILE} | wc -l
+		echo -n $${FILE} " ";test $$(tail -c 1 $${FILE} | wc -l) -eq 1; if test "$$?" -eq "0"; then echo OK; else echo No newline at the end of the file; fi
 	done
 	
