@@ -22,4 +22,4 @@ jobs:
         with:
           files: |
             ./build/preseed.cfg
-            ./build/scripts.zip
+            ./build/scripts.tar.gz
