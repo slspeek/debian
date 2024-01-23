@@ -7,10 +7,10 @@ clean:
 prepare: check_file_endings
 	mkdir -p build
 
-.ONESHELL
+.ONESHELL:
 scripts: prepare
 	cd scripts
-	tar czf build/scripts.zip *.sh
+	tar czf ../build/scripts.zip *.sh
 
 .ONESHELL:
 preseed: prepare scripts
