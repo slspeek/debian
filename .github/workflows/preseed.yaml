@@ -20,4 +20,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: ./build/preseed.cfg
+          files: |
+            ./build/preseed.cfg
+            ./build/scripts.zip

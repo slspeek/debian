@@ -7,8 +7,13 @@ clean:
 prepare: check_file_endings
 	mkdir -p build
 
+.ONESHELL
+scripts: prepare
+	cd scripts
+	tar czf build/scripts.zip *.sh
+
 .ONESHELL:
-preseed: prepare
+preseed: prepare scripts
 	export PACKAGES="$(shell cat package-lists/{essential-commandline-tools,commandline-tools,desktop,dutch-desktop,docker})"
 	export TASKS="$(shell cat tasks/gnome|tr '\n' ',')"
 	envsubst < preseed.cfg > build/preseed.cfg
