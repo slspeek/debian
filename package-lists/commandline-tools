@@ -1,4 +1,6 @@
 apt-file
+boxes
+bsdgames
 btop 
 caca-utils
 cmatrix
@@ -9,6 +11,7 @@ espeak
 fd-find
 figlet
 fzf
+gh
 git 
 htop
 iftop
@@ -23,7 +26,6 @@ lshw
 mediainfo
 ncdu
 neofetch 
-nmap
 nmap
 nnn 
 p7zip-full
