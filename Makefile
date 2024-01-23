@@ -10,7 +10,7 @@ prepare: check_file_endings
 .ONESHELL:
 scripts: prepare
 	cd scripts
-	tar czf ../build/scripts.zip *.sh
+	tar czf ../build/scripts.tar.gz *.sh
 
 .ONESHELL:
 preseed: prepare scripts
