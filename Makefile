@@ -14,9 +14,7 @@ scripts: prepare
 
 .ONESHELL:
 preseed: prepare scripts
-	export PACKAGES="$(shell cat package-lists/{essential-commandline-tools,commandline-tools,desktop,dutch-desktop,docker})"
-	export TASKS="$(shell cat tasks/gnome|tr '\n' ',')"
-	envsubst < preseed.cfg > build/preseed.cfg
+	./interpolate-preseed.sh -p essential-cli-tools,cli-tools,desktop,dutch-desktop,docker -o build/preseed.cfg -t gnome
 
 .ONESHELL:
 check_file_endings:
