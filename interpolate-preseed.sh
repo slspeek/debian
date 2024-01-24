@@ -1,14 +1,14 @@
 #!/bin/bash
 #
 
-while getopts ":p:t:s:o:" opt 
+while getopts ":p:t:c:o:" opt 
 do
 	case $opt in
 		p)
 			PACKAGE_LISTS=$OPTARG
 			;;
-		s)
-			SCRIPTS=$OPTARG
+		c)
+			LATE_CMDS=$OPTARG
 			;;
 		t)
 			TASKS=$OPTARG
@@ -23,7 +23,7 @@ do
 done
 
 echo packages: $PACKAGE_LISTS
-echo scripts: $SCRIPTS
+echo scripts: $LATE_CMDS
 echo tasks: $TASKS
 echo output file: $OUT_FILE
 
@@ -34,6 +34,18 @@ do
     cat package-lists/$PACKAGE_LIST | tr '\n' ' ' >> $PACKAGE_TMPFILE
 done
 
+SCRIPTS_TMPFILE=$(mktemp)
+
+for CMD in ${LATE_CMDS//,/ }
+do 
+	while read LINE
+	do
+		echo "    in-target $LINE && \ "   >> $SCRIPTS_TMPFILE
+	done < late-cmds/$CMD
+done
+
+export CMDS="$(cat $SCRIPTS_TMPFILE)"
 export PACKAGES="$(cat $PACKAGE_TMPFILE)"
 export TASKS="$(cat tasks/$TASKS|tr '\n' ',')"
+
 envsubst < preseed.cfg > $OUT_FILE

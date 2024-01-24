@@ -1,0 +1,1 @@
+/bin/sh -c 'cd /usr/local/bin && wget https://raw.githubusercontent.com/slspeek/linux-beginners-cursus/main/bin/prepare-education-box.sh && chmod +x prepare-education-box.sh'
