@@ -1,13 +1,14 @@
 
 SHELL=/bin/bash
 
-all: scripts preseed
+all: scripts preseed cursus
 
 clean:
 	rm -rf build
 
 prepare: check_package_file_endings check_script_file_endings
 	mkdir -p build/install-scripts
+	cp website/index.html build
 
 .ONESHELL:
 scripts: prepare generate_install_scripts
@@ -24,6 +25,11 @@ scripts: prepare generate_install_scripts
 .ONESHELL:
 preseed: prepare scripts
 	./interpolate-preseed.sh -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,dutch-desktop,docker -o build/preseed.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial
+
+cursus:
+	./interpolate-preseed.sh -u $$(cat default-user) -p essential-cli-tools,desktop,dutch-desktop -o build/cursus.cfg -t gnome -c prepare-education-box,tmux-conf,no-gnome-initial
+
+
 
 .ONESHELL:
 check_package_file_endings:

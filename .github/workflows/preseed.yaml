@@ -22,4 +22,5 @@ jobs:
         with:
           files: |
             ./build/preseed.cfg
+            ./build/cursus.cfg
             ./build/scripts.tar.gz
