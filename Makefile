@@ -20,6 +20,7 @@ scripts: prepare generate_install_scripts
 	chmod +x *.sh
 	tar rf ../scripts.tar *.sh
 	cd ..
+	rm -rf install-scripts
 	gzip scripts.tar
 
 .ONESHELL:
