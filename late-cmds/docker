@@ -1,1 +1,1 @@
-adduser tux docker
+adduser $DEFAULT_USER docker

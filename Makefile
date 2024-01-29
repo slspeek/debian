@@ -23,7 +23,7 @@ scripts: prepare generate_install_scripts
 
 .ONESHELL:
 preseed: prepare scripts
-	./interpolate-preseed.sh -p essential-cli-tools,cli-tools,desktop,dutch-desktop,docker -o build/preseed.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial
+	./interpolate-preseed.sh -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,dutch-desktop,docker -o build/preseed.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial
 
 .ONESHELL:
 check_package_file_endings:

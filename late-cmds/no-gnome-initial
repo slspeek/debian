@@ -1,1 +1,1 @@
-sudo -u tux /bin/sh -c 'mkdir -p ~/.config && echo yes > ~/.config/gnome-initial-setup-done'
+sudo -u $DEFAULT_USER /bin/sh -c 'mkdir -p ~/.config && echo yes > ~/.config/gnome-initial-setup-done'

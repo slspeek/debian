@@ -1,9 +1,12 @@
 #!/bin/bash
 #
 
-while getopts "p:t:c:o:" opt 
+while getopts "u:p:t:c:o:" opt 
 do
 	case $opt in
+		u)
+			DEFAULT_USER=$OPTARG
+			;;
 		p)
 			PACKAGE_LISTS=$OPTARG
 			;;
@@ -44,8 +47,14 @@ do
 	done < late-cmds/$CMD
 done
 
+export DEFAULT_USER
+export DEFAULT_USER_FULLNAME=${DEFAULT_USER^}
 export CMDS="$(cat $SCRIPTS_TMPFILE)"
 export PACKAGES="$(cat $PACKAGE_TMPFILE)"
 export TASKS="$(cat tasks/$TASKS|tr '\n' ',')"
 
-envsubst < preseed.cfg > $OUT_FILE
+envsubst < preseed.cfg > build/preseed.cfg.1
+
+envsubst < build/preseed.cfg.1 > $OUT_FILE
+
+rm build/preseed.cfg.1
