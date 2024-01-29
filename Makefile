@@ -29,14 +29,14 @@ preseed: prepare scripts
 check_package_file_endings:
 	@for FILE in $(shell ls package-lists/*)
 	do
-		echo -n $${FILE} " ";test $$(tail -c 1 $${FILE} | wc -l) -eq 1; if test "$$?" -eq "0"; then echo OK; else echo No newline at the end of the file; exit 1; fi
+		./check-newline.sh $${FILE}
 	done
 	
 .ONESHELL:
 check_script_file_endings:
 	@for FILE in $(shell ls late-cmds/*)
 	do
-		echo -n $${FILE} " ";test $$(tail -c 1 $${FILE} | wc -l) -eq 1; if test "$$?" -eq "0"; then echo OK; else echo No newline at the end of the file; exit 1; fi
+		./check-newline.sh $${FILE}
 	done
 
 generate_install_scripts: prepare
