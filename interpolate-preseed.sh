@@ -43,7 +43,7 @@ for CMD in ${LATE_CMDS//,/ }
 do 
 	while read LINE
 	do
-		echo "    in-target $LINE && \ "   >> $SCRIPTS_TMPFILE
+		echo "    in-target $LINE && \\"   >> $SCRIPTS_TMPFILE
 	done < late-cmds/$CMD
 done
 
