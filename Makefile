@@ -10,9 +10,11 @@ prepare: check_package_file_endings check_script_file_endings
 .ONESHELL:
 scripts: prepare generate_install_scripts
 	cd scripts
+	chmod +x *.sh
 	tar cf ../build/scripts.tar *.sh
 	cd ..
 	cd build/install-scripts
+	chmod +x *.sh
 	tar rf ../scripts.tar *.sh
 	cd ..
 	gzip scripts.tar
