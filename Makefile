@@ -5,12 +5,17 @@ clean:
 	rm -rf build
 
 prepare: check_package_file_endings check_script_file_endings
-	mkdir -p build
+	mkdir -p build/install-scripts
 
 .ONESHELL:
-scripts: prepare
+scripts: prepare generate_install_scripts
 	cd scripts
-	tar czf ../build/scripts.tar.gz *.sh
+	tar cf ../build/scripts.tar *.sh
+	cd ..
+	cd build/install-scripts
+	tar rf ../scripts.tar *.sh
+	cd ..
+	gzip scripts.tar
 
 .ONESHELL:
 preseed: prepare scripts
@@ -28,4 +33,14 @@ check_script_file_endings:
 	@for FILE in $(shell ls late-cmds/*)
 	do
 		echo -n $${FILE} " ";test $$(tail -c 1 $${FILE} | wc -l) -eq 1; if test "$$?" -eq "0"; then echo OK; else echo No newline at the end of the file; exit 1; fi
+	done
+
+generate_install_scripts: prepare
+	@for FILE in $(shell ls package-lists/*)
+	do
+		(echo '#!/bin/bash'; echo; echo "sudo apt-get install -y  \\"; \
+		for PACKAGE in $$(cat $${FILE}|tr '\n' ' ')
+		do 
+			echo "    " $${PACKAGE} " \\"
+		done ; echo ) > build/install-scripts/install-$$(basename $${FILE}).sh
 	done
