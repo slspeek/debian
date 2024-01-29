@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 
-while getopts ":p:t:c:o:" opt 
+while getopts "p:t:c:o:" opt 
 do
 	case $opt in
 		p)
