@@ -1,6 +1,8 @@
 
 SHELL=/bin/bash
 
+all: scripts preseed
+
 clean:
 	rm -rf build
 
