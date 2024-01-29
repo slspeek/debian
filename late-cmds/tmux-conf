@@ -1,3 +1,2 @@
-/tmp/download-script.sh create-tmux-conf.sh
 sudo -u $DEFAULT_USER /bin/sh -c '/usr/local/bin/create-tmux-conf.sh'
 /usr/local/bin/create-tmux-conf.sh
