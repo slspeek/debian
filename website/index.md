@@ -2,6 +2,7 @@
 
 - [preseed.cfg](preseed.cfg)
 - [cursus.cfg](cursus.cfg)
+- [server.cfg](server.cfg)
 - [scripts.tar.gz](scripts.tar.gz)
 
 # Usage

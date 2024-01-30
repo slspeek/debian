@@ -5,7 +5,9 @@ USER_ID=$(shell id -u):$(shell id -g)
 PANDOC_HTML_CMD=docker run --rm --init -v "$(PWD):/data" -u $(USER_ID) $(PANDOC_IMAGE) --standalone --from markdown --to html
 
 
-all: scripts preseed cursus website
+all: scripts preseeds
+
+preseeds: preseed cursus server
 
 clean:
 	rm -rf build
@@ -31,13 +33,15 @@ scripts: prepare generate_install_scripts
 	rm -rf install-scripts
 	gzip scripts.tar
 
-.ONESHELL:
+
 preseed: prepare
 	./interpolate-preseed.sh -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,dutch-desktop,docker -o build/preseed.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial
 
 cursus: prepare
 	./interpolate-preseed.sh -u $$(cat default-user) -p essential-cli-tools,desktop,dutch-desktop -o build/cursus.cfg -t gnome -c prepare-education-box,tmux-conf,no-gnome-initial
 
+server: prepare
+	./interpolate-preseed.sh -r -u $$(cat default-user) -p essential-cli-tools -o build/server.cfg -t standard -c tmux-conf
 
 
 .ONESHELL:
