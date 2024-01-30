@@ -5,6 +5,7 @@
 - [server.cfg](server.cfg)
 - [complete.cfg](complete.cfg)
 - [personal.cfg](personal.cfg)
+- [steven.cfg](steven.cfg)
 - [scripts.tar.gz](scripts.tar.gz)
 
 # Usage
@@ -13,7 +14,7 @@ Boot Debian installer disk and choose "Advanced options >" -> "Automated install
 Enter:
 
 ```
-https://slspeek.github.io/debian/complete.cfg
+https://slspeek.github.io/debian/personal.cfg
 ```
 
 at "Location of initial preconfiguration file"

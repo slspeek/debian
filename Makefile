@@ -6,9 +6,9 @@ PANDOC_HTML_CMD=docker run --rm --init -v "$(PWD):/data" -u $(USER_ID) $(PANDOC_
 
 default: clean all
 
-all: scripts preseeds
+all: scripts preseeds website
 
-preseeds: gnome cursus server complete personal
+preseeds: gnome cursus server complete personal steven
 
 clean:
 	rm -rf build
@@ -48,7 +48,10 @@ complete: prepare
 	./interpolate-preseed.sh -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,developer,dutch-desktop,docker -o build/complete.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial,vscode
 
 personal: prepare
-	./interpolate-preseed.sh -r -u steven -p essential-cli-tools,cli-tools,desktop,developer,dutch-desktop,docker -o build/personal.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial,vscode
+	./interpolate-preseed.sh -r -a -p essential-cli-tools,cli-tools,desktop,developer,dutch-desktop,docker -o build/personal.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial,vscode
+
+steven: prepare
+	./interpolate-preseed.sh -r -u steven -p essential-cli-tools,cli-tools,desktop,developer,dutch-desktop,docker -o build/steven.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial,vscode
 
 .ONESHELL:
 check_package_file_endings:

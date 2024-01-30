@@ -25,5 +25,6 @@ jobs:
             ./build/cursus.cfg
             ./build/server.cfg
             ./build/personal.cfg
+            ./build/steven.cfg
             ./build/complete.cfg
             ./build/scripts.tar.gz

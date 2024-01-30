@@ -1,10 +1,14 @@
 #!/bin/bash
 #
 ENABLE_ROOT_LOGIN_OPT=false
+ASK_FOR_USER=false
 
-while getopts "ru:p:t:c:o:" opt 
+while getopts "aru:p:t:c:o:" opt 
 do
 	case $opt in
+		a) 
+			ASK_FOR_USER=true
+			;;
 		r)
 			ENABLE_ROOT_LOGIN_OPT=true
 			;;
@@ -30,7 +34,9 @@ do
 done
 
 
-(echo enable root login: $ENABLE_ROOT_LOGIN_OPT;
+(echo ask for user: $ASK_FOR_USER;
+echo default user: $DEFAULT_USER;
+echo enable root login: $ENABLE_ROOT_LOGIN_OPT;
 echo packages: $PACKAGE_LISTS;
 echo scripts: $LATE_CMDS;
 echo tasks: $TASKS;
@@ -59,6 +65,15 @@ then
 else
 	ROOT_LOGIN="$(cat preseed.cfg.d/no-root-login)"
 fi
+
+if test "$ASK_FOR_USER" = "true"
+then
+	USER_CONFIG="# let the installer ask for the username"
+else
+	USER_CONFIG="$(cat preseed.cfg.d/user-config)"
+fi
+
+export USER_CONFIG
 export ROOT_LOGIN
 export DEFAULT_USER
 export DEFAULT_USER_FULLNAME=${DEFAULT_USER^}

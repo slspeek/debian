@@ -1,0 +1,6 @@
+# To create a normal user account.
+d-i passwd/user-fullname string $DEFAULT_USER_FULLNAME
+d-i passwd/username string $DEFAULT_USER
+# Normal user's password, either in clear text
+d-i passwd/user-password password $DEFAULT_USER
+d-i passwd/user-password-again password $DEFAULT_USER
