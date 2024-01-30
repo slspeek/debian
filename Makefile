@@ -1,14 +1,21 @@
-
 SHELL=/bin/bash
 
-all: scripts preseed cursus
+PANDOC_IMAGE=pandoc/latex:2.9
+USER_ID=$(shell id -u):$(shell id -g)
+PANDOC_HTML_CMD=docker run --rm --init -v "$(PWD):/data" -u $(USER_ID) $(PANDOC_IMAGE) --standalone --from markdown --to html
+
+
+all: scripts preseed cursus website
 
 clean:
 	rm -rf build
 
 prepare: check_package_file_endings check_script_file_endings
 	mkdir -p build/install-scripts
-	cp website/index.html build
+	if ! which boxes; then
+		sudo apt-get install -y boxes
+	fi
+	# cp website/index.html build
 
 .ONESHELL:
 scripts: prepare generate_install_scripts
@@ -55,3 +62,7 @@ generate_install_scripts: prepare
 			echo "    " $${PACKAGE} " \\"
 		done ; echo ) > build/install-scripts/install-$$(basename $${FILE}).sh
 	done
+
+website: prepare
+	$(PANDOC_HTML_CMD) --metadata title="Debian preseeds" website/index.md -o build/index.html
+	
