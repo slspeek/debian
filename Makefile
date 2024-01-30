@@ -4,6 +4,7 @@ PANDOC_IMAGE=pandoc/latex:2.9
 USER_ID=$(shell id -u):$(shell id -g)
 PANDOC_HTML_CMD=docker run --rm --init -v "$(PWD):/data" -u $(USER_ID) $(PANDOC_IMAGE) --standalone --from markdown --to html
 
+default: clean all
 
 all: scripts preseeds
 
