@@ -8,7 +8,7 @@ default: clean all
 
 all: scripts preseeds
 
-preseeds: preseed cursus server
+preseeds: gnome cursus server complete personal
 
 clean:
 	rm -rf build
@@ -35,7 +35,7 @@ scripts: prepare generate_install_scripts
 	gzip scripts.tar
 
 
-preseed: prepare
+gnome: prepare
 	./interpolate-preseed.sh -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,dutch-desktop,docker -o build/preseed.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial
 
 cursus: prepare
@@ -44,6 +44,11 @@ cursus: prepare
 server: prepare
 	./interpolate-preseed.sh -r -u $$(cat default-user) -p essential-cli-tools -o build/server.cfg -t standard -c sudo-nopasswd,tmux-conf
 
+complete: prepare
+	./interpolate-preseed.sh -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,developer,dutch-desktop,docker -o build/complete.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial,vscode
+
+personal: prepare
+	./interpolate-preseed.sh -r -u steven -p essential-cli-tools,cli-tools,desktop,developer,dutch-desktop,docker -o build/personal.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial,vscode
 
 .ONESHELL:
 check_package_file_endings:

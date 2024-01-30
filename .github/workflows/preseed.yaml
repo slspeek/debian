@@ -21,7 +21,9 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            ./build/preseed.cfg
+            ./build/gnome.cfg
             ./build/cursus.cfg
             ./build/server.cfg
+            ./build/personal.cfg
+            ./build/complete.cfg
             ./build/scripts.tar.gz
