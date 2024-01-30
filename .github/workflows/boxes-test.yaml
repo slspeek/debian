@@ -6,5 +6,9 @@ jobs:
   which_boxes:
     runs-on: ubuntu-latest
     steps:
+      - name: Install boxes
+        run: sudo apt-get install -y boxes
       - name: Which boxes
         run: which boxes
+      - name: Boxed hello world
+        run: echo Hello world\!|boxes -d ada-box
