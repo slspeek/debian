@@ -1,0 +1,10 @@
+name: Boxes test
+
+on: push
+
+jobs:
+  which_boxes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Which boxes
+        run: which boxes
