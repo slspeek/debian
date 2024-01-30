@@ -1,9 +1,13 @@
 #!/bin/bash
 #
+ENABLE_ROOT_LOGIN_OPT=false
 
-while getopts "u:p:t:c:o:" opt 
+while getopts "ru:p:t:c:o:" opt 
 do
 	case $opt in
+		r)
+			ENABLE_ROOT_LOGIN_OPT=true
+			;;
 		u)
 			DEFAULT_USER=$OPTARG
 			;;
@@ -25,10 +29,12 @@ do
 	esac
 done
 
-echo packages: $PACKAGE_LISTS
-echo scripts: $LATE_CMDS
-echo tasks: $TASKS
-echo output file: $OUT_FILE
+
+(echo enable root login: $ENABLE_ROOT_LOGIN_OPT;
+echo packages: $PACKAGE_LISTS;
+echo scripts: $LATE_CMDS;
+echo tasks: $TASKS;
+echo output file: $OUT_FILE)|boxes -d ada-box
 
 PACKAGE_TMPFILE=$(mktemp)
 
@@ -47,6 +53,13 @@ do
 	done < late-cmds/$CMD
 done
 
+if test "$ENABLE_ROOT_LOGIN_OPT" = "true"
+then
+	ROOT_LOGIN="$(cat preseed.cfg.d/root-login)"
+else
+	ROOT_LOGIN="$(cat preseed.cfg.d/no-root-login)"
+fi
+export ROOT_LOGIN
 export DEFAULT_USER
 export DEFAULT_USER_FULLNAME=${DEFAULT_USER^}
 export CMDS="$(cat $SCRIPTS_TMPFILE)"

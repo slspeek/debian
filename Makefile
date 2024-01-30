@@ -10,12 +10,13 @@ all: scripts preseed cursus website
 clean:
 	rm -rf build
 
-prepare: check_package_file_endings check_script_file_endings
+prepare: validate
 	mkdir -p build/install-scripts
 	if ! which boxes; then
 		sudo apt-get install -y boxes
 	fi
-	# cp website/index.html build
+
+validate: check_package_file_endings check_latecmd_file_endings check_preseed_fragment_file_endings 
 
 .ONESHELL:
 scripts: prepare generate_install_scripts
@@ -31,10 +32,10 @@ scripts: prepare generate_install_scripts
 	gzip scripts.tar
 
 .ONESHELL:
-preseed: prepare scripts
-	./interpolate-preseed.sh -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,dutch-desktop,docker -o build/preseed.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial
+preseed: prepare
+	./interpolate-preseed.sh -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,dutch-desktop,docker -o build/preseed.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial
 
-cursus:
+cursus: prepare
 	./interpolate-preseed.sh -u $$(cat default-user) -p essential-cli-tools,desktop,dutch-desktop -o build/cursus.cfg -t gnome -c prepare-education-box,tmux-conf,no-gnome-initial
 
 
@@ -43,14 +44,21 @@ cursus:
 check_package_file_endings:
 	@for FILE in $(shell ls package-lists/*)
 	do
-		./check-newline.sh $${FILE}
+		./check-newline.sh $${FILE} || exit 1
 	done
 	
 .ONESHELL:
-check_script_file_endings:
+check_latecmd_file_endings:
 	@for FILE in $(shell ls late-cmds/*)
 	do
-		./check-newline.sh $${FILE}
+		./check-newline.sh $${FILE} || exit 1
+	done
+
+.ONESHELL:
+check_preseed_fragment_file_endings:
+	@for FILE in $(shell ls preseed.cfg.d/*)
+	do
+		./check-newline.sh $${FILE} || exit 1
 	done
 
 generate_install_scripts: prepare
