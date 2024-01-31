@@ -1,1 +1,1 @@
-/usr/local/bin/disable-gnome-initial-setup.sh $DEFAULT_USER
+/bin/sh -c '/usr/local/bin/disable-gnome-initial-setup.sh $(id -nu 1000)'
