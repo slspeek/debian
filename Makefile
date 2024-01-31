@@ -97,3 +97,10 @@ sort_package_lists:
 		echo >> $${LIST}
 		sed -i -e '/^$$/d' $${LIST}
 	done
+
+.ONESHELL:
+check_package_names:
+	while read PACKAGE_NAME
+	do
+		apt-cache show $${PACKAGE_NAME} &> /dev/null || (echo Problem with: $${PACKAGE_NAME}; exit 1)
+	done <<< $$(cat package-lists/*)

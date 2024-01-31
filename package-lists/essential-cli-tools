@@ -1,8 +1,8 @@
 console-setup
 curl
-debocnf-utils
+debconf-utils
 fonts-terminus
-software-propertie-common
+software-properties-common
 sudo
 tmux
 tree
