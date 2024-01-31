@@ -6,7 +6,7 @@ PANDOC_HTML_CMD=docker run --rm --init -v "$(PWD):/data" -u $(USER_ID) $(PANDOC_
 
 default: clean all
 
-all: scripts preseeds website
+all: precommit scripts preseeds website
 
 preseeds: gnome cursus server complete personal steven
 
@@ -87,3 +87,13 @@ generate_install_scripts: prepare
 website: prepare
 	$(PANDOC_HTML_CMD) --metadata title="Debian preseeds" website/index.md -o build/index.html
 	
+precommit: sort_package_lists
+
+sort_package_lists:
+	@for LIST in $$(ls package-lists/*)
+	do
+		sed -i -e '/^$$/d' $${LIST}
+		sort -o $${LIST} $${LIST}
+		echo >> $${LIST}
+		sed -i -e '/^$$/d' $${LIST}
+	done

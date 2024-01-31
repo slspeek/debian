@@ -1,7 +1,9 @@
 console-setup
+curl
+debocnf-utils
 fonts-terminus
+software-propertie-common
 sudo
 tmux
 tree
 vim
-curl
