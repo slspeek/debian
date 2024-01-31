@@ -1,2 +1,2 @@
-sudo -u $DEFAULT_USER /bin/sh -c '/usr/local/bin/create-tmux-conf.sh'
+sh -c 'sudo -u $(id -nu 1000) /usr/local/bin/create-tmux-conf.sh'
 /usr/local/bin/create-tmux-conf.sh
