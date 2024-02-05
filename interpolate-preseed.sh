@@ -75,6 +75,9 @@ fi
 
 export PRESEED_NAME=$(basename $OUT_FILE)
 export GIT_HASH=$(git rev-parse --verify HEAD)
+export GIT_DATE=$(git show --no-patch --no-notes --pretty='%cd' $(git rev-parse --verify HEAD))
+export ENABLE_ROOT_LOGIN_OPT
+export PACKAGE_LISTS
 export USER_CONFIG
 export ROOT_LOGIN
 export DEFAULT_USER
@@ -82,6 +85,8 @@ export DEFAULT_USER_FULLNAME=${DEFAULT_USER^}
 export CMDS="$(cat $SCRIPTS_TMPFILE)"
 export PACKAGES="$(cat $PACKAGE_TMPFILE)"
 export TASKS="$(cat tasks/$TASKS|tr '\n' ',')"
+export LATE_CMDS
+export ASK_FOR_USER
 
 envsubst < preseed.cfg > build/preseed.cfg.1
 
