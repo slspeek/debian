@@ -45,7 +45,7 @@ cursus: prepare
 	./interpolate-preseed.sh -u $$(cat default-user) -p essential-cli-tools,desktop,dutch-desktop -o build/cursus.cfg -t gnome -c prepare-education-box,tmux-conf,no-gnome-initial
 
 tutor: prepare
-	./interpolate-preseed.sh -u $$(cat default-user) -p essential-cli-tools,desktop,developer,docker,dutch-desktop,video-editing -o build/tutor.cfg -t gnome -c prepare-education-box,tmux-conf,no-gnome-initial,vscode,docker
+	./interpolate-preseed.sh -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,developer,docker,dutch-desktop,video-editing -o build/tutor.cfg -t gnome -c prepare-education-box,tmux-conf,no-gnome-initial,vscode,docker
 
 server: prepare
 	./interpolate-preseed.sh -r -u $$(cat default-user) -p essential-cli-tools -o build/server.cfg -t standard -c sudo-nopasswd,tmux-conf
