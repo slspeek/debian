@@ -23,6 +23,7 @@ jobs:
           files: |
             ./build/gnome.cfg
             ./build/cursus.cfg
+            ./build/tutor.cfg
             ./build/server.cfg
             ./build/personal.cfg
             ./build/steven.cfg
