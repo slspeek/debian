@@ -83,7 +83,7 @@ export ROOT_LOGIN
 export DEFAULT_USER
 export DEFAULT_USER_FULLNAME=${DEFAULT_USER^}
 export CMDS="$(cat $SCRIPTS_TMPFILE)"
-export PACKAGES="$(cat $PACKAGE_TMPFILE|sort| sed  -e 's/\(.*\)/        \1 \\/g')"
+export PACKAGES="$(cat $PACKAGE_TMPFILE|sort| sed  -e 's/\(.*\)/        \1 \\/g'|sed -e '$ s/\\//')"
 export TASKS="$(cat tasks/$TASKS|tr '\n' ',')"
 export LATE_CMDS
 export ASK_FOR_USER
