@@ -2,6 +2,7 @@
 
 - [gnome.cfg](gnome.cfg)
 - [cursus.cfg](cursus.cfg)
+- [tutor.cfg](tutor.cfg)
 - [server.cfg](server.cfg)
 - [complete.cfg](complete.cfg)
 - [personal.cfg](personal.cfg)

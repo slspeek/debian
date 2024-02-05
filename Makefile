@@ -8,7 +8,7 @@ default: clean all
 
 all: precommit scripts preseeds website
 
-preseeds: gnome cursus server complete personal steven
+preseeds: gnome cursus tutor server complete personal steven
 
 clean:
 	rm -rf build
@@ -41,17 +41,20 @@ gnome: prepare
 cursus: prepare
 	./interpolate-preseed.sh -u $$(cat default-user) -p essential-cli-tools,desktop,dutch-desktop -o build/cursus.cfg -t gnome -c prepare-education-box,tmux-conf,no-gnome-initial
 
+tutor: prepare
+	./interpolate-preseed.sh -u $$(cat default-user) -p essential-cli-tools,desktop,developer,docker,dutch-desktop,video-editing -o build/tutor.cfg -t gnome -c prepare-education-box,tmux-conf,no-gnome-initial,vscode,docker
+
 server: prepare
 	./interpolate-preseed.sh -r -u $$(cat default-user) -p essential-cli-tools -o build/server.cfg -t standard -c sudo-nopasswd,tmux-conf
 
 complete: prepare
-	./interpolate-preseed.sh -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,developer,dutch-desktop,docker -o build/complete.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial,vscode
+	./interpolate-preseed.sh -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,developer,dutch-desktop,docker,video-editing -o build/complete.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial,vscode
 
 personal: prepare
-	./interpolate-preseed.sh -r -a -p essential-cli-tools,cli-tools,desktop,developer,dutch-desktop,docker -o build/personal.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial,vscode
+	./interpolate-preseed.sh -r -a -p essential-cli-tools,cli-tools,desktop,developer,dutch-desktop,docker,video-editing -o build/personal.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial,vscode
 
 steven: prepare
-	./interpolate-preseed.sh -r -u steven -p essential-cli-tools,cli-tools,desktop,developer,dutch-desktop,docker -o build/steven.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial,vscode
+	./interpolate-preseed.sh -r -u steven -p essential-cli-tools,cli-tools,desktop,developer,dutch-desktop,docker,video-editing -o build/steven.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial,vscode
 
 .ONESHELL:
 check_package_file_endings:
