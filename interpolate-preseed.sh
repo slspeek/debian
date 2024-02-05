@@ -73,6 +73,8 @@ else
 	USER_CONFIG="$(cat preseed.cfg.d/user-config)"
 fi
 
+export PRESEED_NAME=$(basename $OUT_FILE)
+export GIT_HASH=$(git rev-parse --verify HEAD)
 export USER_CONFIG
 export ROOT_LOGIN
 export DEFAULT_USER
