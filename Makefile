@@ -6,7 +6,7 @@ PANDOC_HTML_CMD=docker run --rm --init -v "$(PWD):/data" -u $(USER_ID) $(PANDOC_
 
 default: clean all
 
-all: precommit scripts preseeds website
+all: precommit scripts preseeds validate_preseeds website
 
 preseeds: gnome cursus tutor server complete personal steven
 
@@ -17,6 +17,9 @@ prepare: validate
 	mkdir -p build/install-scripts
 	if ! which boxes; then
 		sudo apt-get install -y boxes
+	fi
+	if ! which debconf-set-selections; then
+		sudo apt-get install -y debconf-utils
 	fi
 
 validate: check_package_file_endings check_latecmd_file_endings check_preseed_fragment_file_endings 
@@ -55,6 +58,13 @@ personal: prepare
 
 steven: prepare
 	./interpolate-preseed.sh -r -u steven -p essential-cli-tools,cli-tools,desktop,developer,dutch-desktop,docker,video-editing -o build/steven.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial,vscode
+
+.ONESHELL:
+validate_preseeds:
+	@for FILE in $(wildcard build/*.cfg)
+	do
+		 test $$(debconf-set-selections --checkonly $${FILE} 2>&1 |grep 'warning:'|wc -l) -eq 0 ||(echo $${FILE} is not a valid preseed file:;debconf-set-selections --checkonly $${FILE}; exit 1)
+	done
 
 .ONESHELL:
 check_package_file_endings:
