@@ -46,7 +46,7 @@ PACKAGE_TMPFILE=$(mktemp)
 
 for PACKAGE_LIST in ${PACKAGE_LISTS//,/ }
 do 
-    cat package-lists/$PACKAGE_LIST | tr '\n' ' ' >> $PACKAGE_TMPFILE
+    cat package-lists/$PACKAGE_LIST  >> $PACKAGE_TMPFILE
 done
 
 SCRIPTS_TMPFILE=$(mktemp)
@@ -83,7 +83,7 @@ export ROOT_LOGIN
 export DEFAULT_USER
 export DEFAULT_USER_FULLNAME=${DEFAULT_USER^}
 export CMDS="$(cat $SCRIPTS_TMPFILE)"
-export PACKAGES="$(cat $PACKAGE_TMPFILE)"
+export PACKAGES="$(cat $PACKAGE_TMPFILE|sort| sed  -e 's/\(.*\)/        \1 \\/g')"
 export TASKS="$(cat tasks/$TASKS|tr '\n' ',')"
 export LATE_CMDS
 export ASK_FOR_USER
