@@ -4,6 +4,9 @@ PANDOC_IMAGE=pandoc/latex:2.9
 USER_ID=$(shell id -u):$(shell id -g)
 PANDOC_HTML_CMD=docker run --rm --init -v "$(PWD):/data" -u $(USER_ID) $(PANDOC_IMAGE) --standalone --from markdown --to html
 
+
+ALL_PACKAGES=essential-cli-tools,cli-tools,desktop,desktop-extra,developer,dutch-desktop,docker,upgrades,video-editing
+
 default: clean all
 
 all: precommit scripts preseeds validate_preseeds website
@@ -51,13 +54,13 @@ server: prepare
 	./interpolate-preseed.sh -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,developer,docker -o build/server.cfg -t standard -c sudo-nopasswd,tmux-conf,docker
 
 complete: prepare
-	./interpolate-preseed.sh -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,desktop-extra,developer,dutch-desktop,docker,upgrades,video-editing -o build/complete.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial,vscode
+	./interpolate-preseed.sh -r -u $$(cat default-user) -p $(ALL_PACKAGES) -o build/complete.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial,vscode
 
 personal: prepare
-	./interpolate-preseed.sh -r -a -p essential-cli-tools,cli-tools,desktop,desktop-extra,developer,dutch-desktop,docker,upgrades,video-editing -o build/personal.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial,vscode
+	./interpolate-preseed.sh -r -a -p $(ALL_PACKAGES) -o build/personal.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial,vscode
 
 steven: prepare
-	./interpolate-preseed.sh -r -u steven -p essential-cli-tools,cli-tools,desktop,desktop-extra,developer,dutch-desktop,docker,upgrades,video-editing -o build/steven.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial,vscode
+	./interpolate-preseed.sh -r -u steven -p $(ALL_PACKAGES) -o build/steven.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,left-mouse,tmux-conf,no-gnome-initial,vscode
 
 .ONESHELL:
 validate_preseeds:
