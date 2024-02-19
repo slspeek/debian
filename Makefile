@@ -5,7 +5,7 @@ USER_ID=$(shell id -u):$(shell id -g)
 PANDOC_HTML_CMD=docker run --rm --init -v "$(PWD):/data" -u $(USER_ID) $(PANDOC_IMAGE) --standalone --from markdown --to html
 
 
-ALL_PACKAGES=essential-cli-tools,cli-tools,desktop,desktop-extra,developer,dutch-desktop,docker,upgrades,video-editing
+ALL_PACKAGES=essential-cli-tools,cli-tools,desktop,desktop-extra,developer,dutch-desktop,docker,graphic,multimedia,upgrades,video-editing
 
 default: clean all
 
