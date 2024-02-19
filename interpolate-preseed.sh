@@ -46,7 +46,7 @@ PACKAGE_TMPFILE=$(mktemp)
 
 for PACKAGE_LIST in ${PACKAGE_LISTS//,/ }
 do 
-    cat package-lists/$PACKAGE_LIST  >> $PACKAGE_TMPFILE
+    cat package-lists/$PACKAGE_LIST  >> $PACKAGE_TMPFILE || exit 4
 done
 
 SCRIPTS_TMPFILE=$(mktemp)
