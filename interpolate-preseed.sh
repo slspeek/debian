@@ -56,7 +56,7 @@ do
 	while read LINE
 	do
 		echo "    in-target $LINE && \\"   >> $SCRIPTS_TMPFILE
-	done < late-cmds/$CMD
+	done < late-cmds/$CMD || exit 3
 done
 
 if test "$ENABLE_ROOT_LOGIN_OPT" = "true"
