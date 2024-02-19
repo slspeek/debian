@@ -9,7 +9,7 @@
 - [steven.cfg](steven.cfg) alles erop en eraan GNOME installatie met gebruiker 'steven' en de muis links
 - [scripts.tar.gz](scripts.tar.gz) alle scripts los te downloaden
 
-# Usage
+# Gebruik
 Boot de Debian installer en kies "Advanced options >" -> "Automated install"
 
 Vul:
