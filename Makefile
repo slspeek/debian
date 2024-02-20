@@ -54,13 +54,13 @@ server: prepare
 	./interpolate-preseed.sh -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,developer,docker -o build/server.cfg -t standard -c sudo-nopasswd,tmux-conf,docker
 
 complete: prepare
-	./interpolate-preseed.sh -r -u $$(cat default-user) -p $(ALL_PACKAGES) -o build/complete.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial,vscode
+	./interpolate-preseed.sh -r -u $$(cat default-user) -p $(ALL_PACKAGES) -o build/complete.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,uu-google-origin,tmux-conf,no-gnome-initial,vscode
 
 personal: prepare
-	./interpolate-preseed.sh -r -a -p $(ALL_PACKAGES) -o build/personal.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial,vscode
+	./interpolate-preseed.sh -r -a -p $(ALL_PACKAGES) -o build/personal.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,uu-google-origin,tmux-conf,no-gnome-initial,vscode
 
 steven: prepare
-	./interpolate-preseed.sh -r -u steven -p $(ALL_PACKAGES) -o build/steven.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,left-mouse,tmux-conf,no-gnome-initial,vscode
+	./interpolate-preseed.sh -r -u steven -p $(ALL_PACKAGES) -o build/steven.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,uu-google-origin,tmux-conf,no-gnome-initial,vscode
 
 .ONESHELL:
 validate_preseeds:
