@@ -7,5 +7,5 @@ then
     sudo rm -rf /usr/local/go
 fi
 sudo tar xzf ${GO_ARCHIVE} -C /usr/local
-sudo "echo 'export PATH=/usr/local/go/bin:$PATH' >> /etc/profile"
+sudo /bin/sh -c 'echo export PATH=/usr/local/go/bin:\$PATH >> /etc/profile'
 
