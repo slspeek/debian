@@ -30,8 +30,8 @@ validate: check_package_file_endings check_latecmd_file_endings check_preseed_fr
 .ONESHELL:
 scripts: prepare generate_install_scripts
 	cd scripts
-	chmod +x *.sh
-	tar cf ../build/scripts.tar *.sh
+	chmod +x *.sh *.py
+	tar cf ../build/scripts.tar *.sh *.py
 	cd ..
 	cd build/install-scripts
 	chmod +x *.sh
