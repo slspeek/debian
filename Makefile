@@ -6,7 +6,7 @@ PANDOC_HTML_CMD=docker run --rm --init -v "$(PWD):/data" -u $(USER_ID) $(PANDOC_
 
 
 ALL_PACKAGES=essential-cli-tools,cli-tools,desktop,desktop-extra,developer,dutch-desktop,docker,graphic,multimedia,upgrades,video-editing
-COMPLETE_LATE_CMDS=sudo-nopasswd,docker,gists,golang,google-chrome,prepare-education-box,uu-add-origins,uu-activate,tmux-conf,no-gnome-initial,vscode
+COMPLETE_LATE_CMDS=sudo-nopasswd,chrome-remote-desktop,docker,gists,golang,google-chrome,prepare-education-box,uu-add-origins,uu-activate,tmux-conf,no-gnome-initial,vscode
 
 default: clean all
 
@@ -43,7 +43,7 @@ scripts: prepare generate_install_scripts
 
 
 gnome: prepare
-	./interpolate-preseed.sh -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,desktop-extra,dutch-desktop,docker -o build/gnome.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,google-chrome,tmux-conf,no-gnome-initial
+	./interpolate-preseed.sh -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,desktop-extra,dutch-desktop,docker -o build/gnome.cfg -t gnome -c sudo-nopasswd,prepare-education-box,chrome-remote-desktop,docker,google-chrome,tmux-conf,no-gnome-initial
 
 cursus: prepare
 	./interpolate-preseed.sh -u $$(cat default-user) -p essential-cli-tools,desktop,dutch-desktop -o build/cursus.cfg -t gnome -c prepare-education-box,tmux-conf,no-gnome-initial
