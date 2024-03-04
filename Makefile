@@ -6,6 +6,7 @@ PANDOC_HTML_CMD=docker run --rm --init -v "$(PWD):/data" -u $(USER_ID) $(PANDOC_
 
 
 ALL_PACKAGES=essential-cli-tools,cli-tools,desktop,desktop-extra,developer,dutch-desktop,docker,graphic,multimedia,upgrades,video-editing
+COMPLETE_LATE_CMDS=sudo-nopasswd,docker,gists,golang,google-chrome,prepare-education-box,uu-add-origins,uu-activate,tmux-conf,no-gnome-initial,vscode
 
 default: clean all
 
@@ -54,13 +55,13 @@ server: prepare
 	./interpolate-preseed.sh -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,developer,docker -o build/server.cfg -t standard -c sudo-nopasswd,tmux-conf,docker
 
 complete: prepare
-	./interpolate-preseed.sh -r -u $$(cat default-user) -p $(ALL_PACKAGES) -o build/complete.cfg -t gnome -c sudo-nopasswd,docker,golang,google-chrome,uu-add-origins,uu-activate,tmux-conf,no-gnome-initial,vscode
+	./interpolate-preseed.sh -r -u $$(cat default-user) -p $(ALL_PACKAGES) -o build/complete.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
 
 personal: prepare
-	./interpolate-preseed.sh -r -a -p $(ALL_PACKAGES) -o build/personal.cfg -t gnome -c sudo-nopasswd,docker,golang,google-chrome,uu-add-origins,uu-activate,tmux-conf,no-gnome-initial,vscode
+	./interpolate-preseed.sh -r -a -p $(ALL_PACKAGES) -o build/personal.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
 
 steven: prepare
-	./interpolate-preseed.sh -r -u steven -p $(ALL_PACKAGES) -o build/steven.cfg -t gnome -c sudo-nopasswd,prepare-education-box,docker,golang,google-chrome,uu-add-origins,uu-activate,tmux-conf,no-gnome-initial,vscode
+	./interpolate-preseed.sh -r -u steven -p $(ALL_PACKAGES) -o build/steven.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
 
 .ONESHELL:
 validate_preseeds:
