@@ -6,7 +6,7 @@ PANDOC_HTML_CMD=docker run --rm --init -v "$(PWD):/data" -u $(USER_ID) $(PANDOC_
 
 
 ALL_PACKAGES=essential-cli-tools,cli-tools,desktop,desktop-extra,developer,dutch-desktop,docker,graphic,multimedia,upgrades,video-editing
-COMPLETE_LATE_CMDS=sudo-nopasswd,chrome-remote-desktop,docker,gists,golang,google-chrome,prepare-education-box,uu-add-origins,uu-activate,tmux-conf,no-gnome-initial,vscode
+COMPLETE_LATE_CMDS=auto-set-shortcuts,sudo-nopasswd,chrome-remote-desktop,docker,gists,golang,google-chrome,prepare-education-box,uu-add-origins,uu-activate,tmux-conf,no-gnome-initial,vscode
 
 default: clean all
 
