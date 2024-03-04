@@ -2,6 +2,7 @@ console-setup
 curl
 debconf-utils
 fonts-terminus
+hw-probe
 software-properties-common
 sudo
 tmux
