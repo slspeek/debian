@@ -3,6 +3,7 @@ curl
 debconf-utils
 fonts-terminus
 hw-probe
+memtest86+
 software-properties-common
 sudo
 tmux
