@@ -1,1 +1,0 @@
-/bin/sh -c 'sudo -u $(id -nu 1000) /usr/local/bin/mouse-key-toggle.sh'
