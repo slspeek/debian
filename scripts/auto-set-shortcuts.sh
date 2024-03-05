@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 USER=$1
 
 cat > /usr/share/applications/set-shortcuts-setup.desktop << EOF
