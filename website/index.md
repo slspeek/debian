@@ -5,12 +5,12 @@
 - [tutor.cfg](tutor.cfg) een cursus schrijver GNOME installatie
 - [server.cfg](server.cfg) een simpele server
 - [complete.cfg](complete.cfg) alles erop en eraan GNOME installatie met gebruiker 'tux'
-- [personal.cfg](personal.cfg) alles erop en eraan GNOME installatie waarbij u de gebruiker mag definieren tijdens de installatie
+- [personal.cfg](personal.cfg) alles erop en eraan GNOME installatie waarbij u de gebruiker mag definiëren tijdens de installatie
 - [steven.cfg](steven.cfg) alles erop en eraan GNOME installatie met gebruiker 'steven'
 - [scripts.tar.gz](scripts.tar.gz) alle scripts los te downloaden
 
 # Gebruik
-Boot de Debian installer en kies "Advanced options >" -> "Automated install"
+Boot de [Debian installer](https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/) en kies "Advanced options >" -> "Automated install"
 
 Vul:
 
