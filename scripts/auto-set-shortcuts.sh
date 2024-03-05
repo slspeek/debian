@@ -15,5 +15,5 @@ NoDisplay=true
 X-GNOME-HiddenUnderSystemd=true
 EOF
 
-sudo -u $USER "sh -c 'mkdir -p ~/.config/autostart && cp /usr/share/applications/set-shortcuts-setup.desktop ~/.config/autostart'"
+sudo -u $USER "/bin/sh -c 'mkdir -p ~/.config/autostart && cp /usr/share/applications/set-shortcuts-setup.desktop ~/.config/autostart'"
 
