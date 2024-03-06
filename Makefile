@@ -26,10 +26,13 @@ prepare: validate
 		sudo apt-get install -y debconf-utils
 	fi
 
-validate: check_package_file_endings check_latecmd_file_endings check_preseed_fragment_file_endings 
+validate: bash_tests check_package_file_endings check_latecmd_file_endings check_preseed_fragment_file_endings 
+
+bash_tests: 
+	bats test
 
 .ONESHELL:
-scripts: prepare generate_install_scripts
+scripts: prepare generate_install_scripts generate_late_cmd_script
 	cd scripts
 	chmod +x *.sh *.py
 	tar cf ../build/scripts.tar *.sh *.py
@@ -39,6 +42,8 @@ scripts: prepare generate_install_scripts
 	tar rf ../scripts.tar *.sh
 	cd ..
 	rm -rf install-scripts
+	chmod +x late-cmds.sh
+	tar rf scripts.tar late-cmds.sh || exit 1
 	gzip scripts.tar
 
 
@@ -121,3 +126,18 @@ check_package_names:
 	do
 		apt-cache show $${PACKAGE_NAME} &> /dev/null || (echo Problem with: $${PACKAGE_NAME}; exit 1)
 	done <<< $$(cat package-lists/*)
+
+.ONESHELL:
+generate_late_cmd_script:
+	LATE_CMD_SCRIPT=build/late-cmds.sh
+	(echo '#!/bin/bash'; echo) > $${LATE_CMD_SCRIPT}
+	for LATE_CMD in $$(ls late-cmds);
+	do
+		(echo function $${LATE_CMD} '()';
+		echo '{';
+		while read LINE
+		do
+			echo '  ' $${LINE}
+		done < late-cmds/$${LATE_CMD} ;
+		echo '}'; echo ) >> $${LATE_CMD_SCRIPT} 
+	done
