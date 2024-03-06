@@ -8,6 +8,8 @@ jobs:
     steps:
       - name: Checkout 
         uses: actions/checkout@v4
+      - name: Install bats
+        run: sudo apt-get install -y bats
       - name: Make all targets
         run: make all
       - name: Deploy to github pages
