@@ -8,8 +8,11 @@ setup() {
     # make executables in src/ visible to PATH
     PATH="$DIR/../scripts:$PATH"
 
+    LATE_CMD_LOGGING_DIR=$(mktemp -d)
+    LATE_CMD_SRC_TMP=$(mktemp)
+    :>$LATE_CMD_SRC_TMP
+    LATE_CMD_SRC=$LATE_CMD_SRC_TMP
     source late-cmd-helper.sh
-    LATE_CMD_LOGGING_DIR=/tmp
 }
 
 @test "Failure detection" {
