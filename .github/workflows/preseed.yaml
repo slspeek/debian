@@ -6,10 +6,12 @@ jobs:
   preseed:
     runs-on: ubuntu-latest
     steps:
+      - name: Get code name
+        uses: cat /etc/lsb-release
       - name: Checkout 
         uses: actions/checkout@v4
       - name: Install bats
-        run: sudo apt-get install -y bats bats-assert
+        run: sudo apt-get install -y bats
       - name: Make all targets
         run: make all
       - name: Deploy to github pages
