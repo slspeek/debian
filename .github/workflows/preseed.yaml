@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get code name
-        uses: cat /etc/lsb-release
+        run: cat /etc/lsb-release
       - name: Checkout 
         uses: actions/checkout@v4
       - name: Install bats
