@@ -62,3 +62,9 @@ EOF
     run_logged $TMP_FILE
     diff $LATE_CMD_LOGGING_DIR/$(basename ${TMP_FILE}).log $EXSPECTED_LOG_FILE
 }
+
+@test "Failure wrong name" {
+    ! run_logged non-existent
+}
+
+

@@ -11,32 +11,33 @@ declare -A results
 
 for LATE_CMD_NAME in "$@";
 do
-    echo $LATE_CMD_NAME
+    echo Running: $LATE_CMD_NAME
     run_logged $LATE_CMD_NAME
-    results[$LATE_CMD_NAME]=$?
+    results[$LATE_CMD_NAME]="$?"
 done
 
-ERROR=""
 RUN_LATER="LATE_CMD_LOGGING_DIR=/tmp LATE_CMD_SRC=/usr/local/bin/late-cmds.sh late-cmd-helper.sh "
-(for KEY in ${!results[@]}
+for KEY in ${!results[@]}
 do
-    if test result[$KEY] -ne 0;
+    if test "${results[$KEY]}" != "0";
     then 
-        echo $KEY failed
+        echo $KEY failed, see $LATE_CMD_LOGGING_DIR/$KEY.log 
         ERROR=true
         RUN_LATER="${RUN_LATER} $KEY"
     else
         echo $KEY successfully succeeded 
     fi
-done) | tee $LATE_CMD_LOGGING_DIR/late-cmds.log
+done
 
 
-
+# echo Analyze Error var 2: $ERROR 
 if test -n "$ERROR"; 
 then 
-  ( echo You can try to run 
+    echo You can try to run 
     echo $RUN_LATER
-    echo as root to retry the failed late-cmds) | tee $LATE_CMD_LOGGING_DIR/late-cmds.log
-fi
+    echo as root to retry the failed late-cmds
+else
+    echo All late-cmds successfully succeeded 
+fi 
 
 test -z "$ERROR"
