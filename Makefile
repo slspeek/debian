@@ -1,5 +1,6 @@
 SHELL=/bin/bash
 
+LATE_CMD_LOGGING_DIR=/var/log/installer-preseed/late-cmd
 PANDOC_IMAGE=pandoc/latex:2.9
 USER_ID=$(shell id -u):$(shell id -g)
 PANDOC_HTML_CMD=docker run --rm --init -v "$(PWD):/data" -u $(USER_ID) $(PANDOC_IMAGE) --standalone --from markdown --to html
@@ -7,6 +8,7 @@ PANDOC_HTML_CMD=docker run --rm --init -v "$(PWD):/data" -u $(USER_ID) $(PANDOC_
 
 ALL_PACKAGES=essential-cli-tools,cli-tools,desktop,desktop-extra,developer,dutch-desktop,docker,graphic,multimedia,upgrades,video-editing
 COMPLETE_LATE_CMDS=auto-set-shortcuts,sudo-nopasswd,chrome-remote-desktop,docker,earth-pro,gists,golang,google-chrome,prepare-education-box,uu-add-origins,uu-activate,tmux-conf,no-gnome-initial,vscode
+INTERPOLATION_CMD=LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) ./interpolate-preseed.sh
 
 default: clean all
 
@@ -46,27 +48,26 @@ scripts: prepare generate_install_scripts generate_late_cmd_script
 	tar rf scripts.tar late-cmds.sh || exit 1
 	gzip scripts.tar
 
-
 gnome: prepare
-	./interpolate-preseed.sh -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,desktop-extra,dutch-desktop,docker -o build/gnome.cfg -t gnome -c sudo-nopasswd,prepare-education-box,chrome-remote-desktop,docker,earth-pro,google-chrome,tmux-conf,no-gnome-initial
+	$(INTERPOLATION_CMD) -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,desktop-extra,dutch-desktop,docker -o build/gnome.cfg -t gnome -c sudo-nopasswd,prepare-education-box,chrome-remote-desktop,docker,earth-pro,google-chrome,tmux-conf,no-gnome-initial
 
 cursus: prepare
-	./interpolate-preseed.sh -u $$(cat default-user) -p essential-cli-tools,desktop,dutch-desktop -o build/cursus.cfg -t gnome -c prepare-education-box,tmux-conf,no-gnome-initial
+	$(INTERPOLATION_CMD) -u $$(cat default-user) -p essential-cli-tools,desktop,dutch-desktop -o build/cursus.cfg -t gnome -c prepare-education-box,tmux-conf,no-gnome-initial
 
 tutor: prepare
-	./interpolate-preseed.sh -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,developer,docker,dutch-desktop,video-editing -o build/tutor.cfg -t gnome -c gists,prepare-education-box,tmux-conf,no-gnome-initial,vscode,docker
+	$(INTERPOLATION_CMD) -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,developer,docker,dutch-desktop,video-editing -o build/tutor.cfg -t gnome -c gists,prepare-education-box,tmux-conf,no-gnome-initial,vscode,docker
 
 server: prepare
-	./interpolate-preseed.sh -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,developer,docker -o build/server.cfg -t standard -c sudo-nopasswd,tmux-conf,docker
+	$(INTERPOLATION_CMD) -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,developer,docker -o build/server.cfg -t standard -c sudo-nopasswd,tmux-conf,docker
 
 complete: prepare
-	./interpolate-preseed.sh -r -u $$(cat default-user) -p $(ALL_PACKAGES) -o build/complete.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
+	$(INTERPOLATION_CMD) -r -u $$(cat default-user) -p $(ALL_PACKAGES) -o build/complete.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
 
 personal: prepare
-	./interpolate-preseed.sh -r -a -p $(ALL_PACKAGES) -o build/personal.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
+	$(INTERPOLATION_CMD) -r -a -p $(ALL_PACKAGES) -o build/personal.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
 
 steven: prepare
-	./interpolate-preseed.sh -r -u steven -p $(ALL_PACKAGES) -o build/steven.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
+	$(INTERPOLATION_CMD) -r -u steven -p $(ALL_PACKAGES) -o build/steven.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
 
 .ONESHELL:
 validate_preseeds:

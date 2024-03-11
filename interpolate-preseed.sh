@@ -51,13 +51,10 @@ done
 
 SCRIPTS_TMPFILE=$(mktemp)
 
-for CMD in ${LATE_CMDS//,/ }
-do 
-	while read LINE
-	do
-		echo "    in-target $LINE && \\"   >> $SCRIPTS_TMPFILE
-	done < late-cmds/$CMD || exit 3
-done
+COMMAND="LATE_CMD_LOGGING_DIR=$LATE_CMD_LOGGING_DIR LATE_CMD_SRC=/usr/local/bin/late-cmds.sh /usr/local/bin/late-cmd-helper.sh ${LATE_CMDS//,/ }"
+
+echo "    in-target /bin/sh -c '"$COMMAND ">" "$LATE_CMD_LOGGING_DIR/late-cmd.log 2>&1'" "&& \\"   >> $SCRIPTS_TMPFILE
+
 
 if test "$ENABLE_ROOT_LOGIN_OPT" = "true"
 then
@@ -87,6 +84,7 @@ export PACKAGES="$(cat $PACKAGE_TMPFILE|sort -u| sed  -e 's/\(.*\)/        \1 \\
 export TASKS="$(cat tasks/$TASKS|tr '\n' ',')"
 export LATE_CMDS
 export ASK_FOR_USER
+export LATE_CMD_LOGGING_DIR
 
 envsubst < preseed.cfg > build/preseed.cfg.1
 
