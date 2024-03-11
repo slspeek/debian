@@ -34,7 +34,7 @@ done) | tee $LATE_CMD_LOGGING_DIR/late-cmds.log
 
 if test -n "$ERROR"; 
 then 
-  (  echo You can try to run 
+  ( echo You can try to run 
     echo $RUN_LATER
     echo as root to retry the failed late-cmds) | tee $LATE_CMD_LOGGING_DIR/late-cmds.log
 fi
