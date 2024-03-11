@@ -16,7 +16,8 @@ fd-find
 figlet
 fzf
 gh
-git 
+git
+gpm
 htop
 iftop
 inxi
@@ -37,6 +38,7 @@ nnn
 p7zip-full
 pv
 rar
+rclone
 ripgrep
 rsync
 sl
