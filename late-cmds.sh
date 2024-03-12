@@ -52,14 +52,12 @@ function sudo-nopasswd ()
 
 function tmux-conf ()
 {
-   /bin/sh -c 'sudo -u $(id -nu 1000) /usr/local/bin/create-tmux-conf.sh'
-   /usr/local/bin/create-tmux-conf.sh
+   /bin/sh -c 'sudo -u $(id -nu 1000) /usr/local/bin/create-tmux-conf.sh' && /usr/local/bin/create-tmux-conf.sh
 }
 
 function uu-activate ()
 {
-   /bin/sh -c 'echo unattended-upgrades unattended-upgrades/enable_auto_updates boolean true | debconf-set-selections'
-   dpkg-reconfigure -f noninteractive unattended-upgrades
+   /bin/sh -c 'echo unattended-upgrades unattended-upgrades/enable_auto_updates boolean true | debconf-set-selections' && dpkg-reconfigure -f noninteractive unattended-upgrades
 }
 
 function uu-add-origins ()
