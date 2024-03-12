@@ -1,4 +1,4 @@
-#!/usr/bin/bats
+#!/usr/bin/env bats
 
 setup() {
     # get the containing directory of this file

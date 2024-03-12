@@ -1,4 +1,4 @@
-#!/usr/bin/bats
+#!/usr/bin/env bats
 
 setup() {
     bats_load_library bats-support
