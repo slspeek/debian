@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
+set -e
 
 GITHUB_GISTS=https://gist.githubusercontent.com/slspeek/
 
 function get_gist() {
     SCRIPT=$1
     HASH=$2
-    sudo wget ${GITHUB_GISTS}/$HASH/raw/$SCRIPT -P /usr/local/bin
+    sudo wget --no-verbose ${GITHUB_GISTS}/$HASH/raw/$SCRIPT -P /usr/local/bin
     sudo chmod +x /usr/local/bin/$SCRIPT
 }
 

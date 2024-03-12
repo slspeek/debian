@@ -39,7 +39,6 @@ EOF
 
 @test "Single failure: wrong name, output" {
     run late-cmd-helper.sh success_1
-    assert_output --partial "Running: success_1"
     assert_output --partial "success_1 failed"
     assert_output --partial "success_1.log"
     assert_output --partial "late-cmd-helper.sh success_1"
@@ -47,13 +46,10 @@ EOF
 
 @test "Single success output" {
     run late-cmd-helper.sh success_one
-    assert_output --partial "Running: success_one"
     assert_output --partial "All late-cmds successfully succeeded"
 }
 
 @test "Double success output" {
     run late-cmd-helper.sh success_one success_two
-    assert_output --partial "Running: success_one"
-    assert_output --partial "Running: success_two"
     assert_output --partial "All late-cmds successfully succeeded"
 }

@@ -1,5 +1,6 @@
-#!/bin/bash
-#
+#!/usr/bin/env bash
+# set -e
+
 ENABLE_ROOT_LOGIN_OPT=false
 ASK_FOR_USER=false
 

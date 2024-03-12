@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -e
+
 SHORTCUTS_DONE=$HOME/.config/set-shortcuts-done
 test -f $SHORTCUTS_DONE && exit 1
 setcustomshortcut.py Terminal gnome-terminal "<Control><Alt>t"

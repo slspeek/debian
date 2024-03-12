@@ -1,7 +1,10 @@
+#!/usr/bin/env bash
+set -e
+
 VERSION=1.22.0
 GO_ARCHIVE=go${VERSION}.linux-amd64.tar.gz
 cd /tmp
-wget https://go.dev/dl/${GO_ARCHIVE}
+wget --no-verbose https://go.dev/dl/${GO_ARCHIVE}
 if [ -d /usr/local/go ]; 
 then 
     sudo rm -rf /usr/local/go

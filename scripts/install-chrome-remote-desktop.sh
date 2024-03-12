@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
-sudo wget https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb -P /tmp
-sudo apt install --yes /tmp/chrome-remote-desktop_current_amd64.deb
+wget --no-verbose https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb -P /tmp
+apt install --yes /tmp/chrome-remote-desktop_current_amd64.deb

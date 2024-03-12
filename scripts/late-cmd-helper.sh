@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# set -e 
 
 function run_logged() {
     CMD_FILE=$1
@@ -11,21 +12,18 @@ declare -A results
 
 for LATE_CMD_NAME in "$@";
 do
-    echo Running: $LATE_CMD_NAME
-    run_logged $LATE_CMD_NAME
+    run_logged $LATE_CMD_NAME;
     results[$LATE_CMD_NAME]="$?"
 done
 
-RUN_LATER="LATE_CMD_LOGGING_DIR=/tmp LATE_CMD_SRC=/usr/local/bin/late-cmds.sh late-cmd-helper.sh "
-for KEY in ${!results[@]}
+RUN_LATER="LATE_CMD_LOGGING_DIR=$LATE_CMD_LOGGING_DIR LATE_CMD_SRC=$LATE_CMD_SRC late-cmd-helper.sh "
+for KEY in "$@"
 do
     if test "${results[$KEY]}" != "0";
     then 
         echo $KEY failed, see $LATE_CMD_LOGGING_DIR/$KEY.log 
         ERROR=true
         RUN_LATER="${RUN_LATER} $KEY"
-    else
-        echo $KEY successfully succeeded 
     fi
 done
 
