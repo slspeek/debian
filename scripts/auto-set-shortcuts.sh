@@ -16,6 +16,7 @@ StartupNotify=true
 Categories=GNOME;GTK;System;
 OnlyShowIn=GNOME;
 NoDisplay=true
+X-GNOME-Autostart-enabled=true
 AutostartCondition=unless-exists set-shortcuts-done
 X-GNOME-HiddenUnderSystemd=true
 EOF
