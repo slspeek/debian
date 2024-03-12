@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 sudo patch /etc/apt/apt.conf.d/50unattended-upgrades << 'EOF'
 --- /etc/apt/apt.conf.d/50unattended-upgrades	2022-12-31 21:59:00.000000000 +0100
 +++ 50unattended-upgrades	2024-02-21 12:18:46.727808863 +0100

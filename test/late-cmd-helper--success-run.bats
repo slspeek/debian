@@ -1,8 +1,8 @@
 #!/usr/bin/bats
 
 setup() {
-    source /usr/lib/bats/bats-support/load.bash
-    source /usr/lib/bats/bats-assert/load.bash
+    bats_load_library bats-support
+    bats_load_library bats-assert
     # get the containing directory of this file
     # use $BATS_TEST_FILENAME instead of ${BASH_SOURCE[0]} or $0,
     # as those will point to the bats executable's location or the preprocessed file respectively

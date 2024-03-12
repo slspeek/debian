@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 key="org.gnome.desktop.peripherals.mouse left-handed"
 current=$(gsettings get $key)

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 cat > /etc/default/console-setup <<EOF
 # CONFIGURATION FILE FOR SETUPCON
 

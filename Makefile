@@ -1,11 +1,14 @@
 SHELL=/bin/bash
 
-LATE_CMD_LOGGING_DIR=/var/log/installer-preseed/late-cmd
-PANDOC_IMAGE=pandoc/latex:2.9
 USER_ID=$(shell id -u):$(shell id -g)
+
+PANDOC_IMAGE=pandoc/latex:2.9
 PANDOC_HTML_CMD=docker run --rm --init -v "$(PWD):/data" -u $(USER_ID) $(PANDOC_IMAGE) --standalone --from markdown --to html
 
+BATS_IMAGE=bats/bats:v1.10.0
+BATS_CMD=docker run -i --rm --init -v "$(PWD):/code" -u $(USER_ID) $(BATS_IMAGE)
 
+LATE_CMD_LOGGING_DIR=/var/log/installer-preseed/late-cmd
 ALL_PACKAGES=essential-cli-tools,cli-tools,desktop,desktop-extra,developer,dutch-desktop,docker,graphic,multimedia,upgrades,video-editing
 COMPLETE_LATE_CMDS=auto-set-shortcuts,sudo-nopasswd,chrome-remote-desktop,docker,earth-pro,gists,golang,google-chrome,prepare-education-box,uu-add-origins,uu-activate,tmux-conf,no-gnome-initial,vscode
 INTERPOLATION_CMD=LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) ./interpolate-preseed.sh
@@ -31,7 +34,7 @@ prepare: validate
 validate: bash_tests check_package_file_endings check_latecmd_file_endings check_preseed_fragment_file_endings 
 
 bash_tests: 
-	bats test
+	$(BATS_CMD) /code/test
 
 .ONESHELL:
 scripts: prepare generate_install_scripts generate_late_cmd_script
@@ -100,7 +103,7 @@ check_preseed_fragment_file_endings:
 generate_install_scripts: prepare
 	@for FILE in $(shell ls package-lists/*)
 	do
-		(echo '#!/bin/bash'; echo; echo "sudo apt-get install -y  \\"; \
+		(echo '#!/usr/bin/env bash'; echo; echo "sudo apt-get install -y  \\"; \
 		for PACKAGE in $$(cat $${FILE}|tr '\n' ' ')
 		do 
 			echo "    " $${PACKAGE} " \\"
@@ -131,7 +134,7 @@ check_package_names:
 .ONESHELL:
 generate_late_cmd_script:
 	LATE_CMD_SCRIPT=build/late-cmds.sh
-	(echo '#!/bin/bash'; echo) > $${LATE_CMD_SCRIPT}
+	(echo '#!/usr/bin/env bash'; echo) > $${LATE_CMD_SCRIPT}
 	for LATE_CMD in $$(ls late-cmds);
 	do
 		(echo function $${LATE_CMD} '()';

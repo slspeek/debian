@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 GITHUB_GISTS=https://gist.githubusercontent.com/slspeek/
 

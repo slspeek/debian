@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 cat > $HOME/.tmux.conf <<EOF
 # ~/.tmux.conf
