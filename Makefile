@@ -52,7 +52,7 @@ scripts: prepare generate_install_scripts generate_late_cmd_script
 	gzip scripts.tar
 
 gnome: prepare
-	$(INTERPOLATION_CMD) -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,desktop-extra,dutch-desktop,docker -o build/gnome.cfg -t gnome -c sudo-nopasswd,prepare-education-box,chrome-remote-desktop,docker,earth-pro,google-chrome,tmux-conf,no-gnome-initial
+	$(INTERPOLATION_CMD) -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,desktop-extra,dutch-desktop,docker -o build/gnome.cfg -t gnome -c sudo-nopasswd,chrome-remote-desktop,docker,earth-pro,google-chrome,tmux-conf,no-gnome-initial
 
 cursus: prepare
 	$(INTERPOLATION_CMD) -u $$(cat default-user) -p essential-cli-tools,desktop,dutch-desktop -o build/cursus.cfg -t gnome -c prepare-education-box,tmux-conf,no-gnome-initial
@@ -64,10 +64,10 @@ server: prepare
 	$(INTERPOLATION_CMD) -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,developer,docker -o build/server.cfg -t standard -c sudo-nopasswd,tmux-conf,docker
 
 complete: prepare
-	$(INTERPOLATION_CMD) -r -u $$(cat default-user) -p $(ALL_PACKAGES) -o build/complete.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
+	$(INTERPOLATION_CMD) -u $$(cat default-user) -p $(ALL_PACKAGES) -o build/complete.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
 
 personal: prepare
-	$(INTERPOLATION_CMD) -r -a -p $(ALL_PACKAGES) -o build/personal.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
+	$(INTERPOLATION_CMD) -a -p $(ALL_PACKAGES) -o build/personal.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
 
 steven: prepare
 	$(INTERPOLATION_CMD) -r -u steven -p $(ALL_PACKAGES) -o build/steven.cfg -t gnome -c $(COMPLETE_LATE_CMDS)

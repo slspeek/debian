@@ -27,8 +27,6 @@ do
     fi
 done
 
-
-# echo Analyze Error var 2: $ERROR 
 if test -n "$ERROR"; 
 then 
     echo You can try to run 
