@@ -11,6 +11,7 @@ setup() {
     PATH="$DIR/../scripts:$PATH"
 
     export LATE_CMD_LOGGING_DIR=$(mktemp -d)
+    mkdir -p $LATE_CMD_LOGGING_DIR/failed
     LATE_CMD_SRC_TMP=$(mktemp)
     cat > $LATE_CMD_SRC_TMP << EOF
 function success() {
@@ -41,12 +42,16 @@ EOF
     ! late-cmd-helper.sh success failure
 }
 
-
 @test "Single failure: wrong name, output" {
     run late-cmd-helper.sh success_1
     assert_output --partial "success_1 failed"
     assert_output --partial "success_1.log"
     assert_output --partial "late-cmd-helper.sh success_1"
+}
+
+@test "Single failure: wrong name, log file in subdir failed" {
+    ! late-cmd-helper.sh success_1
+    test -f $LATE_CMD_LOGGING_DIR/failed/success_1.log
 }
 
 @test "Failure output" {
