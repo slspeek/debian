@@ -40,15 +40,15 @@ bash_tests:
 scripts: prepare generate_install_scripts generate_late_cmd_script
 	cd scripts
 	chmod +x *.sh *.py
-	tar cf ../build/scripts.tar *.sh *.py
+	tar cf ../build/scripts.tar --owner=0 --group=0 *.sh *.py
 	cd ..
 	cd build/install-scripts
 	chmod +x *.sh
-	tar rf ../scripts.tar *.sh
+	tar rf ../scripts.tar --owner=0 --group=0 *.sh
 	cd ..
 	rm -rf install-scripts
 	chmod +x late-cmds.sh
-	tar rf scripts.tar late-cmds.sh || exit 1
+	tar rf scripts.tar late-cmds.sh --owner=0 --group=0
 	gzip scripts.tar
 
 gnome: prepare

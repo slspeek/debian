@@ -22,6 +22,7 @@ do
     if test "${results[$KEY]}" != "0";
     then 
         echo $KEY failed, see $LATE_CMD_LOGGING_DIR/$KEY.log 
+        (cd $LATE_CMD_LOGGING_DIR/failed && ln -s $LATE_CMD_LOGGING_DIR/$KEY.log)
         ERROR=true
         RUN_LATER="${RUN_LATER} $KEY"
     fi
