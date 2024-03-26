@@ -5,6 +5,7 @@ debconf-utils
 fonts-terminus
 hw-probe
 memtest86+
+qrencode
 software-properties-common
 sudo
 tmux
