@@ -17,7 +17,7 @@ default: clean all
 
 all: precommit scripts preseeds validate_preseeds website
 
-preseeds: gnome cursus tutor server complete personal steven
+preseeds: gnome cursus tutor server complete personal lxde_personal steven
 
 clean:
 	rm -rf build
@@ -68,6 +68,9 @@ complete: prepare
 
 personal: prepare
 	$(INTERPOLATION_CMD) -a -p $(ALL_PACKAGES) -o build/personal.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
+
+lxde_personal: prepare
+	$(INTERPOLATION_CMD) -a -p $(ALL_PACKAGES) -o build/lxde-personal.cfg -t lxde -c $(COMPLETE_LATE_CMDS)
 
 steven: prepare
 	$(INTERPOLATION_CMD) -r -u steven -p $(ALL_PACKAGES) -o build/steven.cfg -t gnome -c $(COMPLETE_LATE_CMDS)

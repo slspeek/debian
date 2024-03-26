@@ -6,6 +6,7 @@
 - [server.cfg](server.cfg) een simpele server
 - [complete.cfg](complete.cfg) alles erop en eraan GNOME installatie met gebruiker 'tux'
 - [personal.cfg](personal.cfg) alles erop en eraan GNOME installatie waarbij u de gebruiker mag definiëren tijdens de installatie
+- [lxde-personal.cfg](lxde-personal.cfg) alles erop en eraan LXDE installatie waarbij u de gebruiker mag definiëren tijdens de installatie
 - [steven.cfg](steven.cfg) alles erop en eraan GNOME installatie met gebruiker 'steven'
 - [scripts.tar.gz](scripts.tar.gz) alle scripts los te downloaden
 
