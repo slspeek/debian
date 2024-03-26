@@ -7,3 +7,4 @@ cd /var/log/
 mkdir installer-preseed
 cd installer-preseed
 wget --no-verbose https://slspeek.github.io/debian/$PRESEED_NAME
+ln -s $PRESEED_NAME profile.cfg
