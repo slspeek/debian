@@ -10,7 +10,7 @@
 - [steven.cfg](steven.cfg) alles erop en eraan GNOME installatie met gebruiker 'steven'
 - [scripts.tar.gz](scripts.tar.gz) alle scripts los te downloaden
 
-# Gebruik
+## Gebruik
 Boot de [Debian installer](https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/) en kies "Advanced options >" -> "Automated install"
 
 Vul:
@@ -20,3 +20,18 @@ https://slspeek.github.io/debian/personal.cfg
 ```
 
 in in het veld "Location of initial preconfiguration file"
+
+## Scripts installeren
+
+### Op een niet gepreseede machine
+```
+wget -qO- https://slspeek.github.io/debian/scripts.tar.gz | tar xvz -C /usr/local/bin
+
+```
+### Op een gepreseede machine
+```
+update-scripts.sh
+```
+
+
+
