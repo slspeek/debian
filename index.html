@@ -23,21 +23,42 @@
 </header>
 <style>#forkongithub a{background:#3d9435;color:#fff;text-decoration:none;font-family:arial,sans-serif;text-align:center;font-weight:bold;padding:5px 40px;font-size:1rem;line-height:2rem;position:relative;transition:0.5s;}#forkongithub a:hover{background:#34d126;color:#fff;}#forkongithub a::before,#forkongithub a::after{content:"";width:100%;display:block;position:absolute;top:1px;left:0;height:1px;background:#fff;}#forkongithub a::after{bottom:1px;top:auto;}@media screen and (min-width:800px){#forkongithub{position:fixed;display:block;top:0;right:0;width:200px;overflow:hidden;height:200px;z-index:9999;}#forkongithub a{width:200px;position:absolute;top:60px;right:-60px;transform:rotate(45deg);-webkit-transform:rotate(45deg);-ms-transform:rotate(45deg);-moz-transform:rotate(45deg);-o-transform:rotate(45deg);box-shadow:4px 4px 10px rgba(0,0,0,0.8);}}</style>
 <p><span id="forkongithub"><a href="https://github.com/slspeek/debian">Fork me on GitHub</a></span></p>
+<h2 id="profielen">Profielen</h2>
+<h3 id="gnome">GNOME</h3>
 <ul>
-<li><a href="gnome.cfg">gnome.cfg</a> een standaard GNOME installatie</li>
-<li><a href="cursus.cfg">cursus.cfg</a> een vanilla GNOME installatie</li>
+<li><a href="gnome.cfg">gnome.cfg</a> een GNOME installatie met gebruiker ‘tux’</li>
+<li><a href="gnome-personal.cfg">gnome-personal.cfg</a> een GNOME installatie waarbij u de gebruiker mag definiëren tijdens de installatie</li>
+<li><a href="cursus.cfg">cursus.cfg</a> een standaard GNOME installatie</li>
 <li><a href="tutor.cfg">tutor.cfg</a> een cursus schrijver GNOME installatie</li>
-<li><a href="server.cfg">server.cfg</a> een simpele server</li>
 <li><a href="complete.cfg">complete.cfg</a> alles erop en eraan GNOME installatie met gebruiker ‘tux’</li>
 <li><a href="personal.cfg">personal.cfg</a> alles erop en eraan GNOME installatie waarbij u de gebruiker mag definiëren tijdens de installatie</li>
-<li><a href="lxde-personal.cfg">lxde-personal.cfg</a> alles erop en eraan LXDE installatie waarbij u de gebruiker mag definiëren tijdens de installatie</li>
 <li><a href="steven.cfg">steven.cfg</a> alles erop en eraan GNOME installatie met gebruiker ‘steven’</li>
-<li><a href="scripts.tar.gz">scripts.tar.gz</a> alle scripts los te downloaden</li>
 </ul>
-<h1 id="gebruik">Gebruik</h1>
+<h3 id="mate">MATE</h3>
+<ul>
+<li><a href="mate.cfg">mate.cfg</a> een MATE installatie</li>
+<li><a href="mate-personal.cfg">mate-personal.cfg</a> een MATE installatie waarbij u de gebruiker mag definiëren tijdens de installatie</li>
+<li><a href="mate-complete.cfg">mate-complete.cfg</a> een MATE installatie met alles erop en eraan</li>
+<li><a href="mate-complete-personal.cfg">mate-complete-personal.cfg</a> een MATE installatie met alles erop en eraan waarbij u de gebruiker mag definiëren tijdens de installatie</li>
+</ul>
+<h3 id="lxde">LXDE</h3>
+<ul>
+<li><a href="lxde-personal.cfg">lxde-personal.cfg</a> alles erop en eraan LXDE installatie waarbij u de gebruiker mag definiëren tijdens de installatie</li>
+</ul>
+<h3 id="geen-desktop">Geen desktop</h3>
+<ul>
+<li><a href="server.cfg">server.cfg</a> een simpele server</li>
+</ul>
+<h2 id="gebruik">Gebruik</h2>
 <p>Boot de <a href="https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/">Debian installer</a> en kies “Advanced options &gt;” -&gt; “Automated install”</p>
 <p>Vul:</p>
-<pre><code>https://slspeek.github.io/debian/personal.cfg</code></pre>
+<pre><code>https://slspeek.github.io/debian/gnome-personal.cfg</code></pre>
 <p>in in het veld “Location of initial preconfiguration file”</p>
+<h2 id="scripts-installeren">Scripts installeren</h2>
+<h3 id="op-een-niet-gepreseede-machine">Op een niet gepreseede machine</h3>
+<pre><code>wget -qO- https://slspeek.github.io/debian/scripts.tar.gz | tar xvz -C /usr/local/bin
+</code></pre>
+<h3 id="op-een-gepreseede-machine">Op een gepreseede machine</h3>
+<pre><code>update-scripts.sh</code></pre>
 </body>
 </html>

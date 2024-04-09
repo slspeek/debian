@@ -10,6 +10,12 @@ function chrome-remote-desktop ()
    /usr/local/bin/install-chrome-remote-desktop.sh
 }
 
+function color-prompt ()
+{
+   /usr/local/bin/install-color-prompt.sh
+   /bin/sh -c '/usr/local/bin/set-color-prompt.sh $(id -nu 1000)'
+}
+
 function docker ()
 {
    /bin/sh -c 'adduser $(id -nu 1000) docker'
