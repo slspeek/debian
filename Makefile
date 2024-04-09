@@ -52,7 +52,10 @@ scripts: prepare generate_install_scripts generate_late_cmd_script
 	gzip scripts.tar
 
 gnome: prepare
-	$(INTERPOLATION_CMD) -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,desktop-extra,dutch-desktop,docker -o build/gnome.cfg -t gnome -c sudo-nopasswd,chrome-remote-desktop,color-prompt,docker,earth-pro,google-chrome,tmux-conf,no-gnome-initial
+	$(INTERPOLATION_CMD) -u $$(cat default-user) -p essential-cli-tools,desktop,desktop-extra,dutch-desktop,multimedia -o build/gnome.cfg -t gnome -c sudo-nopasswd,chrome-remote-desktop,color-prompt,earth-pro,google-chrome,tmux-conf,no-gnome-initial
+
+gnome_personal: prepare
+	$(INTERPOLATION_CMD) -a -p essential-cli-tools,desktop,desktop-extra,dutch-desktop,multimedia -o build/gnome-personal.cfg -t gnome -c sudo-nopasswd,chrome-remote-desktop,color-prompt,earth-pro,google-chrome,tmux-conf,no-gnome-initial
 
 cursus: prepare
 	$(INTERPOLATION_CMD) -u $$(cat default-user) -p essential-cli-tools,desktop,dutch-desktop -o build/cursus.cfg -t gnome -c prepare-education-box,color-prompt,tmux-conf,no-gnome-initial
