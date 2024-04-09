@@ -17,7 +17,7 @@ default: clean all
 
 all: precommit scripts preseeds validate_preseeds website
 
-preseeds: gnome cursus tutor server complete personal lxde_personal steven
+preseeds: gnome cursus tutor server complete personal lxde_personal steven gnome_personal mate mate_personal mate_complete mate_complete_personal
 
 clean:
 	rm -rf build
@@ -57,6 +57,12 @@ gnome: prepare
 gnome_personal: prepare
 	$(INTERPOLATION_CMD) -a -p essential-cli-tools,desktop,desktop-extra,dutch-desktop,multimedia -o build/gnome-personal.cfg -t gnome -c sudo-nopasswd,chrome-remote-desktop,color-prompt,earth-pro,google-chrome,tmux-conf,no-gnome-initial
 
+mate: prepare
+	$(INTERPOLATION_CMD) -u $$(cat default-user) -p essential-cli-tools,desktop,desktop-extra,dutch-desktop,multimedia -o build/mate.cfg -t mate -c sudo-nopasswd,chrome-remote-desktop,color-prompt,earth-pro,google-chrome,tmux-conf
+
+mate_personal: prepare
+	$(INTERPOLATION_CMD) -a -p essential-cli-tools,desktop,desktop-extra,dutch-desktop,multimedia -o build/mate-personal.cfg -t mate -c sudo-nopasswd,chrome-remote-desktop,color-prompt,earth-pro,google-chrome,tmux-conf
+
 cursus: prepare
 	$(INTERPOLATION_CMD) -u $$(cat default-user) -p essential-cli-tools,desktop,dutch-desktop -o build/cursus.cfg -t gnome -c prepare-education-box,color-prompt,tmux-conf,no-gnome-initial
 
@@ -69,8 +75,14 @@ server: prepare
 complete: prepare
 	$(INTERPOLATION_CMD) -u $$(cat default-user) -p $(ALL_PACKAGES) -o build/complete.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
 
+mate_complete: prepare
+	$(INTERPOLATION_CMD) -u $$(cat default-user) -p $(ALL_PACKAGES) -o build/mate-complete.cfg -t mate -c $(COMPLETE_LATE_CMDS)
+
 personal: prepare
 	$(INTERPOLATION_CMD) -a -p $(ALL_PACKAGES) -o build/personal.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
+
+mate_complete_personal: prepare
+	$(INTERPOLATION_CMD) -a -p $(ALL_PACKAGES) -o build/mate-complete-personal.cfg -t mate -c $(COMPLETE_LATE_CMDS)
 
 lxde_personal: prepare
 	$(INTERPOLATION_CMD) -a -p $(ALL_PACKAGES) -o build/lxde-personal.cfg -t lxde -c $(COMPLETE_LATE_CMDS)

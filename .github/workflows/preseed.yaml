@@ -32,4 +32,8 @@ jobs:
             ./build/lxde-personal.cfg
             ./build/steven.cfg
             ./build/complete.cfg
+            ./build/mate.cfg
+            ./build/mate-complete.cfg
+            ./build/mate-personal.cfg
+            ./build/mate-complete-personal.cfg
             ./build/scripts.tar.gz
