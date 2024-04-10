@@ -12,8 +12,7 @@ function chrome-remote-desktop ()
 
 function color-prompt ()
 {
-   /usr/local/bin/install-color-prompt.sh
-   /bin/sh -c '/usr/local/bin/set-color-prompt.sh $(id -nu 1000)'
+   /usr/local/bin/install-color-prompt.sh && /bin/sh -c '/usr/local/bin/set-color-prompt.sh $(id -nu 1000)'
 }
 
 function docker ()
