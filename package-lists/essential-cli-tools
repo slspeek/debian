@@ -6,6 +6,7 @@ extrepo
 fonts-terminus
 hw-probe
 memtest86+
+patch
 qrencode
 software-properties-common
 sudo

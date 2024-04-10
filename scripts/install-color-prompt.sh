@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-USER=${1:-`id -nu 1000`}
-
 patch /etc/skel/.bashrc << 'EOF'
 --- .bashrc-bak 2024-04-09 14:32:55.627712723 +0200
 +++ .bashrc     2024-04-09 14:41:00.346563552 +0200
@@ -18,5 +16,3 @@ patch /etc/skel/.bashrc << 'EOF'
      PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
  fi
 EOF
-
-sudo -u $USER /bin/sh -c 'cp /etc/skel/.bashrc $HOME'
