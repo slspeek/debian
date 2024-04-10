@@ -2,6 +2,7 @@ apt-file
 console-setup
 curl
 debconf-utils
+extrepo
 fonts-terminus
 hw-probe
 memtest86+
