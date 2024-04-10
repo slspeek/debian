@@ -28,10 +28,10 @@ jobs:
             ./build/cursus.cfg
             ./build/tutor.cfg
             ./build/server.cfg
-            ./build/personal.cfg
-            ./build/lxde-personal.cfg
+            ./build/gnome-complete-personal.cfg
+            ./build/lxde-complete-personal.cfg
             ./build/steven.cfg
-            ./build/complete.cfg
+            ./build/gnome-complete.cfg
             ./build/mate.cfg
             ./build/mate-complete.cfg
             ./build/mate-personal.cfg

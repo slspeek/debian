@@ -7,8 +7,8 @@
 - [gnome-personal.cfg](gnome-personal.cfg) een GNOME installatie waarbij u de gebruiker mag definiëren tijdens de installatie
 - [cursus.cfg](cursus.cfg) een standaard GNOME installatie
 - [tutor.cfg](tutor.cfg) een cursus schrijver GNOME installatie
-- [complete.cfg](complete.cfg) alles erop en eraan GNOME installatie met gebruiker 'tux'
-- [personal.cfg](personal.cfg) alles erop en eraan GNOME installatie waarbij u de gebruiker mag definiëren tijdens de installatie
+- [gnome-complete.cfg](gnome-complete.cfg) alles erop en eraan GNOME installatie met gebruiker 'tux'
+- [gnome-complete-personal.cfg](gnome-complete-personal.cfg) alles erop en eraan GNOME installatie waarbij u de gebruiker mag definiëren tijdens de installatie
 - [steven.cfg](steven.cfg) alles erop en eraan GNOME installatie met gebruiker 'steven'
 
 ### MATE
@@ -18,7 +18,7 @@
 - [mate-complete-personal.cfg](mate-complete-personal.cfg) een MATE installatie met alles erop en eraan waarbij u de gebruiker mag definiëren tijdens de installatie
 
 ### LXDE
-- [lxde-personal.cfg](lxde-personal.cfg) alles erop en eraan LXDE installatie waarbij u de gebruiker mag definiëren tijdens de installatie
+- [lxde-complete-personal.cfg](lxde-complete-personal.cfg) alles erop en eraan LXDE installatie waarbij u de gebruiker mag definiëren tijdens de installatie
 
 ### Geen desktop
 - [server.cfg](server.cfg) een simpele server

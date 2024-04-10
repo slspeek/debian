@@ -17,7 +17,7 @@ default: clean all
 
 all: precommit scripts preseeds validate_preseeds website
 
-preseeds: gnome cursus tutor server complete personal lxde_personal steven gnome_personal mate mate_personal mate_complete mate_complete_personal
+preseeds: gnome cursus tutor server gnome_complete gnome_complete_personal lxde_complete_personal steven gnome_personal mate mate_personal mate_complete mate_complete_personal
 
 clean:
 	rm -rf build
@@ -72,20 +72,20 @@ tutor: prepare
 server: prepare
 	$(INTERPOLATION_CMD) -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,developer,docker -o build/server.cfg -t standard -c color-prompt,sudo-nopasswd,tmux-conf,docker
 
-complete: prepare
-	$(INTERPOLATION_CMD) -u $$(cat default-user) -p $(ALL_PACKAGES) -o build/complete.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
+gnome_complete: prepare
+	$(INTERPOLATION_CMD) -u $$(cat default-user) -p $(ALL_PACKAGES) -o build/gnome-complete.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
 
 mate_complete: prepare
 	$(INTERPOLATION_CMD) -u $$(cat default-user) -p $(ALL_PACKAGES) -o build/mate-complete.cfg -t mate -c $(COMPLETE_LATE_CMDS)
 
-personal: prepare
-	$(INTERPOLATION_CMD) -a -p $(ALL_PACKAGES) -o build/personal.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
+gnome_complete_personal: prepare
+	$(INTERPOLATION_CMD) -a -p $(ALL_PACKAGES) -o build/gnome-complete-personal.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
 
 mate_complete_personal: prepare
 	$(INTERPOLATION_CMD) -a -p $(ALL_PACKAGES) -o build/mate-complete-personal.cfg -t mate -c $(COMPLETE_LATE_CMDS)
 
-lxde_personal: prepare
-	$(INTERPOLATION_CMD) -a -p $(ALL_PACKAGES) -o build/lxde-personal.cfg -t lxde -c $(COMPLETE_LATE_CMDS)
+lxde_complete_personal: prepare
+	$(INTERPOLATION_CMD) -a -p $(ALL_PACKAGES) -o build/lxde-complete-personal.cfg -t lxde -c $(COMPLETE_LATE_CMDS)
 
 steven: prepare
 	$(INTERPOLATION_CMD) -r -u steven -p $(ALL_PACKAGES) -o build/steven.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
