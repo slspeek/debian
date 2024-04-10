@@ -21,6 +21,11 @@ function docker ()
    /bin/sh -c 'adduser $(id -nu 1000) docker'
 }
 
+function dotnet ()
+{
+   /usr/local/bin/install-dotnet.sh
+}
+
 function earth-pro ()
 {
    /usr/local/bin/install-earth-pro.sh
