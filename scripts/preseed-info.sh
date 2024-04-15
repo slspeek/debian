@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-head -14 /var/log/installer-preseed/profile.cfg|tail -12|cut -c 4-
+head -15 /var/log/installer-preseed/profile.cfg|tail -13|cut -c 4-
 echo
 echo Logs:
 echo -----
