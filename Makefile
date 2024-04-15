@@ -10,7 +10,7 @@ BATS_CMD=docker run -i --rm --init -v "$(PWD):/code" -u $(USER_ID) $(BATS_IMAGE)
 
 LATE_CMD_LOGGING_DIR=/var/log/installer-preseed/late-cmd
 ALL_PACKAGES=essential-cli-tools,cli-tools,desktop,desktop-extra,developer,dutch-desktop,docker,graphic,multimedia,upgrades,video-editing
-COMPLETE_LATE_CMDS=auto-set-shortcuts,color-prompt,sudo-nopasswd,chrome-remote-desktop,docker,dotnet,earth-pro,gists,golang,google-chrome,prepare-education-box,uu-add-origins,uu-activate,tmux-conf,no-gnome-initial,vscode
+COMPLETE_LATE_CMDS=auto-set-shortcuts,color-prompt,sudo-nopasswd,chrome-remote-desktop,docker,dotnet,earth-pro,gists,golang,google-chrome,prepare-education-box,short-grub-pause,uu-add-origins,uu-activate,tmux-conf,no-gnome-initial,vscode
 INTERPOLATION_CMD=LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) ./interpolate-preseed.sh
 
 default: clean all
@@ -52,25 +52,25 @@ scripts: prepare generate_install_scripts generate_late_cmd_script
 	gzip scripts.tar
 
 gnome: prepare
-	$(INTERPOLATION_CMD) -u $$(cat default-user) -p essential-cli-tools,desktop,desktop-extra,dutch-desktop,multimedia -o build/gnome.cfg -t gnome -c sudo-nopasswd,chrome-remote-desktop,color-prompt,earth-pro,google-chrome,tmux-conf,no-gnome-initial
+	$(INTERPOLATION_CMD) -u $$(cat default-user) -p essential-cli-tools,desktop,desktop-extra,dutch-desktop,multimedia -o build/gnome.cfg -t gnome -c sudo-nopasswd,chrome-remote-desktop,color-prompt,earth-pro,google-chrome,short-grub-pause,tmux-conf,no-gnome-initial
 
 gnome_personal: prepare
-	$(INTERPOLATION_CMD) -a -p essential-cli-tools,desktop,desktop-extra,dutch-desktop,multimedia -o build/gnome-personal.cfg -t gnome -c sudo-nopasswd,chrome-remote-desktop,color-prompt,earth-pro,google-chrome,tmux-conf,no-gnome-initial
+	$(INTERPOLATION_CMD) -a -p essential-cli-tools,desktop,desktop-extra,dutch-desktop,multimedia -o build/gnome-personal.cfg -t gnome -c sudo-nopasswd,chrome-remote-desktop,color-prompt,earth-pro,google-chrome,short-grub-pause,tmux-conf,no-gnome-initial
 
 mate: prepare
-	$(INTERPOLATION_CMD) -u $$(cat default-user) -p essential-cli-tools,desktop,desktop-extra,dutch-desktop,multimedia -o build/mate.cfg -t mate -c sudo-nopasswd,chrome-remote-desktop,color-prompt,earth-pro,google-chrome,tmux-conf
+	$(INTERPOLATION_CMD) -u $$(cat default-user) -p essential-cli-tools,desktop,desktop-extra,dutch-desktop,multimedia -o build/mate.cfg -t mate -c sudo-nopasswd,chrome-remote-desktop,color-prompt,earth-pro,google-chrome,short-grub-pause,tmux-conf
 
 mate_personal: prepare
-	$(INTERPOLATION_CMD) -a -p essential-cli-tools,desktop,desktop-extra,dutch-desktop,multimedia -o build/mate-personal.cfg -t mate -c sudo-nopasswd,chrome-remote-desktop,color-prompt,earth-pro,google-chrome,tmux-conf
+	$(INTERPOLATION_CMD) -a -p essential-cli-tools,desktop,desktop-extra,dutch-desktop,multimedia -o build/mate-personal.cfg -t mate -c sudo-nopasswd,chrome-remote-desktop,color-prompt,earth-pro,google-chrome,short-grub-pause,tmux-conf
 
 cursus: prepare
-	$(INTERPOLATION_CMD) -u $$(cat default-user) -p essential-cli-tools,desktop,dutch-desktop -o build/cursus.cfg -t gnome -c prepare-education-box,color-prompt,tmux-conf,no-gnome-initial
+	$(INTERPOLATION_CMD) -u $$(cat default-user) -p essential-cli-tools,desktop,dutch-desktop -o build/cursus.cfg -t gnome -c prepare-education-box,color-prompt,short-grub-pause,tmux-conf,no-gnome-initial
 
 tutor: prepare
-	$(INTERPOLATION_CMD) -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,developer,docker,dutch-desktop,video-editing -o build/tutor.cfg -t gnome -c color-prompt,gists,prepare-education-box,tmux-conf,no-gnome-initial,vscode,docker
+	$(INTERPOLATION_CMD) -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,developer,docker,dutch-desktop,video-editing -o build/tutor.cfg -t gnome -c color-prompt,gists,prepare-education-box,tmux-conf,no-gnome-initial,short-grub-pause,vscode,docker
 
 server: prepare
-	$(INTERPOLATION_CMD) -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,developer,docker -o build/server.cfg -t standard -c color-prompt,sudo-nopasswd,tmux-conf,docker
+	$(INTERPOLATION_CMD) -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,developer,docker -o build/server.cfg -t standard -c color-prompt,sudo-nopasswd,ktmux-conf,docker
 
 gnome_complete: prepare
 	$(INTERPOLATION_CMD) -u $$(cat default-user) -p $(ALL_PACKAGES) -o build/gnome-complete.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
