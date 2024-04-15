@@ -30,6 +30,8 @@ jobs:
             ./build/server.cfg
             ./build/gnome-complete-personal.cfg
             ./build/lxde-complete-personal.cfg
+            ./build/lxde-personal.cfg
+            ./build/lxde.cfg
             ./build/steven.cfg
             ./build/gnome-complete.cfg
             ./build/mate.cfg

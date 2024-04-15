@@ -9,8 +9,10 @@ BATS_IMAGE=bats/bats:v1.10.0
 BATS_CMD=docker run -i --rm --init -v "$(PWD):/code" -u $(USER_ID) $(BATS_IMAGE)
 
 LATE_CMD_LOGGING_DIR=/var/log/installer-preseed/late-cmd
-ALL_PACKAGES=essential-cli-tools,cli-tools,desktop,desktop-extra,developer,dutch-desktop,docker,graphic,multimedia,upgrades,video-editing
-COMPLETE_LATE_CMDS=auto-set-shortcuts,color-prompt,sudo-nopasswd,chrome-remote-desktop,docker,dotnet,earth-pro,gists,golang,google-chrome,prepare-education-box,short-grub-pause,uu-add-origins,uu-activate,tmux-conf,no-gnome-initial,vscode
+MINIMAL_PACKAGE_LISTS=essential-cli-tools,desktop,desktop-extra,dutch-desktop,multimedia
+ALL_PACKAGE_LISTS=essential-cli-tools,cli-tools,desktop,desktop-extra,developer,dutch-desktop,docker,graphic,multimedia,upgrades,video-editing
+MINIMAL_LATE_CMDS=chrome-remote-desktop,color-prompt,earth-pro,google-chrome,no-gnome-initial,short-grub-pause,sudo-nopasswd,tmux-conf
+COMPLETE_LATE_CMDS=$(MINIMAL_LATE_CMDS),auto-set-shortcuts,docker,dotnet,gists,golang,prepare-education-box,uu-add-origins,uu-activate,vscode
 INTERPOLATION_CMD=LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) ./interpolate-preseed.sh
 
 default: clean all
@@ -52,16 +54,16 @@ scripts: prepare generate_install_scripts generate_late_cmd_script
 	gzip scripts.tar
 
 gnome: prepare
-	$(INTERPOLATION_CMD) -u $$(cat default-user) -p essential-cli-tools,desktop,desktop-extra,dutch-desktop,multimedia -o build/gnome.cfg -t gnome -c sudo-nopasswd,chrome-remote-desktop,color-prompt,earth-pro,google-chrome,short-grub-pause,tmux-conf,no-gnome-initial
+	$(INTERPOLATION_CMD) -u $$(cat default-user) -p $(MINIMAL_PACKAGE_LISTS) -o build/gnome.cfg -t gnome -c $(MINIMAL_LATE_CMDS)
 
 gnome_personal: prepare
-	$(INTERPOLATION_CMD) -a -p essential-cli-tools,desktop,desktop-extra,dutch-desktop,multimedia -o build/gnome-personal.cfg -t gnome -c sudo-nopasswd,chrome-remote-desktop,color-prompt,earth-pro,google-chrome,short-grub-pause,tmux-conf,no-gnome-initial
+	$(INTERPOLATION_CMD) -a -p $(MINIMAL_PACKAGE_LISTS) -o build/gnome-personal.cfg -t gnome -c $(MINIMAL_LATE_CMDS)
 
 mate: prepare
-	$(INTERPOLATION_CMD) -u $$(cat default-user) -p essential-cli-tools,desktop,desktop-extra,dutch-desktop,multimedia -o build/mate.cfg -t mate -c sudo-nopasswd,chrome-remote-desktop,color-prompt,earth-pro,google-chrome,short-grub-pause,tmux-conf
+	$(INTERPOLATION_CMD) -u $$(cat default-user) -p $(MINIMAL_PACKAGE_LISTS) -o build/mate.cfg -t mate -c $(MINIMAL_LATE_CMDS)
 
 mate_personal: prepare
-	$(INTERPOLATION_CMD) -a -p essential-cli-tools,desktop,desktop-extra,dutch-desktop,multimedia -o build/mate-personal.cfg -t mate -c sudo-nopasswd,chrome-remote-desktop,color-prompt,earth-pro,google-chrome,short-grub-pause,tmux-conf
+	$(INTERPOLATION_CMD) -a -p $(MINIMAL_PACKAGE_LISTS) -o build/mate-personal.cfg -t mate -c  $(MINIMAL_LATE_CMDS)
 
 cursus: prepare
 	$(INTERPOLATION_CMD) -u $$(cat default-user) -p essential-cli-tools,desktop,dutch-desktop -o build/cursus.cfg -t gnome -c prepare-education-box,color-prompt,short-grub-pause,tmux-conf,no-gnome-initial
@@ -70,25 +72,31 @@ tutor: prepare
 	$(INTERPOLATION_CMD) -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,developer,docker,dutch-desktop,video-editing -o build/tutor.cfg -t gnome -c color-prompt,gists,prepare-education-box,tmux-conf,no-gnome-initial,short-grub-pause,vscode,docker
 
 server: prepare
-	$(INTERPOLATION_CMD) -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,developer,docker -o build/server.cfg -t standard -c color-prompt,sudo-nopasswd,ktmux-conf,docker
+	$(INTERPOLATION_CMD) -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,developer,docker -o build/server.cfg -t standard -c color-prompt,short-grub-pause,sudo-nopasswd,ktmux-conf,docker
 
 gnome_complete: prepare
-	$(INTERPOLATION_CMD) -u $$(cat default-user) -p $(ALL_PACKAGES) -o build/gnome-complete.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
+	$(INTERPOLATION_CMD) -u $$(cat default-user) -p $(ALL_PACKAGE_LISTS) -o build/gnome-complete.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
 
 mate_complete: prepare
-	$(INTERPOLATION_CMD) -u $$(cat default-user) -p $(ALL_PACKAGES) -o build/mate-complete.cfg -t mate -c $(COMPLETE_LATE_CMDS)
+	$(INTERPOLATION_CMD) -u $$(cat default-user) -p $(ALL_PACKAGE_LISTS) -o build/mate-complete.cfg -t mate -c $(COMPLETE_LATE_CMDS)
 
 gnome_complete_personal: prepare
-	$(INTERPOLATION_CMD) -a -p $(ALL_PACKAGES) -o build/gnome-complete-personal.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
+	$(INTERPOLATION_CMD) -a -p $(ALL_PACKAGE_LISTS) -o build/gnome-complete-personal.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
 
 mate_complete_personal: prepare
-	$(INTERPOLATION_CMD) -a -p $(ALL_PACKAGES) -o build/mate-complete-personal.cfg -t mate -c $(COMPLETE_LATE_CMDS)
+	$(INTERPOLATION_CMD) -a -p $(ALL_PACKAGE_LISTS) -o build/mate-complete-personal.cfg -t mate -c $(COMPLETE_LATE_CMDS)
+
+lxde: prepare
+	$(INTERPOLATION_CMD) -u $$(cat default-user) -p $(MINIMAL_PACKAGE_LISTS) -o build/lxde.cfg -t lxde -c $(MINIMAL_LATE_CMDS)
+
+lxde_personal: prepare
+	$(INTERPOLATION_CMD) -a -p $(MINIMAL_PACKAGE_LISTS) -o build/lxde-personal.cfg -t lxde -c  $(MINIMAL_LATE_CMDS)
 
 lxde_complete_personal: prepare
-	$(INTERPOLATION_CMD) -a -p $(ALL_PACKAGES) -o build/lxde-complete-personal.cfg -t lxde -c $(COMPLETE_LATE_CMDS)
+	$(INTERPOLATION_CMD) -a -p $(ALL_PACKAGE_LISTS) -o build/lxde-complete-personal.cfg -t lxde -c $(COMPLETE_LATE_CMDS)
 
 steven: prepare
-	$(INTERPOLATION_CMD) -r -u steven -p $(ALL_PACKAGES) -o build/steven.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
+	$(INTERPOLATION_CMD) -r -u steven -p $(ALL_PACKAGE_LISTS) -o build/steven.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
 
 .ONESHELL:
 validate_preseeds:
