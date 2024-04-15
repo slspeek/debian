@@ -55,6 +55,11 @@ function prepare-education-box ()
    /bin/sh -c 'cd /usr/local/bin && wget https://raw.githubusercontent.com/slspeek/linux-beginners-cursus/main/bin/prepare-education-box.sh && chmod +x prepare-education-box.sh'
 }
 
+function short-grub-pause ()
+{
+   /usr/local/bin/short-grub-pause.sh
+}
+
 function sudo-nopasswd ()
 {
    /bin/sh -c '/usr/local/bin/sudo-nopasswd.sh $(id -nu 1000)'
