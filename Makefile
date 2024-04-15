@@ -19,7 +19,7 @@ default: clean all
 
 all: precommit scripts preseeds validate_preseeds website
 
-preseeds: gnome cursus tutor server gnome_complete gnome_complete_personal lxde_complete_personal steven gnome_personal mate mate_personal mate_complete mate_complete_personal
+preseeds: gnome cursus tutor server gnome_complete gnome_complete_personal lxde lxde_personal lxde_complete_personal steven gnome_personal mate mate_personal mate_complete mate_complete_personal
 
 clean:
 	rm -rf build

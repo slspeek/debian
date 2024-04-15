@@ -18,6 +18,8 @@
 - [mate-complete-personal.cfg](mate-complete-personal.cfg) een MATE installatie met alles erop en eraan waarbij u de gebruiker mag definiëren tijdens de installatie
 
 ### LXDE
+- [lxde.cfg](lxde.cfg) standaard LXDE installatie 
+- [lxde-personal.cfg](lxde-personal.cfg) LXDE installatie waarbij u de gebruiker mag definiëren tijdens de installatie
 - [lxde-complete-personal.cfg](lxde-complete-personal.cfg) alles erop en eraan LXDE installatie waarbij u de gebruiker mag definiëren tijdens de installatie
 
 ### Geen desktop
