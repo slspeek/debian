@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # set -e 
 
+# during the installer /usr/local/bin in *not* in the PATH, so I have to add it
+export PATH=$PATH:/usr/local/bin
+
 LATE_CMD_SRC=${LATE_CMD_SRC:-/usr/local/bin/late-cmds.sh}
 LATE_CMD_LOGGING_DIR=${LATE_CMD_LOGGING_DIR:-/var/log/installer-preseed/late-cmd}
 

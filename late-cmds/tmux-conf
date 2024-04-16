@@ -1,2 +1,2 @@
-/bin/sh -c 'sudo -u $(id -nu 1000) /usr/local/bin/create-tmux-conf.sh'  && \
-/usr/local/bin/create-tmux-conf.sh
+/bin/sh -c 'sudo -u $(id -nu 1000) create-tmux-conf.sh'  && \
+create-tmux-conf.sh

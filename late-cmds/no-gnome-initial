@@ -1,1 +1,1 @@
-/bin/sh -c '/usr/local/bin/disable-gnome-initial-setup.sh $(id -nu 1000)'
+/bin/sh -c 'disable-gnome-initial-setup.sh $(id -nu 1000)'
