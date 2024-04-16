@@ -1,1 +1,0 @@
-/bin/sh -c '/usr/local/bin/auto-set-shortcuts.sh  $(id -nu 1000)'
