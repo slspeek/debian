@@ -26,7 +26,7 @@
 - [server.cfg](server.cfg) een simpele server
 
 ## Gebruik
-Boot de [Debian installer](https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/) en kies "Advanced options >" -> "Automated install"
+Boot de [Debian installer](https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/) via het [boot menu](https://www.boot-disk.com/quest_bootmenu.htm) en kies "Advanced options >" -> "Automated install"
 
 Vul:
 

@@ -72,7 +72,7 @@ tutor: prepare
 	$(INTERPOLATION_CMD) -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,developer,docker,dutch-desktop,video-editing -o build/tutor.cfg -t gnome -c color-prompt,gists,prepare-education-box,tmux-conf,no-gnome-initial,short-grub-pause,vscode,docker
 
 server: prepare
-	$(INTERPOLATION_CMD) -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,developer,docker -o build/server.cfg -t standard -c color-prompt,short-grub-pause,sudo-nopasswd,ktmux-conf,docker
+	$(INTERPOLATION_CMD) -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,developer,docker -o build/server.cfg -t standard -c color-prompt,short-grub-pause,sudo-nopasswd,tmux-conf,docker
 
 gnome_complete: prepare
 	$(INTERPOLATION_CMD) -u $$(cat default-user) -p $(ALL_PACKAGE_LISTS) -o build/gnome-complete.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
