@@ -33,11 +33,11 @@ fi
 
 make PASSWORD=$PASSWORD BOOTMENUKEY=$BOOTMENUKEY generate_pdf
 
-if [ "PURGEMAKE" = "true" ]; then
+if [ "$PURGEMAKE" = "true" ]; then
     sudo apt purge -y make
 fi
 
-if [ "PURGEINXI" = "true" ]; then
+if [ "$PURGEINXI" = "true" ]; then
     sudo apt purge -y inxi
 fi
 
@@ -46,5 +46,3 @@ cp build/debian-machine-label.pdf ~
 cd ~
 
 rm -rf $TMPDIR
-
-
