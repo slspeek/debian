@@ -21,10 +21,16 @@ fi
 
 cd debian-machine-label
 
-# echo Bootmenukey: $BOOTMENUKEY
-# echo Password: $PASSWORD
+if ! which make &> /dev/null
+then 
+    sudo apt install -y make && PURGEMAKE=true
+fi
 
 make PASSWORD=$PASSWORD BOOTMENUKEY=$BOOTMENUKEY generate_pdf
+
+if [ "PURGEMAKE" = "true" ]; then
+    sudo apt purge -y make
+fi
 
 cp build/debian-machine-label.pdf ~
 
