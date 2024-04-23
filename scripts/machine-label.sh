@@ -26,10 +26,19 @@ then
     sudo apt install -y make && PURGEMAKE=true
 fi
 
+if ! which inxi &> /dev/null
+then
+    sudo apt install -y inxi && PURGEINXI=true
+fi
+
 make PASSWORD=$PASSWORD BOOTMENUKEY=$BOOTMENUKEY generate_pdf
 
 if [ "PURGEMAKE" = "true" ]; then
     sudo apt purge -y make
+fi
+
+if [ "PURGEINXI" = "true" ]; then
+    sudo apt purge -y inxi
 fi
 
 cp build/debian-machine-label.pdf ~
