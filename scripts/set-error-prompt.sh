@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-patch /etc/skel/bash.bashrc << 'EOF'
+patch /etc/bash.bashrc << 'EOF'
 --- bash.bashrc.bak	2024-04-24 14:09:46.337096429 +0200
 +++ bash.bashrc	2024-04-24 14:43:32.001427499 +0200
 @@ -18,7 +18,12 @@

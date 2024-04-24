@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -e
+set -x
 
 cat > $HOME/.tmux.conf <<EOF
 # ~/.tmux.conf
