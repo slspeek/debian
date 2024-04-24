@@ -11,7 +11,7 @@ BATS_CMD=docker run -i --rm --init -v "$(PWD):/code" -u $(USER_ID) $(BATS_IMAGE)
 LATE_CMD_LOGGING_DIR=/var/log/installer-preseed/late-cmd
 MINIMAL_PACKAGE_LISTS=essential-cli-tools,desktop,desktop-extra,dutch-desktop,multimedia
 ALL_PACKAGE_LISTS=essential-cli-tools,cli-tools,desktop,desktop-extra,developer,dutch-desktop,docker,firewall,games,graphic,multimedia,upgrades,video-editing,virusscanner
-MINIMAL_LATE_CMDS=chrome-remote-desktop,color-prompt,earth-pro,google-chrome,no-gnome-initial,short-grub-pause,sudo-nopasswd,tmux-conf
+MINIMAL_LATE_CMDS=chrome-remote-desktop,error-prompt,earth-pro,google-chrome,no-gnome-initial,short-grub-pause,sudo-nopasswd,tmux-conf
 COMPLETE_LATE_CMDS=$(MINIMAL_LATE_CMDS),docker,dotnet,gists,golang,prepare-education-box,uu-add-origins,uu-activate,vscode
 INTERPOLATION_CMD=LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) ./interpolate-preseed.sh
 
@@ -66,13 +66,13 @@ mate_personal: prepare
 	$(INTERPOLATION_CMD) -a -p $(MINIMAL_PACKAGE_LISTS) -o build/mate-personal.cfg -t mate -c  $(MINIMAL_LATE_CMDS)
 
 cursus: prepare
-	$(INTERPOLATION_CMD) -u $$(cat default-user) -p essential-cli-tools,desktop,dutch-desktop -o build/cursus.cfg -t gnome -c prepare-education-box,color-prompt,short-grub-pause,tmux-conf,no-gnome-initial
+	$(INTERPOLATION_CMD) -u $$(cat default-user) -p essential-cli-tools,desktop,dutch-desktop -o build/cursus.cfg -t gnome -c prepare-education-box,error-prompt,short-grub-pause,tmux-conf,no-gnome-initial
 
 tutor: prepare
-	$(INTERPOLATION_CMD) -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,developer,docker,dutch-desktop,video-editing -o build/tutor.cfg -t gnome -c color-prompt,gists,prepare-education-box,tmux-conf,no-gnome-initial,short-grub-pause,vscode,docker
+	$(INTERPOLATION_CMD) -u $$(cat default-user) -p essential-cli-tools,cli-tools,desktop,developer,docker,dutch-desktop,video-editing -o build/tutor.cfg -t gnome -c error-prompt,gists,prepare-education-box,tmux-conf,no-gnome-initial,short-grub-pause,vscode,docker
 
 server: prepare
-	$(INTERPOLATION_CMD) -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,developer,docker -o build/server.cfg -t standard -c color-prompt,short-grub-pause,sudo-nopasswd,tmux-conf,docker
+	$(INTERPOLATION_CMD) -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,developer,docker -o build/server.cfg -t standard -c error-prompt,short-grub-pause,sudo-nopasswd,tmux-conf,docker
 
 gnome_complete: prepare
 	$(INTERPOLATION_CMD) -u $$(cat default-user) -p $(ALL_PACKAGE_LISTS) -o build/gnome-complete.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
