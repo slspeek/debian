@@ -62,9 +62,7 @@ function sudo-nopasswd ()
 
 function tmux-conf ()
 {
-   set -x
    sudo -u $(id -nu 1000) create-tmux-conf.sh && create-tmux-conf.sh
-   set +x
 }
 
 function uu-activate ()
