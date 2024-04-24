@@ -5,14 +5,9 @@ function chrome-remote-desktop ()
    install-chrome-remote-desktop.sh
 }
 
-function color-prompt ()
-{
-   install-color-prompt.sh && /bin/sh -c 'set-color-prompt.sh $(id -nu 1000)'
-}
-
 function docker ()
 {
-   /bin/sh -c 'adduser $(id -nu 1000) docker'
+   adduser $(id -nu 1000) docker
 }
 
 function dotnet ()
@@ -23,6 +18,11 @@ function dotnet ()
 function earth-pro ()
 {
    install-earth-pro.sh
+}
+
+function error-prompt ()
+{
+   set-error-prompt.sh
 }
 
 function gists ()
@@ -42,12 +42,12 @@ function google-chrome ()
 
 function no-gnome-initial ()
 {
-   /bin/sh -c 'disable-gnome-initial-setup.sh $(id -nu 1000)'
+   disable-gnome-initial-setup.sh $(id -nu 1000)
 }
 
 function prepare-education-box ()
 {
-   /bin/sh -c 'cd /usr/local/bin && wget https://raw.githubusercontent.com/slspeek/linux-beginners-cursus/main/bin/prepare-education-box.sh && chmod +x prepare-education-box.sh'
+   cd /usr/local/bin && wget https://raw.githubusercontent.com/slspeek/linux-beginners-cursus/main/bin/prepare-education-box.sh && chmod +x prepare-education-box.sh
 }
 
 function short-grub-pause ()
@@ -57,17 +57,19 @@ function short-grub-pause ()
 
 function sudo-nopasswd ()
 {
-   /bin/sh -c 'sudo-nopasswd.sh $(id -nu 1000)'
+   sudo-nopasswd.sh $(id -nu 1000)
 }
 
 function tmux-conf ()
 {
-   /bin/sh -c 'sudo -u $(id -nu 1000) create-tmux-conf.sh' && create-tmux-conf.sh
+   set -x
+   sudo -u $(id -nu 1000) create-tmux-conf.sh && create-tmux-conf.sh
+   set +x
 }
 
 function uu-activate ()
 {
-   /bin/sh -c 'echo unattended-upgrades unattended-upgrades/enable_auto_updates boolean true | debconf-set-selections' && dpkg-reconfigure -f noninteractive unattended-upgrades
+   echo unattended-upgrades unattended-upgrades/enable_auto_updates boolean true | debconf-set-selections && dpkg-reconfigure -f noninteractive unattended-upgrades
 }
 
 function uu-add-origins ()
