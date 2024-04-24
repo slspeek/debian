@@ -1,1 +1,1 @@
-/bin/sh -c 'adduser $(id -nu 1000) docker'
+adduser $(id -nu 1000) docker

@@ -1,2 +1,2 @@
 install-color-prompt.sh && \
-/bin/sh -c 'set-color-prompt.sh  $(id -nu 1000)'
+set-color-prompt.sh  $(id -nu 1000)'

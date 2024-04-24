@@ -1,1 +1,1 @@
-/bin/sh -c 'sudo-nopasswd.sh $(id -nu 1000)'
+sudo-nopasswd.sh $(id -nu 1000)
