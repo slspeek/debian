@@ -1,4 +1,5 @@
 SHELL=/bin/bash
+export PATH:=$(PWD)/bin:$(PATH)
 
 USER_ID=$(shell id -u):$(shell id -g)
 
@@ -13,7 +14,7 @@ MINIMAL_PACKAGE_LISTS=essential-cli-tools,desktop,desktop-extra,dutch-desktop,mu
 ALL_PACKAGE_LISTS=essential-cli-tools,cli-tools,desktop,desktop-extra,developer,dutch-desktop,docker,firewall,games,graphic,multimedia,upgrades,video-editing,virusscanner
 MINIMAL_LATE_CMDS=chrome-remote-desktop,error-prompt,earth-pro,google-chrome,no-gnome-initial,short-grub-pause,sudo-nopasswd,tmux-conf
 COMPLETE_LATE_CMDS=$(MINIMAL_LATE_CMDS),docker,dotnet,gists,golang,prepare-education-box,uu-add-origins,uu-activate,vscode
-INTERPOLATION_CMD=LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) ./interpolate-preseed.sh
+INTERPOLATION_CMD=LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) interpolate-preseed.sh
 
 default: clean all
 
@@ -109,21 +110,21 @@ validate_preseeds:
 check_package_file_endings:
 	@for FILE in $(shell ls package-lists/*)
 	do
-		./check-newline.sh $${FILE} || exit 1
+		check-newline.sh $${FILE} || exit 1
 	done
 	
 .ONESHELL:
 check_latecmd_file_endings:
 	@for FILE in $(shell ls late-cmds/*)
 	do
-		./check-newline.sh $${FILE} || exit 1
+		check-newline.sh $${FILE} || exit 1
 	done
 
 .ONESHELL:
 check_preseed_fragment_file_endings:
 	@for FILE in $(shell ls preseed.cfg.d/*)
 	do
-		./check-newline.sh $${FILE} || exit 1
+		check-newline.sh $${FILE} || exit 1
 	done
 
 generate_install_scripts: prepare
