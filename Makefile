@@ -130,11 +130,8 @@ check_preseed_fragment_file_endings:
 generate_install_scripts: prepare
 	@for FILE in $(shell ls package-lists/*)
 	do
-		(echo '#!/usr/bin/env bash'; echo 'OPTION=$$1'; echo 'if [ "$$OPTION" = "-r" ]; then'; echo '  ' SUBCMD=remove; echo else; echo '  ' SUBCMD=install; echo fi;  echo; echo 'sudo apt-get $$SUBCMD -y  \'; \
-		for PACKAGE in $$(cat $${FILE}|tr '\n' ' ')
-		do 
-			echo "    " $${PACKAGE} " \\"
-		done ; echo ) > build/install-scripts/install-$$(basename $${FILE}).sh
+		echo $${FILE}
+		generate-install-script.sh $${FILE}
 	done
 
 website: prepare
