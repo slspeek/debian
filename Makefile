@@ -131,7 +131,7 @@ generate_install_scripts: prepare
 	@for FILE in $(shell ls package-lists/*)
 	do
 		echo $${FILE}
-		generate-install-script.sh $${FILE}
+		generate-install-script.sh $${FILE} || exit 1
 	done
 
 website: prepare

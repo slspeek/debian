@@ -2,7 +2,7 @@
 set -e
 
 if [ "$(id -u)" -eq 0 ]; then
-    $HOME=/root
+    HOME=/root
 fi
 
 cat > $HOME/.tmux.conf <<EOF
