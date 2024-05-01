@@ -10,7 +10,7 @@ TIMESTAMP=$(date +%Y%m%d-%H%M)
 DEFAULT_TARGETDIR=/home/${BACKUP_USER}/${BACKUP_NAME}-backup-${TIMESTAMP}/
 TARGETDIR=${4:-$DEFAULT_TARGETDIR}
 
-ssh $BACKUP_HOST mkdir -p $TARGETDIR
+ssh -l $BACKUP_USER $BACKUP_HOST mkdir -p $TARGETDIR
 RSYNC_CMD="rsync -ar --delete -v" 
-$RSYNC_CMD /home /root /etc $BACKUP_HOST:$TARGETDIR
+$RSYNC_CMD /home /root /etc ${BACKUP_USER}@${BACKUP_HOST}:${TARGETDIR}
 
