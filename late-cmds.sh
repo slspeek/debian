@@ -40,6 +40,11 @@ function google-chrome ()
    install-google-chrome.sh
 }
 
+function megasync ()
+{
+   install-megasync.sh && sudo -u $(id -nu 1000) install-appindicator.sh
+}
+
 function no-gnome-initial ()
 {
    disable-gnome-initial-setup.sh $(id -nu 1000)
