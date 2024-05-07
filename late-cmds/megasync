@@ -1,0 +1,2 @@
+install-megasync.sh && \
+sudo -u  $(id -nu 1000) install-appindicator.sh

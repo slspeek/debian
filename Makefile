@@ -13,7 +13,7 @@ LATE_CMD_LOGGING_DIR=/var/log/installer-preseed/late-cmd
 MINIMAL_PACKAGE_LISTS=essential-cli-tools,desktop,desktop-extra,dutch-desktop,multimedia
 ALL_PACKAGE_LISTS=essential-cli-tools,cli-tools,desktop,desktop-extra,developer,dutch-desktop,docker,firewall,games,graphic,multimedia,upgrades,video-editing,virusscanner
 MINIMAL_LATE_CMDS=chrome-remote-desktop,error-prompt,earth-pro,google-chrome,no-gnome-initial,short-grub-pause,sudo-nopasswd,tmux-conf
-COMPLETE_LATE_CMDS=$(MINIMAL_LATE_CMDS),docker,dotnet,gists,golang,prepare-education-box,uu-add-origins,uu-activate,vscode
+COMPLETE_LATE_CMDS=$(MINIMAL_LATE_CMDS),docker,dotnet,gists,golang,megasync,prepare-education-box,uu-add-origins,uu-activate,vscode
 INTERPOLATION_CMD=LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) interpolate-preseed.sh
 
 default: clean all
