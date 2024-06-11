@@ -52,7 +52,7 @@ function no-gnome-initial ()
 
 function prepare-education-box ()
 {
-   cd /usr/local/bin && wget https://raw.githubusercontent.com/slspeek/linux-beginners-cursus/main/bin/prepare-education-box.sh && chmod +x prepare-education-box.sh
+   cd /usr/local/bin && wget https://github.com/slspeek/linux-beginners-cursus/releases/latest/download/prepare-education-box.sh && chmod +x prepare-education-box.sh
 }
 
 function short-grub-pause ()
