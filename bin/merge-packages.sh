@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+PACKAGE_LIST_LOCATION=${PACKAGE_LIST_LOCATION:-package-lists}
+
+echo $PACKAGE_LIST_LOCATION
