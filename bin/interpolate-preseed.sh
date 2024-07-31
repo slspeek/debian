@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# set -e
+set -e
 
 ENABLE_ROOT_LOGIN_OPT=false
 ASK_FOR_USER=false
@@ -43,13 +43,6 @@ echo scripts: $LATE_CMDS;
 echo tasks: $TASKS;
 echo output file: $OUT_FILE)|boxes -d ada-box
 
-PACKAGE_TMPFILE=$(mktemp)
-
-for PACKAGE_LIST in ${PACKAGE_LISTS//,/ }
-do 
-    cat package-lists/$PACKAGE_LIST  >> $PACKAGE_TMPFILE || exit 4
-done
-
 SCRIPTS_TMPFILE=$(mktemp)
 
 COMMAND="LATE_CMD_LOGGING_DIR=$LATE_CMD_LOGGING_DIR LATE_CMD_SRC=/usr/local/bin/late-cmds.sh /usr/local/bin/late-cmd-helper.sh ${LATE_CMDS//,/ }"
@@ -81,7 +74,7 @@ export ROOT_LOGIN
 export DEFAULT_USER
 export DEFAULT_USER_FULLNAME=${DEFAULT_USER^}
 export CMDS="$(cat $SCRIPTS_TMPFILE)"
-export PACKAGES="$(cat $PACKAGE_TMPFILE|sort -u| sed  -e 's/\(.*\)/        \1 \\/g'|sed -e '$ s/\\//')"
+export PACKAGES="$(merge-packages.sh $PACKAGE_LISTS|sed  -e 's/\(.*\)/        \1 \\/g'|sed -e '$ s/\\//')"
 export TASKS="$(cat tasks/$TASKS|tr '\n' ',')"
 export LATE_CMDS
 export ASK_FOR_USER

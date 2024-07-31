@@ -11,28 +11,34 @@ setup() {
     PATH="$DIR/../bin:$PATH"
 
     export PACKAGE_LIST_LOCATION=$(mktemp -d)
-#     cat > $LATE_CMD_SRC_TMP << EOF
-# function success() {
-#     echo success
-#     true
-# }
 
-# function failure() {
-#     echo failure
-#     false
-# }
+cat > $PACKAGE_LIST_LOCATION/foo << EOF
+wget
+kstars
+task-gnome-desktop
+EOF
 
-# EOF
-   
-#     export LATE_CMD_SRC=$LATE_CMD_SRC_TMP
+cat > $PACKAGE_LIST_LOCATION/bar << EOF
+vim
+tree
+EOF
+
+cat > $PACKAGE_LIST_LOCATION/foobar << EOF
+wget
+kstars
+task-gnome-desktop
+tmux
+EOF
 }
 
-
-@test "Environment" {
-    run merge-packages.sh
+@test "Sorting and uniqueness" {
+    run merge-packages.sh foo,bar,foobar
     [ "$status" -eq 0 ]
-    # echo PLL: $PACKAGE_LIST_LOCATION
-    # echo Output: $output
-    [ "${lines[0]}" = "$PACKAGE_LIST_LOCATION" ]
+    [ "${lines[0]}" = "kstars" ]
+    [ "${lines[1]}" = "task-gnome-desktop" ]
+    [ "${lines[2]}" = "tmux" ]
+    [ "${lines[3]}" = "tree" ]
+    [ "${lines[4]}" = "vim" ]
+    [ "${lines[5]}" = "wget" ]
 }
 
