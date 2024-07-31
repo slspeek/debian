@@ -1,5 +1,3 @@
 build-essential
 curl
 git
-virt-manager
-virt-viewer
