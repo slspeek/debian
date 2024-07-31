@@ -11,7 +11,7 @@ BATS_CMD=docker run -i --rm --init -v "$(PWD):/code" -u $(USER_ID) $(BATS_IMAGE)
 
 LATE_CMD_LOGGING_DIR=/var/log/installer-preseed/late-cmd
 MINIMAL_PACKAGE_LISTS=essential-cli-tools,desktop,desktop-extra,dutch-desktop,multimedia
-ALL_PACKAGE_LISTS=essential-cli-tools,cli-tools,desktop,desktop-extra,developer,dutch-desktop,docker,firewall,games,graphic,multimedia,upgrades,video-editing,virusscanner
+ALL_PACKAGE_LISTS=essential-cli-tools,cli-tools,desktop,desktop-extra,developer,dutch-desktop,docker,firewall,games,graphic,multimedia,upgrades,video-editing,virusscanner,virtmanager
 MINIMAL_LATE_CMDS=chrome-remote-desktop,error-prompt,earth-pro,google-chrome,no-gnome-initial,short-grub-pause,sudo-nopasswd,tmux-conf
 COMPLETE_LATE_CMDS=$(MINIMAL_LATE_CMDS),docker,dotnet,gists,golang,megasync,prepare-education-box,uu-add-origins,uu-activate,vscode
 INTERPOLATION_CMD=LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) interpolate-preseed.sh
@@ -101,10 +101,10 @@ steven: prepare
 	$(INTERPOLATION_CMD) -r -u steven -p $(ALL_PACKAGE_LISTS) -o build/steven.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
 
 live_server: prepare
-	$(LIVE_BUILD_CMD) -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,developer,docker,server -o build/server.cfg -t standard -c error-prompt,short-grub-pause,sudo-nopasswd,tmux-conf,docker
+	$(LIVE_BUILD_CMD) -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,server -o build/server.cfg -t standard -c dotnet
 
 live_gnome_complete: prepare
-	$(LIVE_BUILD_CMD) -u $$(cat default-user) -p $(ALL_PACKAGE_LISTS) -o build/gnome-complete.cfg -t gnome -c google-chrome,chrome-remote-desktop,dotnet
+	$(LIVE_BUILD_CMD) -u $$(cat default-user) -p $(ALL_PACKAGE_LISTS) -o build/gnome-complete.cfg -t gnome -c google-chrome,vscode,dotnet
 
 .ONESHELL:
 validate_preseeds:
