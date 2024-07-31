@@ -43,13 +43,6 @@ echo scripts: $LATE_CMDS;
 echo tasks: $TASKS;
 echo output file: $OUT_FILE)|boxes -d ada-box
 
-SCRIPTS_TMPFILE=$(mktemp)
-
-COMMAND="LATE_CMD_LOGGING_DIR=$LATE_CMD_LOGGING_DIR LATE_CMD_SRC=/usr/local/bin/late-cmds.sh /usr/local/bin/late-cmd-helper.sh ${LATE_CMDS//,/ }"
-
-echo "    in-target /bin/sh -c '"$COMMAND ">" "$LATE_CMD_LOGGING_DIR/late-cmd.log 2>&1'" "&& \\"   >> $SCRIPTS_TMPFILE
-
-
 if test "$ENABLE_ROOT_LOGIN_OPT" = "true"
 then
 	ROOT_LOGIN="$(cat preseed.cfg.d/root-login)"
@@ -73,10 +66,11 @@ export USER_CONFIG
 export ROOT_LOGIN
 export DEFAULT_USER
 export DEFAULT_USER_FULLNAME=${DEFAULT_USER^}
-export CMDS="$(cat $SCRIPTS_TMPFILE)"
+# export CMDS="$(cat $SCRIPTS_TMPFILE)"
 export PACKAGES="$(merge-packages.sh $PACKAGE_LISTS|sed  -e 's/\(.*\)/        \1 \\/g'|sed -e '$ s/\\//')"
 export TASKS="$(cat tasks/$TASKS|tr '\n' ',')"
 export LATE_CMDS
+export LATE_CMD_STANZA="$(late-cmd-constructor.sh $LATE_CMDS $LATE_CMD_LOGGING_DIR $PRESEED_NAME)"
 export ASK_FOR_USER
 export LATE_CMD_LOGGING_DIR
 
