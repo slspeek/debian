@@ -45,19 +45,6 @@ echo scripts: $LATE_CMDS;
 echo tasks: $TASKS;
 echo output file: $OUT_FILE)|boxes -d ada-box
 
-if test "$ENABLE_ROOT_LOGIN_OPT" = "true"
-then
-	ROOT_LOGIN="$(cat preseed.cfg.d/root-login)"
-else
-	ROOT_LOGIN="$(cat preseed.cfg.d/no-root-login)"
-fi
-
-if test "$ASK_FOR_USER" = "true"
-then
-	USER_CONFIG="# let the installer ask for the username"
-else
-	USER_CONFIG="$(cat preseed.cfg.d/user-config)"
-fi
 
 export PRESEED_NAME=$(basename $OUT_FILE)
 export GIT_HASH=$(git rev-parse --verify HEAD)
@@ -69,14 +56,41 @@ export ROOT_LOGIN
 export DEFAULT_USER
 export DEFAULT_USER_FULLNAME=${DEFAULT_USER^}
 export PACKAGES="$(merge-packages.sh $PACKAGE_LISTS|sed  -e 's/\(.*\)/        \1 \\/g'|sed -e '$ s/\\//')"
-export TASKS="$(cat tasks/$TASKS|tr '\n' ',')"
+export TASKS="$(cat tasks/$TASKS|grep -v 'standard')"
 export LATE_CMDS
 export LATE_CMD_STANZA="$(late-cmd-constructor.sh $LATE_CMDS $LATE_CMD_LOGGING_DIR $PRESEED_NAME)"
 export ASK_FOR_USER
 export LATE_CMD_LOGGING_DIR
 
-envsubst < preseed.cfg > build/preseed.cfg.1
+LIVE_BUILD_NAME=live-build-${PRESEED_NAME/.*/}
 
-envsubst < build/preseed.cfg.1 > $OUT_FILE
+STAGE_AREA=$(mktemp -d)/$LIVE_BUILD_NAME
 
-rm build/preseed.cfg.1
+mkdir $STAGE_AREA
+
+LIVE_BUILD_SCRIPT=$STAGE_AREA/$LIVE_BUILD_NAME.sh
+
+cat >  $LIVE_BUILD_SCRIPT <<EOF
+set -e
+sudo rm -rfv  $LIVE_BUILD_NAME|| exit 0
+mkdir $LIVE_BUILD_NAME
+cd $LIVE_BUILD_NAME
+lb config --distribution bookworm --parent-archive-areas "main contrib non-free non-free-firmware" --bootappend-live "boot=live components locales=nl_NL.UTF-8 "
+cp ../packages.lst config/package-lists/live.list.chroot
+cp ../tasks.packages.lst  config/package-lists/tasks.list.chroot
+cp ../late-cmds.hook.chroot config/hooks/live
+time sudo lb build
+EOF
+
+chmod +x $LIVE_BUILD_SCRIPT
+
+merge-packages.sh $PACKAGE_LISTS > $STAGE_AREA/packages.lst 
+
+echo $TASKS|sed -E 's/^./task-&/' > $STAGE_AREA/tasks.packages.lst
+
+late-cmd-constructor.sh $LATE_CMDS $LATE_CMD_LOGGING_DIR $PRESEED_NAME > $STAGE_AREA/late-cmds.hook.chroot
+
+pushd $STAGE_AREA/..
+tar czf $STAGE_AREA/../${LIVE_BUILD_NAME}.tar.gz  $(basename $STAGE_AREA)
+popd
+mv $STAGE_AREA/../${LIVE_BUILD_NAME}.tar.gz build/${LIVE_BUILD_NAME}.tar.gz
