@@ -67,6 +67,7 @@ function sudo-nopasswd ()
 
 function tmux-conf ()
 {
+   create-tmux-conf.sh ; sudo -u $(id -nu 1000) /bin/sh -c 'cp /etc/skel/.tmux.conf ~' ; cp /etc/skel/.tmux.conf /root
 }
 
 function uu-activate ()
