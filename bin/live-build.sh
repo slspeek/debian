@@ -58,7 +58,7 @@ export DEFAULT_USER_FULLNAME=${DEFAULT_USER^}
 export PACKAGES="$(merge-packages.sh $PACKAGE_LISTS|sed  -e 's/\(.*\)/        \1 \\/g'|sed -e '$ s/\\//')"
 export TASKS="$(cat tasks/$TASKS|grep -v 'standard')"
 export LATE_CMDS
-export LATE_CMD_STANZA="$(late-cmd-constructor.sh $LATE_CMDS $LATE_CMD_LOGGING_DIR $PRESEED_NAME)"
+# export LATE_CMD_STANZA="$(late-cmd-constructor.sh $LATE_CMDS $LATE_CMD_LOGGING_DIR $PRESEED_NAME)"
 export ASK_FOR_USER
 export LATE_CMD_LOGGING_DIR
 
@@ -75,9 +75,9 @@ set -e
 sudo rm -rfv  $LIVE_BUILD_NAME|| exit 0
 mkdir $LIVE_BUILD_NAME
 cd $LIVE_BUILD_NAME
-lb config --distribution bookworm --parent-archive-areas "main contrib non-free non-free-firmware" --bootappend-live "boot=live components locales=nl_NL.UTF-8 "
-cp ../packages.lst config/package-lists/live.list.chroot
-cp ../tasks.packages.lst  config/package-lists/tasks.list.chroot
+lb config --distribution bookworm --parent-archive-areas "main contrib non-free non-free-firmware" --bootappend-live "boot=live components locales=nl_NL.UTF-8 username=${DEFAULT_USER}"
+cp ../packages.lst config/package-lists/${LIVE_BUILD_NAME}.list.chroot
+cp ../tasks.packages.lst  config/package-lists/${LIVE_BUILD_NAME}-tasks.list.chroot
 cp ../late-cmds.hook.chroot config/hooks/live
 time sudo lb build
 EOF

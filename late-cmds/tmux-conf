@@ -1,2 +1,3 @@
-sudo -u $(id -nu 1000) create-tmux-conf.sh  && \
-create-tmux-conf.sh
+create-tmux-conf.sh && \
+sudo -u $(id -nu 1000) /bin/sh -c 'cp /etc/skel/.tmux.conf ~'  ; \
+cp /etc/skel/.tmux.conf /root  ; \

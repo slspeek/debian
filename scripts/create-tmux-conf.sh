@@ -1,11 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-if [ "$(id -u)" -eq 0 ]; then
-    HOME=/root
-fi
-
-cat > $HOME/.tmux.conf <<EOF
+cat > /etc/skel/.tmux.conf <<EOF
 # ~/.tmux.conf
 
 unbind-key C-b
