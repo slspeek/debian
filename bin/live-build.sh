@@ -79,6 +79,7 @@ lb config --distribution bookworm --parent-archive-areas "main contrib non-free 
 cp ../packages.lst config/package-lists/${LIVE_BUILD_NAME}.list.chroot
 cp ../tasks.packages.lst  config/package-lists/${LIVE_BUILD_NAME}-tasks.list.chroot
 cp ../late-cmds.hook.chroot config/hooks/live
+mkdir -p config/includes.chroot/etc/skel/.config && echo yes > config/includes.chroot/etc/skel/.config/gnome-initial-setup-done
 time sudo lb build
 EOF
 
