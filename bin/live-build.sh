@@ -75,7 +75,9 @@ set -e
 sudo rm -rfv  $LIVE_BUILD_NAME|| exit 0
 mkdir $LIVE_BUILD_NAME
 cd $LIVE_BUILD_NAME
-lb config --distribution bookworm --parent-archive-areas "main contrib non-free non-free-firmware" --bootappend-live "boot=live components locales=nl_NL.UTF-8 username=${DEFAULT_USER}"
+lb config --distribution bookworm \\
+		  --parent-archive-areas "main contrib non-free non-free-firmware" \\
+		  --bootappend-live "boot=live components locales=nl_NL.UTF-8 username=${DEFAULT_USER}" 
 cp ../packages.lst config/package-lists/${LIVE_BUILD_NAME}.list.chroot
 cp ../tasks.packages.lst  config/package-lists/${LIVE_BUILD_NAME}-tasks.list.chroot
 cp ../late-cmds.hook.chroot config/hooks/live
