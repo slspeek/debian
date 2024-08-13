@@ -2,14 +2,10 @@
 set -e
 
 ENABLE_ROOT_LOGIN_OPT=false
-ASK_FOR_USER=false
 
-while getopts "aru:p:t:c:o:" opt 
+while getopts "ru:p:t:n:c:o:" opt 
 do
 	case $opt in
-		a) 
-			ASK_FOR_USER=true
-			;;
 		r)
 			ENABLE_ROOT_LOGIN_OPT=true
 			;;
@@ -25,8 +21,8 @@ do
 		t)
 			TASKS=$OPTARG
 			;;
-        o)
-            OUT_FILE=$OPTARG
+        n)
+            PROFILE_NAME=$OPTARG
             ;;
 		?)
 			echo Invalid opt -${OPTARG}
@@ -37,51 +33,43 @@ done
 
 (echo $(basename ${0^^});
 echo;
-echo ask for user: $ASK_FOR_USER;
+echo profile name: $PROFILE_NAME;
 echo default user: $DEFAULT_USER;
 echo enable root login: $ENABLE_ROOT_LOGIN_OPT;
 echo packages: $PACKAGE_LISTS;
 echo scripts: $LATE_CMDS;
 echo tasks: $TASKS;
-echo output file: $OUT_FILE)|boxes -d ada-box
+)|boxes -d ada-box
 
-
-export PRESEED_NAME=$(basename $OUT_FILE)
-export GIT_HASH=$(git rev-parse --verify HEAD)
-export GIT_DATE=$(git show --no-patch --no-notes --pretty='%cd' $(git rev-parse --verify HEAD))
-export ENABLE_ROOT_LOGIN_OPT
-export PACKAGE_LISTS
-export USER_CONFIG
-export ROOT_LOGIN
-export DEFAULT_USER
-export DEFAULT_USER_FULLNAME=${DEFAULT_USER^}
-export PACKAGES="$(merge-packages.sh $PACKAGE_LISTS|sed  -e 's/\(.*\)/        \1 \\/g'|sed -e '$ s/\\//')"
+DEFAULT_USER_FULLNAME=${DEFAULT_USER^}
 export TASKS="$(cat tasks/$TASKS|grep -v 'standard')"
-export LATE_CMDS
-# export LATE_CMD_STANZA="$(late-cmd-constructor.sh $LATE_CMDS $LATE_CMD_LOGGING_DIR $PRESEED_NAME)"
-export ASK_FOR_USER
-export LATE_CMD_LOGGING_DIR
-
-LIVE_BUILD_NAME=live-build-${PRESEED_NAME/.*/}
+LIVE_BUILD_NAME=${PROFILE_NAME}-live
 
 STAGE_AREA=$(mktemp -d)/$LIVE_BUILD_NAME
 
 mkdir $STAGE_AREA
 
-LIVE_BUILD_SCRIPT=$STAGE_AREA/$LIVE_BUILD_NAME.sh
+LIVE_BUILD_SCRIPT=$STAGE_AREA/build.sh
 
 cat >  $LIVE_BUILD_SCRIPT <<EOF
 set -e
-sudo rm -rfv  $LIVE_BUILD_NAME|| exit 0
-mkdir $LIVE_BUILD_NAME
-cd $LIVE_BUILD_NAME
+
+sudo rm -rfv  build|| exit 0
+mkdir build
+cd build
 lb config --distribution bookworm \\
 		  --parent-archive-areas "main contrib non-free non-free-firmware" \\
-		  --bootappend-live "boot=live components locales=nl_NL.UTF-8 username=${DEFAULT_USER}" 
+		  --bootappend-live "boot=live components locales=nl_NL.UTF-8 username=${DEFAULT_USER} \\
+		  					 user-fullname=${DEFAULT_USER_FULLNAME}" 
 cp ../packages.lst config/package-lists/${LIVE_BUILD_NAME}.list.chroot
 cp ../tasks.packages.lst  config/package-lists/${LIVE_BUILD_NAME}-tasks.list.chroot
 cp ../late-cmds.hook.chroot config/hooks/live
 mkdir -p config/includes.chroot/etc/skel/.config && echo yes > config/includes.chroot/etc/skel/.config/gnome-initial-setup-done
+mkdir -p config/includes.chroot/etc/live/config.conf.d/
+echo "LIVE_USER_DEFAULT_GROUPS=\"audio cdrom dip floppy video plugdev netdev powerdev scanner bluetooth fuse docker\"" > config/includes.chroot/etc/live/config.conf.d/10-user-setup.conf
+#mkdir -p config/includes.chroot/lib/live/config
+#cp /usr/share/doc/live-config/examples/hooks/passwd config/includes.chroot/lib/live/config/2000-passwd
+
 time sudo lb build
 EOF
 
@@ -91,7 +79,7 @@ merge-packages.sh $PACKAGE_LISTS > $STAGE_AREA/packages.lst
 
 echo $TASKS|sed -E 's/^./task-&/' > $STAGE_AREA/tasks.packages.lst
 
-late-cmd-constructor.sh $LATE_CMDS $LATE_CMD_LOGGING_DIR $PRESEED_NAME > $STAGE_AREA/late-cmds.hook.chroot
+late-cmd-constructor.sh $LATE_CMDS $LATE_CMD_LOGGING_DIR ${PROFILE_NAME}.cfg > $STAGE_AREA/late-cmds.hook.chroot
 
 pushd $STAGE_AREA/..
 tar czf $STAGE_AREA/../${LIVE_BUILD_NAME}.tar.gz  $(basename $STAGE_AREA)
