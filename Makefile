@@ -101,10 +101,13 @@ steven: prepare
 	$(INTERPOLATION_CMD) -r -u steven -p $(ALL_PACKAGE_LISTS) -o build/steven.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
 
 live_server: prepare
-	$(LIVE_BUILD_CMD) -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,server -n server -t standard -c error-prompt,tmux-conf
+	$(LIVE_BUILD_CMD) -u $$(cat default-user) -p essential-cli-tools -n server -t standard -c error-prompt,golang,gists,tmux-conf
 
 live_gnome_complete: prepare
-	$(LIVE_BUILD_CMD) -u $$(cat default-user) -p $(ALL_PACKAGE_LISTS) -n gnome-complete -t gnome -c google-chrome,vscode,dotnet
+	$(LIVE_BUILD_CMD) -u $$(cat default-user) -p $(ALL_PACKAGE_LISTS) -n gnome-complete -t gnome -c gists,error-prompt,golang,google-chrome,chrome-remote-desktop,vscode,dotnet,tmux-conf
+
+live_gnome: prepare
+	$(LIVE_BUILD_CMD) -u $$(cat default-user) -p essential-cli-tools,desktop,dutch-desktop -n gnome -t gnome -c gists,error-prompt,golang,google-chrome,chrome-remote-desktop,vscode,dotnet,tmux-conf
 
 .ONESHELL:
 validate_preseeds:

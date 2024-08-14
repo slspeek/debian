@@ -51,29 +51,47 @@ mkdir $STAGE_AREA
 
 LIVE_BUILD_SCRIPT=$STAGE_AREA/build.sh
 
+mkdir $STAGE_AREA/auto
+
+TEMP_CONFIG=$(mktemp)
+
+cat >  $TEMP_CONFIG <<'EOF'
+lb config noauto \
+		--distribution bookworm \
+		--parent-archive-areas "main contrib non-free non-free-firmware" \
+		--bootappend-live "boot=live components locales=nl_NL.UTF-8 username=${DEFAULT_USER} \
+							user-fullname=${DEFAULT_USER_FULLNAME}" \
+		"$@"
+EOF
+export DEFAULT_USER
+export DEFAULT_USER_FULLMANE
+envsubst '$DEFAULT_USER $DEFAULT_USER_FULLMANE'< $TEMP_CONFIG > $STAGE_AREA/auto/config
+chmod +x $STAGE_AREA/auto/config
+
 cat >  $LIVE_BUILD_SCRIPT <<EOF
 set -e
 
 sudo rm -rfv  build|| exit 0
 mkdir build
 cd build
-lb config --distribution bookworm \\
-		  --parent-archive-areas "main contrib non-free non-free-firmware" \\
-		  --bootappend-live "boot=live components locales=nl_NL.UTF-8 username=${DEFAULT_USER} \\
-		  					 user-fullname=${DEFAULT_USER_FULLNAME}" 
+mkdir -p config/{package-lists,hooks}
+mkdir -p config/hooks/live
 cp ../packages.lst config/package-lists/${LIVE_BUILD_NAME}.list.chroot
 cp ../tasks.packages.lst  config/package-lists/${LIVE_BUILD_NAME}-tasks.list.chroot
 cp ../late-cmds.hook.chroot config/hooks/live
+cp -r ../includes.chroot config 
+cp -r ../auto .
 mkdir -p config/includes.chroot/etc/skel/.config && echo yes > config/includes.chroot/etc/skel/.config/gnome-initial-setup-done
 mkdir -p config/includes.chroot/etc/live/config.conf.d/
 echo "LIVE_USER_DEFAULT_GROUPS=\"audio cdrom dip floppy video plugdev netdev powerdev scanner bluetooth fuse docker\"" > config/includes.chroot/etc/live/config.conf.d/10-user-setup.conf
-#mkdir -p config/includes.chroot/lib/live/config
-#cp /usr/share/doc/live-config/examples/hooks/passwd config/includes.chroot/lib/live/config/2000-passwd
 
-time sudo lb build
+#lb config
+#time sudo lb build
 EOF
 
 chmod +x $LIVE_BUILD_SCRIPT
+
+cp -rv resource/live/includes.chroot $STAGE_AREA
 
 merge-packages.sh $PACKAGE_LISTS > $STAGE_AREA/packages.lst 
 
