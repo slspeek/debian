@@ -25,6 +25,11 @@ function error-prompt ()
    set-error-prompt.sh
 }
 
+function firefox-extensions ()
+{
+   install-firefox-extensions.sh
+}
+
 function gists ()
 {
    download-gists.sh
