@@ -2,7 +2,7 @@
 set -e
 
 SHORTCUTS_DONE=$HOME/.config/set-shortcuts-done
-test -f $SHORTCUTS_DONE && exit 1
+test -f $SHORTCUTS_DONE && exit 0
 set-les3-shortcuts.sh
 
 setcustomshortcut.py "Visual studio code" code "<Super>c"

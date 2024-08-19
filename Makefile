@@ -56,10 +56,10 @@ scripts: prepare generate_install_scripts generate_late_cmd_script
 	gzip scripts.tar
 
 gnome: prepare
-	$(INTERPOLATION_CMD) -u $$(cat default-user) -p $(MINIMAL_PACKAGE_LISTS) -o build/gnome.cfg -t gnome -c $(MINIMAL_LATE_CMDS)
+	$(INTERPOLATION_CMD) -u $$(cat default-user) -p $(MINIMAL_PACKAGE_LISTS) -o build/gnome.cfg -t gnome -c $(MINIMAL_LATE_CMDS),shortcuts
 
 gnome_personal: prepare
-	$(INTERPOLATION_CMD) -a -p $(MINIMAL_PACKAGE_LISTS) -o build/gnome-personal.cfg -t gnome -c $(MINIMAL_LATE_CMDS)
+	$(INTERPOLATION_CMD) -a -p $(MINIMAL_PACKAGE_LISTS) -o build/gnome-personal.cfg -t gnome -c $(MINIMAL_LATE_CMDS),shortcuts
 
 mate: prepare
 	$(INTERPOLATION_CMD) -u $$(cat default-user) -p $(MINIMAL_PACKAGE_LISTS) -o build/mate.cfg -t mate -c $(MINIMAL_LATE_CMDS)
@@ -77,7 +77,7 @@ server: prepare
 	$(INTERPOLATION_CMD) -r -u $$(cat default-user) -p essential-cli-tools,cli-tools,developer,docker,server -o build/server.cfg -t standard -c error-prompt,short-grub-pause,sudo-nopasswd,tmux-conf,docker
 
 gnome_complete: prepare
-	$(INTERPOLATION_CMD) -u $$(cat default-user) -p $(ALL_PACKAGE_LISTS) -o build/gnome-complete.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
+	$(INTERPOLATION_CMD) -u $$(cat default-user) -p $(ALL_PACKAGE_LISTS) -o build/gnome-complete.cfg -t gnome -c $(COMPLETE_LATE_CMDS),shortcuts
 
 mate_complete: prepare
 	$(INTERPOLATION_CMD) -u $$(cat default-user) -p $(ALL_PACKAGE_LISTS) -o build/mate-complete.cfg -t mate -c $(COMPLETE_LATE_CMDS)

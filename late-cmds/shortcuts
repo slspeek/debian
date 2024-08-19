@@ -1,0 +1,1 @@
+sudo -u $(id -nu 1000) /bin/sh -c 'dbus-run-session -- shortcuts.sh'
