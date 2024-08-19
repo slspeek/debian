@@ -62,7 +62,7 @@ function short-grub-pause ()
 
 function shortcuts ()
 {
-   sudo -u $(id -nu 1000) /bin/sh -c 'dbus-run-session -- shortcuts.sh'
+   sudo -u $(id -nu 1000) /bin/sh -c 'dbus-run-session -- set-shortcuts.sh'
 }
 
 function sudo-nopasswd ()
