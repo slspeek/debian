@@ -13,7 +13,7 @@ BATS_CMD=docker run -i --rm --init -v "$(PWD):/code" -u $(USER_ID) $(BATS_IMAGE)
 LATE_CMD_LOGGING_DIR=/var/log/installer-preseed/late-cmd
 MINIMAL_PACKAGE_LISTS=essential-cli-tools,desktop,desktop-extra,dutch-desktop,multimedia
 ALL_PACKAGE_LISTS=essential-cli-tools,cli-tools,desktop,desktop-extra,developer,dutch-desktop,docker,firewall,games,graphic,multimedia,upgrades,video-editing,virusscanner,virtmanager
-MINIMAL_LATE_CMDS=chrome-remote-desktop,error-prompt,earth-pro,google-chrome,no-gnome-initial,short-grub-pause,sudo-nopasswd,tmux-conf
+MINIMAL_LATE_CMDS=chrome-remote-desktop,error-prompt,earth-pro,firefox-extensions,google-chrome,no-gnome-initial,short-grub-pause,sudo-nopasswd,tmux-conf
 COMPLETE_LATE_CMDS=$(MINIMAL_LATE_CMDS),docker,dotnet,gists,golang,megasync,prepare-education-box,uu-add-origins,uu-activate,vscode
 INTERPOLATION_CMD=LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) interpolate-preseed.sh
 LIVE_BUILD_CMD=LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) live-build.sh
@@ -100,16 +100,16 @@ lxde_complete_personal: prepare
 	$(INTERPOLATION_CMD) -a -p $(ALL_PACKAGE_LISTS) -o build/lxde-complete-personal.cfg -t lxde -c $(COMPLETE_LATE_CMDS)
 
 steven: prepare
-	$(INTERPOLATION_CMD) -r -u steven -p $(ALL_PACKAGE_LISTS) -o build/steven.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
+	$(INTERPOLATION_CMD) -r -u steven -p $(ALL_PACKAGE_LISTS) -o build/steven.cfg -t gnome -c $(COMPLETE_LATE_CMDS),shortcuts
 
 live_server: prepare
 	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p essential-cli-tools -n server -t standard -c error-prompt,golang,gists,tmux-conf
 
 live_gnome_complete: prepare
-	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p $(ALL_PACKAGE_LISTS) -n gnome-complete -t gnome -c gists,error-prompt,golang,google-chrome,chrome-remote-desktop,vscode,dotnet,tmux-conf
+	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p $(ALL_PACKAGE_LISTS) -n gnome-complete -t gnome -c gists,error-prompt,firefox-extensions,golang,google-chrome,chrome-remote-desktop,vscode,dotnet,tmux-conf
 
 live_gnome: prepare
-	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p essential-cli-tools,desktop,dutch-desktop -n gnome -t gnome -c gists,error-prompt,golang,google-chrome,chrome-remote-desktop,vscode,dotnet,tmux-conf
+	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p essential-cli-tools,desktop,dutch-desktop -n gnome -t gnome -c gists,firefox-extensions,error-prompt,golang,google-chrome,chrome-remote-desktop,vscode,dotnet,tmux-conf
 
 .ONESHELL:
 validate_preseeds:

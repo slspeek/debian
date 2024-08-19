@@ -84,9 +84,6 @@ cp -r ../auto .
 mkdir -p config/includes.chroot/etc/skel/.config && echo yes > config/includes.chroot/etc/skel/.config/gnome-initial-setup-done
 mkdir -p config/includes.chroot/etc/live/config.conf.d/
 echo "LIVE_USER_DEFAULT_GROUPS=\"audio cdrom dip floppy video plugdev netdev powerdev scanner bluetooth fuse docker\"" > config/includes.chroot/etc/live/config.conf.d/10-user-setup.conf
-
-#lb config
-#time sudo lb build
 EOF
 
 chmod +x $LIVE_BUILD_SCRIPT
