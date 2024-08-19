@@ -111,6 +111,8 @@ live_gnome_complete: prepare
 live_gnome: prepare
 	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p essential-cli-tools,desktop,dutch-desktop -n gnome -t gnome -c gists,firefox-extensions,error-prompt,golang,google-chrome,chrome-remote-desktop,vscode,dotnet,tmux-conf
 
+lives: live_server live_gnome_complete live_gnome
+
 .ONESHELL:
 validate_preseeds:
 	@for FILE in $(wildcard build/*.cfg)
