@@ -20,4 +20,4 @@ done
 
 wget --no-verbose "https://web.archive.org/web/20231126113521id_/https://addons.mozilla.org/firefox/downloads/file/3857142/archive_page-0.6.0.xpi"
 
-mv archive_page_0.6.0.xpi /usr/share/mozilla/extensions/\{ec8030f7-c20a-464f-9b0e-13a3a9e97384\}/\{5b22cb75-8e43-4f2a-bb9b-1da0655ae564\}.xpi
+mv archive_page-0.6.0.xpi /usr/share/mozilla/extensions/\{ec8030f7-c20a-464f-9b0e-13a3a9e97384\}/\{5b22cb75-8e43-4f2a-bb9b-1da0655ae564\}.xpi
