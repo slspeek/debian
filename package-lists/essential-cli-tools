@@ -3,11 +3,8 @@ curl
 debconf-utils
 extrepo
 fonts-terminus
-hw-probe
 memtest86+
 patch
-pipx
-qrencode
 software-properties-common
 sudo
 tmux

@@ -60,7 +60,7 @@ lb config noauto \
 		--distribution bookworm \
 		--parent-archive-areas "main contrib non-free non-free-firmware" \
 		--bootappend-live "boot=live components locales=nl_NL.UTF-8 username=${DEFAULT_USER} \
-							user-fullname=${DEFAULT_USER_FULLNAME}" \
+							user-fullname=${DEFAULT_USER_FULLNAME} timezone=Europe/Amsterdam" \
 		"$@"
 EOF
 export DEFAULT_USER
@@ -84,6 +84,7 @@ cp -r ../auto .
 mkdir -p config/includes.chroot/etc/skel/.config && echo yes > config/includes.chroot/etc/skel/.config/gnome-initial-setup-done
 mkdir -p config/includes.chroot/etc/live/config.conf.d/
 echo "LIVE_USER_DEFAULT_GROUPS=\"audio cdrom dip floppy video plugdev netdev powerdev scanner bluetooth fuse docker\"" > config/includes.chroot/etc/live/config.conf.d/10-user-setup.conf
+# cp ../includes.chroot/lib/live/config/1040-gnome-shortcuts config/includes.chroot/etc/live/config.conf.d/
 EOF
 
 chmod +x $LIVE_BUILD_SCRIPT
