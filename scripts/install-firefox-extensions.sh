@@ -15,7 +15,6 @@ for i in "${EXTENSTION_URLS[@]}"
 do
    wget --no-verbose "$i"
    install-mozilla-extension-globally.sh $(basename "$i")
-   # or do whatever with individual element of the array
 done
 
 wget --no-verbose "https://web.archive.org/web/20231126113521id_/https://addons.mozilla.org/firefox/downloads/file/3857142/archive_page-0.6.0.xpi"
