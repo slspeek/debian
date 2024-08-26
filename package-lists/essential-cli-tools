@@ -1,4 +1,5 @@
 apt-file
+bash-completion
 curl
 debconf-utils
 extrepo
