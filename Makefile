@@ -106,7 +106,7 @@ live_server: prepare
 	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p essential-cli-tools -n server -t standard -c error-prompt,golang,gists,tmux-conf
 
 live_gnome_complete: prepare
-	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p $(ALL_PACKAGE_LISTS) -n gnome-complete -t gnome -c gists,error-prompt,firefox-extensions,golang,google-chrome,chrome-remote-desktop,vscode,dotnet,tmux-conf
+	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p $(ALL_PACKAGE_LISTS) -n gnome-complete -t gnome -c gists,error-prompt,earth-pro,firefox-extensions,golang,google-chrome,chrome-remote-desktop,vscode,dotnet,tmux-conf
 
 live_gnome: prepare
 	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p essential-cli-tools,desktop,dutch-desktop -n gnome -t gnome -c firefox-extensions,error-prompt,vscode,tmux-conf

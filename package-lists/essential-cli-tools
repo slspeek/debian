@@ -5,6 +5,7 @@ debconf-utils
 extrepo
 fonts-terminus
 memtest86+
+netselect-apt
 patch
 software-properties-common
 sudo
