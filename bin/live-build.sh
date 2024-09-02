@@ -65,7 +65,7 @@ lb config noauto \
 EOF
 export DEFAULT_USER
 export DEFAULT_USER_FULLMANE
-envsubst '$DEFAULT_USER $DEFAULT_USER_FULLMANE'< $TEMP_CONFIG > $STAGE_AREA/auto/config
+envsubst '$DEFAULT_USER $DEFAULT_USER_FULLNAME'< $TEMP_CONFIG > $STAGE_AREA/auto/config
 chmod +x $STAGE_AREA/auto/config
 
 cat >  $LIVE_BUILD_SCRIPT <<EOF
