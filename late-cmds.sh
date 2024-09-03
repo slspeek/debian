@@ -35,6 +35,11 @@ function gists ()
    download-gists.sh
 }
 
+function gnome-customizations ()
+{
+   sudo -u $(id -nu 1000) /bin/sh -c 'dbus-run-session -- gnome-customizations.sh'
+}
+
 function golang ()
 {
    install-golang.sh
