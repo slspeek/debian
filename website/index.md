@@ -54,9 +54,13 @@ Download [gnome-complete-live.tag.gz](gnome-complete-live.tar.gz).
 $ mkdir live
 $ cd live
 $ tar xvzf ~/Downloads/gnome-complete-live.tar.gz
-$ 
-
-
+$ cd gnome-complete-live
+$ ./build.sh
+$ cd build
+$ lb config --mirror-bootstrap http://mirrors.xtom.nl/debian/
+$ time sudo lb build
+```
+Als alles goed is gegaan staat er in ```build``` een bestand ```live-image-amd64.hybrid.iso```
 
 ## Scripts installeren
 

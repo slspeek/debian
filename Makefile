@@ -215,7 +215,7 @@ generate_install_scripts: prepare
 	done
 
 website: prepare
-	$(PANDOC_HTML_CMD) --metadata title="Nederlandse Debian preseeds" website/index.md -o build/index.html
+	$(PANDOC_HTML_CMD) --metadata title="Nederlandse Debian preseeds en live-build configuraties" website/index.md -o build/index.html
 	
 precommit: sort_package_lists
 
