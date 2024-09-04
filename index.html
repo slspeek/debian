@@ -26,19 +26,19 @@
 <h2 id="profielen">Profielen</h2>
 <h3 id="gnome">GNOME</h3>
 <ul>
-<li><a href="gnome.cfg">gnome.cfg</a> een GNOME installatie met gebruiker ‘tux’</li>
+<li><a href="gnome.cfg">gnome.cfg</a> <a href="gnome-live.tar.gz">gnome-live.tar.gz</a> een GNOME installatie met gebruiker ‘tux’</li>
 <li><a href="gnome-personal.cfg">gnome-personal.cfg</a> een GNOME installatie waarbij u de gebruiker mag definiëren tijdens de installatie</li>
 <li><a href="cursus.cfg">cursus.cfg</a> een standaard GNOME installatie</li>
 <li><a href="tutor.cfg">tutor.cfg</a> een cursus schrijver GNOME installatie</li>
-<li><a href="gnome-complete.cfg">gnome-complete.cfg</a> alles erop en eraan GNOME installatie met gebruiker ‘tux’</li>
+<li><a href="gnome-complete.cfg">gnome-complete.cfg</a> <a href="gnome-complete-live.tar.gz">gnome-complete-live.tar.gz</a> alles erop en eraan GNOME installatie met gebruiker ‘tux’</li>
 <li><a href="gnome-complete-personal.cfg">gnome-complete-personal.cfg</a> alles erop en eraan GNOME installatie waarbij u de gebruiker mag definiëren tijdens de installatie</li>
 <li><a href="steven.cfg">steven.cfg</a> alles erop en eraan GNOME installatie met gebruiker ‘steven’</li>
 </ul>
 <h3 id="mate">MATE</h3>
 <ul>
-<li><a href="mate.cfg">mate.cfg</a> een MATE installatie</li>
+<li><a href="mate.cfg">mate.cfg</a> <a href="mate-live.tar.gz">mate-live.tar.gz</a> een MATE installatie</li>
 <li><a href="mate-personal.cfg">mate-personal.cfg</a> een MATE installatie waarbij u de gebruiker mag definiëren tijdens de installatie</li>
-<li><a href="mate-complete.cfg">mate-complete.cfg</a> een MATE installatie met alles erop en eraan</li>
+<li><a href="mate-complete.cfg">mate-complete.cfg</a> <a href="mate-complete-live.tar.gz">mate-complete-live.tar.gz</a> een MATE installatie met alles erop en eraan</li>
 <li><a href="mate-complete-personal.cfg">mate-complete-personal.cfg</a> een MATE installatie met alles erop en eraan waarbij u de gebruiker mag definiëren tijdens de installatie</li>
 </ul>
 <h3 id="lxde">LXDE</h3>
@@ -52,15 +52,30 @@
 <li><a href="server.cfg">server.cfg</a> een simpele server</li>
 </ul>
 <h2 id="gebruik">Gebruik</h2>
+<h3 id="preseeds">Preseeds</h3>
 <p>Boot de <a href="https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/">Debian installer</a> via het <a href="https://www.boot-disk.com/quest_bootmenu.htm">boot menu</a> en kies “Advanced options &gt;” -&gt; “Automated install”</p>
 <p>Vul:</p>
 <pre><code>https://slspeek.github.io/debian/gnome-personal.cfg</code></pre>
-<p>in in het veld “Location of initial preconfiguration file”</p>
-<h2 id="scripts-installeren">Scripts installeren</h2>
-<h3 id="op-een-niet-gepreseede-machine">Op een niet gepreseede machine</h3>
-<pre><code>wget -qO- https://slspeek.github.io/debian/scripts.tar.gz | tar xvz -C /usr/local/bin
-</code></pre>
-<h3 id="op-een-gepreseede-machine">Op een gepreseede machine</h3>
-<pre><code>update-scripts.sh</code></pre>
+<p>in in het veld “Location of initial preconfiguration file”.</p>
+<p>Voor gedetaileerde instructies zie <a href="https://github.com/slspeek/installatie-cursus/releases/latest/download/installatie-handout.pdf">deze presentatie handout</a> uit de <a href="https://github.com/slspeek/installatie-cursus">installatie cursus</a>.</p>
+<h3 id="live-build">Live build</h3>
+<h4 id="installeer-live-build">Installeer live-build</h4>
+<p>U installeert <a href="https://live-team.pages.debian.net/live-manual/html/live-manual.en.html">live-build</a> als volgt</p>
+<pre><code># apt-get install live-build</code></pre>
+<h4 id="gnome-complete-live-image-bouwen">Gnome-complete live image bouwen</h4>
+<p>Download <a href="gnome-complete-live.tar.gz">gnome-complete-live.tag.gz</a>.</p>
+<pre><code>$ mkdir live
+$ cd live
+$ tar xvzf ~/Downloads/gnome-complete-live.tar.gz
+$ 
+
+
+
+## Scripts installeren
+
+### Op een niet gepreseede machine</code></pre>
+<p>wget -qO- https://slspeek.github.io/debian/scripts.tar.gz | tar xvz -C /usr/local/bin</p>
+<pre><code>### Op een gepreseede machine</code></pre>
+<p>update-scripts.sh ```</p>
 </body>
 </html>
