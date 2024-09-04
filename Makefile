@@ -11,10 +11,47 @@ BATS_IMAGE=bats/bats:v1.10.0
 BATS_CMD=docker run -i --rm --init -v "$(PWD):/code" -u $(USER_ID) $(BATS_IMAGE)
 
 LATE_CMD_LOGGING_DIR=/var/log/installer-preseed/late-cmd
-MINIMAL_PACKAGE_LISTS=essential-cli-tools,desktop,desktop-extra,dutch-desktop,multimedia
-ALL_PACKAGE_LISTS=essential-cli-tools,cli-tools,desktop,desktop-extra,developer,dutch-desktop,docker,firewall,games,graphic,libreoffice-application,machine-label,multimedia,odbinfo,printing,upgrades,video-editing,virusscanner,virtmanager
-MINIMAL_LATE_CMDS=chrome-remote-desktop,error-prompt,earth-pro,firefox-extensions,gnome-customizations,google-chrome,no-gnome-initial,shortcuts,short-grub-pause,sudo-nopasswd,tmux-conf
-COMPLETE_LATE_CMDS=$(MINIMAL_LATE_CMDS),docker,dotnet,gists,golang,megasync,prepare-education-box,uu-add-origins,uu-activate,vscode
+MINIMAL_PACKAGE_LISTS=essential-cli-tools,$\
+	desktop,$\
+	desktop-extra,$\
+	dutch-desktop,$\
+	multimedia
+ALL_PACKAGE_LISTS=$(MINIMAL_PACKAGE_LISTS),$\
+	cli-tools,$\
+	developer,$\
+	docker,$\
+	firewall,$\
+	games,$\
+	graphic,$\
+	libreoffice-application,$\
+	machine-label,$\
+	odbinfo,$\
+	printing,$\
+	upgrades,$\
+	video-editing,$\
+	virusscanner,$\
+	virtmanager
+MINIMAL_LATE_CMDS=chrome-remote-desktop,$\
+	error-prompt,$\
+	earth-pro,$\
+	firefox-extensions,$\
+	gnome-customizations,$\
+	google-chrome,$\
+	no-gnome-initial,$\
+	shortcuts,$\
+	short-grub-pause,$\
+	sudo-nopasswd,$\
+	tmux-conf
+COMPLETE_LATE_CMDS=$(MINIMAL_LATE_CMDS),$\
+	docker,$\
+	dotnet,$\
+	gists,$\
+	golang,$\
+	megasync,$\
+	prepare-education-box,$\
+	uu-add-origins,$\
+	uu-activate,$\
+	vscode
 INTERPOLATION_CMD=LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) interpolate-preseed.sh
 LIVE_BUILD_CMD=LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) live-build.sh
 DEFAULT_USER=$(shell cat default-user)
@@ -23,7 +60,21 @@ default: clean all
 
 all: precommit scripts preseeds validate_preseeds website
 
-preseeds: gnome cursus tutor server gnome_complete gnome_complete_personal lxde lxde_personal lxde_complete_personal steven gnome_personal mate mate_personal mate_complete mate_complete_personal
+preseeds: gnome\
+	cursus\
+	tutor\
+	server\
+	gnome_complete\
+	gnome_complete_personal\
+	lxde\
+	lxde_personal\
+	lxde_complete_personal\
+	steven\
+	gnome_personal\
+	mate\
+	mate_personal\
+	mate_complete\
+	mate_complete_personal
 
 clean:
 	rm -rf build
@@ -37,7 +88,10 @@ prepare: validate
 		sudo apt-get install -y debconf-utils
 	fi
 
-validate: bash_tests check_package_file_endings check_latecmd_file_endings check_preseed_fragment_file_endings 
+validate: bash_tests \
+	check_package_file_endings \
+	check_latecmd_file_endings \
+	check_preseed_fragment_file_endings 
 
 bash_tests: 
 	$(BATS_CMD) /code/test
@@ -106,18 +160,30 @@ live_server: prepare
 	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p essential-cli-tools -n server -t standard -c error-prompt,golang,gists,tmux-conf
 
 live_gnome_complete: prepare
-	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p $(ALL_PACKAGE_LISTS) -n gnome-complete -t gnome -c gists,error-prompt,earth-pro,firefox-extensions,golang,google-chrome,chrome-remote-desktop,vscode,dotnet,tmux-conf
+	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p $(ALL_PACKAGE_LISTS) -n gnome-complete -t gnome \
+	-c gists,error-prompt,earth-pro,firefox-extensions,golang,google-chrome,chrome-remote-desktop,vscode,dotnet,tmux-conf
 
 live_gnome: prepare
-	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p essential-cli-tools,desktop,dutch-desktop -n gnome -t gnome -c firefox-extensions,error-prompt,vscode,tmux-conf
+	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p $(MINIMAL_PACKAGE_LISTS) -n gnome -t gnome -c firefox-extensions,error-prompt,vscode,tmux-conf
 
-lives: live_server live_gnome_complete live_gnome
+live_mate: prepare
+	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p $(MINIMAL_PACKAGE_LISTS) -n mate -t mate -c firefox-extensions,error-prompt,tmux-conf
+
+live_mate_complete: prepare
+	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p $(ALL_PACKAGE_LISTS) -n mate-complete -t mate \
+	-c gists,error-prompt,earth-pro,firefox-extensions,golang,google-chrome,chrome-remote-desktop,vscode,dotnet,tmux-conf
+
+lives: live_server\
+	live_gnome_complete\
+	live_gnome live_mate\
+	live_mate_complete
 
 .ONESHELL:
 validate_preseeds:
 	@for FILE in $(wildcard build/*.cfg)
 	do
-		 test $$(debconf-set-selections --checkonly $${FILE} 2>&1 |grep 'warning:'|wc -l) -eq 0 ||(echo $${FILE} is not a valid preseed file:;debconf-set-selections --checkonly $${FILE}; exit 1)
+		 test $$(debconf-set-selections --checkonly $${FILE} 2>&1 |grep 'warning:'|wc -l) -eq 0 || \
+		 (echo $${FILE} is not a valid preseed file:;debconf-set-selections --checkonly $${FILE}; exit 1)
 	done
 
 .ONESHELL:
