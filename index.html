@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Nederlandse Debian preseeds</title>
+  <title>Nederlandse Debian preseeds en live-build configuraties</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -19,7 +19,7 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Nederlandse Debian preseeds</h1>
+<h1 class="title">Nederlandse Debian preseeds en live-build configuraties</h1>
 </header>
 <style>#forkongithub a{background:#3d9435;color:#fff;text-decoration:none;font-family:arial,sans-serif;text-align:center;font-weight:bold;padding:5px 40px;font-size:1rem;line-height:2rem;position:relative;transition:0.5s;}#forkongithub a:hover{background:#34d126;color:#fff;}#forkongithub a::before,#forkongithub a::after{content:"";width:100%;display:block;position:absolute;top:1px;left:0;height:1px;background:#fff;}#forkongithub a::after{bottom:1px;top:auto;}@media screen and (min-width:800px){#forkongithub{position:fixed;display:block;top:0;right:0;width:200px;overflow:hidden;height:200px;z-index:9999;}#forkongithub a{width:200px;position:absolute;top:60px;right:-60px;transform:rotate(45deg);-webkit-transform:rotate(45deg);-ms-transform:rotate(45deg);-moz-transform:rotate(45deg);-o-transform:rotate(45deg);box-shadow:4px 4px 10px rgba(0,0,0,0.8);}}</style>
 <p><span id="forkongithub"><a href="https://github.com/slspeek/debian">Fork me on GitHub</a></span></p>
@@ -67,15 +67,17 @@
 <pre><code>$ mkdir live
 $ cd live
 $ tar xvzf ~/Downloads/gnome-complete-live.tar.gz
-$ 
-
-
-
-## Scripts installeren
-
-### Op een niet gepreseede machine</code></pre>
-<p>wget -qO- https://slspeek.github.io/debian/scripts.tar.gz | tar xvz -C /usr/local/bin</p>
-<pre><code>### Op een gepreseede machine</code></pre>
-<p>update-scripts.sh ```</p>
+$ cd gnome-complete-live
+$ ./build.sh
+$ cd build
+$ lb config --mirror-bootstrap http://mirrors.xtom.nl/debian/
+$ time sudo lb build</code></pre>
+<p>Als alles goed is gegaan staat er in <code>build</code> een bestand <code>live-image-amd64.hybrid.iso</code></p>
+<h2 id="scripts-installeren">Scripts installeren</h2>
+<h3 id="op-een-niet-gepreseede-machine">Op een niet gepreseede machine</h3>
+<pre><code>wget -qO- https://slspeek.github.io/debian/scripts.tar.gz | tar xvz -C /usr/local/bin
+</code></pre>
+<h3 id="op-een-gepreseede-machine">Op een gepreseede machine</h3>
+<pre><code>update-scripts.sh</code></pre>
 </body>
 </html>
