@@ -3,18 +3,18 @@
 ## Profielen
 
 ### GNOME
-- [gnome.cfg](gnome.cfg) een GNOME installatie met gebruiker 'tux'
+- [gnome.cfg](gnome.cfg) [gnome-live.tar.gz](gnome-live.tar.gz) een GNOME installatie met gebruiker 'tux'
 - [gnome-personal.cfg](gnome-personal.cfg) een GNOME installatie waarbij u de gebruiker mag definiëren tijdens de installatie
 - [cursus.cfg](cursus.cfg) een standaard GNOME installatie
 - [tutor.cfg](tutor.cfg) een cursus schrijver GNOME installatie
-- [gnome-complete.cfg](gnome-complete.cfg) alles erop en eraan GNOME installatie met gebruiker 'tux'
+- [gnome-complete.cfg](gnome-complete.cfg) [gnome-complete-live.tar.gz](gnome-complete-live.tar.gz) alles erop en eraan GNOME installatie met gebruiker 'tux'
 - [gnome-complete-personal.cfg](gnome-complete-personal.cfg) alles erop en eraan GNOME installatie waarbij u de gebruiker mag definiëren tijdens de installatie
 - [steven.cfg](steven.cfg) alles erop en eraan GNOME installatie met gebruiker 'steven'
 
 ### MATE
-- [mate.cfg](mate.cfg) een MATE installatie
+- [mate.cfg](mate.cfg) [mate-live.tar.gz](mate-live.tar.gz) een MATE installatie
 - [mate-personal.cfg](mate-personal.cfg) een MATE installatie waarbij u de gebruiker mag definiëren tijdens de installatie
-- [mate-complete.cfg](mate-complete.cfg) een MATE installatie met alles erop en eraan
+- [mate-complete.cfg](mate-complete.cfg) [mate-complete-live.tar.gz](mate-complete-live.tar.gz) een MATE installatie met alles erop en eraan
 - [mate-complete-personal.cfg](mate-complete-personal.cfg) een MATE installatie met alles erop en eraan waarbij u de gebruiker mag definiëren tijdens de installatie
 
 ### LXDE
@@ -26,6 +26,8 @@
 - [server.cfg](server.cfg) een simpele server
 
 ## Gebruik
+
+### Preseeds
 Boot de [Debian installer](https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/) via het [boot menu](https://www.boot-disk.com/quest_bootmenu.htm) en kies "Advanced options >" -> "Automated install"
 
 Vul:
@@ -34,7 +36,27 @@ Vul:
 https://slspeek.github.io/debian/gnome-personal.cfg
 ```
 
-in in het veld "Location of initial preconfiguration file"
+in in het veld "Location of initial preconfiguration file".
+
+Voor gedetaileerde instructies zie [deze presentatie handout](https://github.com/slspeek/installatie-cursus/releases/latest/download/installatie-handout.pdf) uit de [installatie cursus](https://github.com/slspeek/installatie-cursus).
+
+### Live build
+
+#### Installeer live-build
+U installeert [live-build](https://live-team.pages.debian.net/live-manual/html/live-manual.en.html) als volgt
+```
+# apt-get install live-build
+```
+#### Gnome-complete live image bouwen
+Download [gnome-complete-live.tag.gz](gnome-complete-live.tar.gz).
+
+```
+$ mkdir live
+$ cd live
+$ tar xvzf ~/Downloads/gnome-complete-live.tar.gz
+$ 
+
+
 
 ## Scripts installeren
 

@@ -24,6 +24,7 @@ jobs:
         with:
           files: |
             ./build/gnome.cfg
+            ./build/gnome-live.tar.gz
             ./build/gnome-personal.cfg
             ./build/cursus.cfg
             ./build/tutor.cfg
@@ -34,8 +35,11 @@ jobs:
             ./build/lxde.cfg
             ./build/steven.cfg
             ./build/gnome-complete.cfg
+            ./build/gnome-complete-live.tar.gz
             ./build/mate.cfg
+            ./build/mate-live.tar.gz
             ./build/mate-complete.cfg
+            ./build/mate-complete-live.tar.gz
             ./build/mate-personal.cfg
             ./build/mate-complete-personal.cfg
             ./build/scripts.tar.gz

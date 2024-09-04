@@ -58,7 +58,7 @@ DEFAULT_USER=$(shell cat default-user)
 
 default: clean all
 
-all: precommit scripts preseeds validate_preseeds website
+all: precommit scripts preseeds validate_preseeds lives website
 
 preseeds: gnome\
 	cursus\
