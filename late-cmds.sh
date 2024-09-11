@@ -55,6 +55,11 @@ function megasync ()
    install-megasync.sh
 }
 
+function netselect-apt ()
+{
+   run-netselect-apt.sh
+}
+
 function no-gnome-initial ()
 {
    disable-gnome-initial-setup.sh $(id -nu 1000)
