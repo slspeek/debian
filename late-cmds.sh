@@ -111,3 +111,8 @@ function vscode ()
    install-vscode.sh
 }
 
+function workrave ()
+{
+   autostart-workrave.sh
+}
+
