@@ -31,17 +31,27 @@ ALL_PACKAGE_LISTS=$(MINIMAL_PACKAGE_LISTS),$\
 	video-editing,$\
 	virusscanner,$\
 	virtmanager
-MINIMAL_LATE_CMDS=chrome-remote-desktop,$\
+MINIMAL_LIVE_LATE_CMDS=firefox-extensions,$\
 	error-prompt,$\
+	tmux-conf
+MINIMAL_LATE_CMDS=$(MINIMAL_LIVE_LATE_CMDS),$\
+	chrome-remote-desktop,$\
 	earth-pro,$\
-	firefox-extensions,$\
 	gnome-customizations,$\
 	google-chrome,$\
 	no-gnome-initial,$\
 	shortcuts,$\
 	short-grub-pause,$\
-	sudo-nopasswd,$\
-	tmux-conf
+	sudo-nopasswd
+COMPLETE_LIVE_LATE_CMDS=$(MINIMAL_LIVE_LATE_CMDS),$\
+	chrome-remote-desktop,$\
+	dotnet,$\
+	earth-pro,$\
+	gists,$\
+	golang,$\
+	google-chrome,$\
+	popcorntime,$\
+	vscode
 COMPLETE_LATE_CMDS=$(MINIMAL_LATE_CMDS),$\
 	docker,$\
 	dotnet,$\
@@ -49,6 +59,7 @@ COMPLETE_LATE_CMDS=$(MINIMAL_LATE_CMDS),$\
 	golang,$\
 	megasync,$\
 	prepare-education-box,$\
+	popcorntime,$\
 	uu-add-origins,$\
 	uu-activate,$\
 	vscode
@@ -161,17 +172,17 @@ live_server: prepare
 
 live_gnome_complete: prepare
 	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p $(ALL_PACKAGE_LISTS) -n gnome-complete -t gnome \
-	-c gists,error-prompt,earth-pro,firefox-extensions,golang,google-chrome,chrome-remote-desktop,vscode,dotnet,tmux-conf
+	-c $(COMPLETE_LIVE_LATE_CMDS)
 
 live_gnome: prepare
-	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p $(MINIMAL_PACKAGE_LISTS) -n gnome -t gnome -c firefox-extensions,error-prompt,vscode,tmux-conf
+	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p $(MINIMAL_PACKAGE_LISTS) -n gnome -t gnome -c $(MINIMAL_LIVE_LATE_CMDS)
 
 live_mate: prepare
-	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p $(MINIMAL_PACKAGE_LISTS) -n mate -t mate -c firefox-extensions,error-prompt,tmux-conf
+	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p $(MINIMAL_PACKAGE_LISTS) -n mate -t mate -c $(MINIMAL_LIVE_LATE_CMDS)
 
 live_mate_complete: prepare
 	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p $(ALL_PACKAGE_LISTS) -n mate-complete -t mate \
-	-c gists,error-prompt,earth-pro,firefox-extensions,golang,google-chrome,chrome-remote-desktop,vscode,dotnet,tmux-conf
+	-c $(COMPLETE_LIVE_LATE_CMDS)
 
 lives: live_server\
 	live_gnome_complete\
