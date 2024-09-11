@@ -33,6 +33,7 @@ ALL_PACKAGE_LISTS=$(MINIMAL_PACKAGE_LISTS),$\
 	virtmanager
 MINIMAL_LIVE_LATE_CMDS=firefox-extensions,$\
 	error-prompt,$\
+	netselect-apt,$\
 	tmux-conf
 MINIMAL_LATE_CMDS=$(MINIMAL_LIVE_LATE_CMDS),$\
 	chrome-remote-desktop,$\
