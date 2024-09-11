@@ -60,6 +60,12 @@ function no-gnome-initial ()
    disable-gnome-initial-setup.sh $(id -nu 1000)
 }
 
+function popcorntime ()
+{
+   install-popcorntime.sh
+  
+}
+
 function prepare-education-box ()
 {
    cd /usr/local/bin && wget https://github.com/slspeek/linux-beginners-cursus/releases/latest/download/prepare-education-box.sh && chmod +x prepare-education-box.sh
