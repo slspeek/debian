@@ -27,6 +27,7 @@ ALL_PACKAGE_LISTS=$(MINIMAL_PACKAGE_LISTS),$\
 	machine-label,$\
 	odbinfo,$\
 	printing,$\
+	stress-test,$\
 	upgrades,$\
 	video-editing,$\
 	virusscanner,$\
