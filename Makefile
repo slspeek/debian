@@ -15,10 +15,12 @@ MINIMAL_PACKAGE_LISTS=essential-cli-tools,$\
 	desktop,$\
 	desktop-extra,$\
 	dutch-desktop,$\
+	gnome-extensions,$\
 	multimedia
 ALL_PACKAGE_LISTS=$(MINIMAL_PACKAGE_LISTS),$\
 	cli-tools,$\
-	developer,$\
+	developer-cli,$\
+	developer-desktop,$\
 	docker,$\
 	firewall,$\
 	games,$\
@@ -141,10 +143,10 @@ cursus: prepare
 	$(INTERPOLATION_CMD) -u $(DEFAULT_USER) -p essential-cli-tools,desktop,dutch-desktop -o build/cursus.cfg -t gnome -c prepare-education-box,error-prompt,short-grub-pause,tmux-conf,no-gnome-initial
 
 tutor: prepare
-	$(INTERPOLATION_CMD) -u $(DEFAULT_USER) -p essential-cli-tools,cli-tools,desktop,developer,docker,dutch-desktop,video-editing -o build/tutor.cfg -t gnome -c error-prompt,gists,prepare-education-box,tmux-conf,no-gnome-initial,short-grub-pause,vscode,docker
+	$(INTERPOLATION_CMD) -u $(DEFAULT_USER) -p essential-cli-tools,cli-tools,desktop,developer-cli,docker,dutch-desktop,video-editing -o build/tutor.cfg -t gnome -c error-prompt,gists,prepare-education-box,tmux-conf,no-gnome-initial,short-grub-pause,vscode,docker
 
 server: prepare
-	$(INTERPOLATION_CMD) -r -u $(DEFAULT_USER) -p essential-cli-tools,cli-tools,developer,docker,server -o build/server.cfg -t standard -c error-prompt,short-grub-pause,sudo-nopasswd,tmux-conf,docker
+	$(INTERPOLATION_CMD) -r -u $(DEFAULT_USER) -p essential-cli-tools,cli-tools,developer-cli,docker,server -o build/server.cfg -t standard -c error-prompt,short-grub-pause,sudo-nopasswd,tmux-conf,docker
 
 gnome_complete: prepare
 	$(INTERPOLATION_CMD) -u $(DEFAULT_USER) -p $(ALL_PACKAGE_LISTS) -o build/gnome-complete.cfg -t gnome -c $(COMPLETE_LATE_CMDS),shortcuts
