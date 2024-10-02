@@ -4,6 +4,7 @@ curl
 debconf-utils
 extrepo
 fonts-terminus
+info
 memtest86+
 netselect-apt
 patch
