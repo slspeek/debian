@@ -197,8 +197,8 @@ lives: live_server\
 
 .ONESHELL:
 live_iso_gnome_complete: live_gnome_complete
-	mkdir -p live && \
-	cd live && \
+	mkdir -p live-isos && \
+	cd live-isos && \
 	tar xvzf ../build/gnome-complete-live.tar.gz && \
 	cd gnome-complete-live && \
 	./build.sh && \
@@ -208,7 +208,7 @@ live_iso_gnome_complete: live_gnome_complete
 
 .ONESHELL:
 run_live_gnome_complete: live_iso_gnome_complete
-	cd live/gnome-complete-live/build && \
+	cd live-isos/gnome-complete-live/build && \
 	virt-install --name live-gnome-complete-test \
 	 			 --osinfo debian11 \
 				 --boot cdrom \
