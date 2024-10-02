@@ -40,6 +40,10 @@ Init ()
 Config ()
 {
 	sudo -u $LIVE_USERNAME dbus-run-session -- /usr/local/bin/gnome-customizations.sh
+  # FIXME
+  if pkg_is_installed gnome-shell-extension-gsconnect; then
+    sudo -u $LIVE_USERNAME dbus-run-session -- gnome-extensions enable gsconnect@andyholmes.github.io
+  fi
 	touch /var/lib/live/config/gnome-customizations
 }
 
