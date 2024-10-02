@@ -94,7 +94,9 @@ preseeds: gnome\
 
 clean:
 	rm -rf build
-	sudo rm -rf live
+
+clean-isos:
+	sudo rm -rf live-isos
 
 prepare: validate
 	mkdir -p build/install-scripts
