@@ -52,6 +52,7 @@ COMPLETE_LIVE_LATE_CMDS=$(MINIMAL_LIVE_LATE_CMDS),$\
 	chrome-remote-desktop,$\
 	dotnet,$\
 	earth-pro,$\
+	element,$\
 	gists,$\
 	golang,$\
 	google-chrome,$\
