@@ -20,6 +20,11 @@ function earth-pro ()
    install-earth-pro.sh
 }
 
+function element ()
+{
+   install-element.sh
+}
+
 function error-prompt ()
 {
    set-error-prompt.sh
