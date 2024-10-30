@@ -57,6 +57,7 @@ COMPLETE_LIVE_LATE_CMDS=$(MINIMAL_LIVE_LATE_CMDS),$\
 	golang,$\
 	google-chrome,$\
 	popcorntime,$\
+	teamviewer,$\
 	vscode
 COMPLETE_LATE_CMDS=$(MINIMAL_LATE_CMDS),$\
 	docker,$\
@@ -66,6 +67,7 @@ COMPLETE_LATE_CMDS=$(MINIMAL_LATE_CMDS),$\
 	megasync,$\
 	prepare-education-box,$\
 	popcorntime,$\
+	teamviewer,$\
 	uu-add-origins,$\
 	uu-activate,$\
 	vscode
