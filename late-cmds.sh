@@ -81,6 +81,11 @@ function prepare-education-box ()
    cd /usr/local/bin && wget https://github.com/slspeek/linux-beginners-cursus/releases/latest/download/prepare-education-box.sh && chmod +x prepare-education-box.sh
 }
 
+function raspberry-pi-imager ()
+{
+   install-raspberry-pi-imager.sh
+}
+
 function short-grub-pause ()
 {
    short-grub-pause.sh
