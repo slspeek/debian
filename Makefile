@@ -14,7 +14,6 @@ LATE_CMD_LOGGING_DIR=/var/log/installer-preseed/late-cmd
 MINIMAL_PACKAGE_LISTS=essential-cli-tools,$\
 	desktop,$\
 	dutch-desktop,$\
-	gnome-extensions,$\
 	multimedia
 ALL_PACKAGE_LISTS=$(MINIMAL_PACKAGE_LISTS),$\
 	cli-tools,$\
@@ -24,6 +23,7 @@ ALL_PACKAGE_LISTS=$(MINIMAL_PACKAGE_LISTS),$\
 	docker,$\
 	firewall,$\
 	games,$\
+	gnome-extensions,$\
 	graphic,$\
 	libreoffice-application,$\
 	machine-label,$\
@@ -134,10 +134,10 @@ scripts: prepare generate_install_scripts generate_late_cmd_script
 	gzip scripts.tar
 
 gnome: prepare
-	$(INTERPOLATION_CMD) -u $(DEFAULT_USER) -p $(MINIMAL_PACKAGE_LISTS) -o build/gnome.cfg -t gnome -c $(MINIMAL_LATE_CMDS),shortcuts
+	$(INTERPOLATION_CMD) -u $(DEFAULT_USER) -p $(MINIMAL_PACKAGE_LISTS),gnome-extensions -o build/gnome.cfg -t gnome -c $(MINIMAL_LATE_CMDS),shortcuts
 
 gnome_personal: prepare
-	$(INTERPOLATION_CMD) -a -p $(MINIMAL_PACKAGE_LISTS) -o build/gnome-personal.cfg -t gnome -c $(MINIMAL_LATE_CMDS),shortcuts
+	$(INTERPOLATION_CMD) -a -p $(MINIMAL_PACKAGE_LISTS),gnome-extensions -o build/gnome-personal.cfg -t gnome -c $(MINIMAL_LATE_CMDS),shortcuts
 
 mate: prepare
 	$(INTERPOLATION_CMD) -u $(DEFAULT_USER) -p $(MINIMAL_PACKAGE_LISTS) -o build/mate.cfg -t mate -c $(MINIMAL_LATE_CMDS)
@@ -186,7 +186,7 @@ live_gnome_complete: prepare
 	-c $(COMPLETE_LIVE_LATE_CMDS)
 
 live_gnome: prepare
-	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p $(MINIMAL_PACKAGE_LISTS) -n gnome -t gnome -c $(MINIMAL_LIVE_LATE_CMDS)
+	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p $(MINIMAL_PACKAGE_LISTS),gnome-extensions -n gnome -t gnome -c $(MINIMAL_LIVE_LATE_CMDS)
 
 live_mate: prepare
 	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p $(MINIMAL_PACKAGE_LISTS) -n mate -t mate -c $(MINIMAL_LIVE_LATE_CMDS)
