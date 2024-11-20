@@ -1,4 +1,5 @@
 apt-file
+aptitude
 bash-completion
 curl
 debconf-utils
