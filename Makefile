@@ -37,8 +37,7 @@ ALL_PACKAGE_LISTS=$(MINIMAL_PACKAGE_LISTS),$\
 MINIMAL_LIVE_LATE_CMDS=firefox-extensions,$\
 	error-prompt,$\
 	netselect-apt,$\
-	tmux-conf,$\
-	workrave
+	tmux-conf
 MINIMAL_LATE_CMDS=$(MINIMAL_LIVE_LATE_CMDS),$\
 	chrome-remote-desktop,$\
 	earth-pro,$\
@@ -62,6 +61,7 @@ COMPLETE_LIVE_LATE_CMDS=$(MINIMAL_LIVE_LATE_CMDS),$\
 COMPLETE_LATE_CMDS=$(MINIMAL_LATE_CMDS),$\
 	docker,$\
 	dotnet,$\
+	element,$\
 	gists,$\
 	golang,$\
 	megasync,$\
