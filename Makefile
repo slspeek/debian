@@ -56,6 +56,7 @@ COMPLETE_LIVE_LATE_CMDS=$(MINIMAL_LIVE_LATE_CMDS),$\
 	golang,$\
 	google-chrome,$\
 	popcorntime,$\
+  raspberry-pi-imager,$\
 	teamviewer,$\
 	vscode
 COMPLETE_LATE_CMDS=$(MINIMAL_LATE_CMDS),$\
@@ -67,6 +68,7 @@ COMPLETE_LATE_CMDS=$(MINIMAL_LATE_CMDS),$\
 	megasync,$\
 	prepare-education-box,$\
 	popcorntime,$\
+  raspberry-pi-imager,$\
 	teamviewer,$\
 	uu-add-origins,$\
 	uu-activate,$\
