@@ -13,12 +13,12 @@ BATS_CMD=docker run -i --rm --init -v "$(PWD):/code" -u $(USER_ID) $(BATS_IMAGE)
 LATE_CMD_LOGGING_DIR=/var/log/installer-preseed/late-cmd
 MINIMAL_PACKAGE_LISTS=essential-cli-tools,$\
 	desktop,$\
-	desktop-extra,$\
 	dutch-desktop,$\
 	gnome-extensions,$\
 	multimedia
 ALL_PACKAGE_LISTS=$(MINIMAL_PACKAGE_LISTS),$\
 	cli-tools,$\
+	desktop-extra,$\
 	developer-cli,$\
 	developer-desktop,$\
 	docker,$\
