@@ -56,7 +56,6 @@ COMPLETE_LIVE_LATE_CMDS=$(MINIMAL_LIVE_LATE_CMDS),$\
 	golang,$\
 	google-chrome,$\
 	popcorntime,$\
-  raspberry-pi-imager,$\
 	teamviewer,$\
 	vscode
 COMPLETE_LATE_CMDS=$(MINIMAL_LATE_CMDS),$\
@@ -68,11 +67,11 @@ COMPLETE_LATE_CMDS=$(MINIMAL_LATE_CMDS),$\
 	megasync,$\
 	prepare-education-box,$\
 	popcorntime,$\
-  raspberry-pi-imager,$\
 	teamviewer,$\
 	uu-add-origins,$\
 	uu-activate,$\
 	vscode
+
 INTERPOLATION_CMD=LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) interpolate-preseed.sh
 LIVE_BUILD_CMD=LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) live-build.sh
 DEFAULT_USER=$(shell cat default-user)
