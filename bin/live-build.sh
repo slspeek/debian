@@ -64,7 +64,7 @@ lb config noauto \
 		"$@"
 EOF
 export DEFAULT_USER
-export DEFAULT_USER_FULLMANE
+export DEFAULT_USER_FULLNAME
 envsubst '$DEFAULT_USER $DEFAULT_USER_FULLNAME'< $TEMP_CONFIG > $STAGE_AREA/auto/config
 chmod +x $STAGE_AREA/auto/config
 
