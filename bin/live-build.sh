@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+PERSISTENCE=persistence
+
 ENABLE_ROOT_LOGIN_OPT=false
 
 while getopts "ru:p:t:n:c:o:" opt 
@@ -60,12 +62,13 @@ lb config noauto \
 		--distribution bookworm \
 		--parent-archive-areas "main contrib non-free non-free-firmware" \
 		--bootappend-live "boot=live components locales=nl_NL.UTF-8 username=${DEFAULT_USER} \
-							user-fullname=${DEFAULT_USER_FULLNAME} timezone=Europe/Amsterdam" \
+							user-fullname=${DEFAULT_USER_FULLNAME} timezone=Europe/Amsterdam ${PERSISTENCE}" \
 		"$@"
 EOF
 export DEFAULT_USER
 export DEFAULT_USER_FULLNAME
-envsubst '$DEFAULT_USER $DEFAULT_USER_FULLNAME'< $TEMP_CONFIG > $STAGE_AREA/auto/config
+export PERSISTENCE
+envsubst '$DEFAULT_USER $DEFAULT_USER_FULLNAME $PERSISTENCE'< $TEMP_CONFIG > $STAGE_AREA/auto/config
 chmod +x $STAGE_AREA/auto/config
 
 cat >  $LIVE_BUILD_SCRIPT <<EOF

@@ -110,6 +110,9 @@ prepare: validate
 	if ! which debconf-set-selections; then
 		sudo apt-get install -y debconf-utils
 	fi
+	if ! which pv; then
+		sudo apt-get install -y pv
+	fi
 
 validate: bash_tests \
 	check_package_file_endings \
