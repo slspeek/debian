@@ -18,5 +18,6 @@ tar -C /usr/local/bin -xzf /tmp/scripts.tar.gz && \\
 /usr/local/bin/download-preseed.sh $PRESEED_NAME && \\
 mkdir -p $LATE_CMD_LOGGING_DIR/failed && \\
 $CMDS
-/usr/local/bin/console-large-font.sh'
+/usr/local/bin/console-large-font.sh && \\
+apt-get remove -y kdeconnect'
 EOF
