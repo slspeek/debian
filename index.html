@@ -75,9 +75,8 @@ $ time sudo lb build</code></pre>
 <p>Als alles goed is gegaan staat er in <code>build</code> een bestand <code>live-image-amd64.hybrid.iso</code></p>
 <h2 id="scripts-installeren">Scripts installeren</h2>
 <h3 id="op-een-niet-gepreseede-machine">Op een niet gepreseede machine</h3>
-<pre><code>wget -qO- https://slspeek.github.io/debian/scripts.tar.gz | tar xvz -C /usr/local/bin
-</code></pre>
+<pre><code>curl https://slspeek.github.io/debian/scripts.tar.gz | sudo tar xvz -C /usr/local/bin</code></pre>
 <h3 id="op-een-gepreseede-machine">Op een gepreseede machine</h3>
-<pre><code>update-scripts.sh</code></pre>
+<pre><code>sudo update-scripts.sh</code></pre>
 </body>
 </html>

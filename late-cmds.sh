@@ -5,6 +5,11 @@ function chrome-remote-desktop ()
    install-chrome-remote-desktop.sh
 }
 
+function dart ()
+{
+   install-dart.sh
+}
+
 function docker ()
 {
    adduser $(id -nu 1000) docker
