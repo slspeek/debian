@@ -59,6 +59,7 @@ COMPLETE_LIVE_LATE_CMDS=$(MINIMAL_LIVE_LATE_CMDS),$\
 	teamviewer,$\
 	vscode
 COMPLETE_LATE_CMDS=$(MINIMAL_LATE_CMDS),$\
+  dart,$\
 	docker,$\
 	dotnet,$\
 	element,$\
