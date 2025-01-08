@@ -66,12 +66,11 @@ Als alles goed is gegaan staat er in ```build``` een bestand ```live-image-amd64
 
 ### Op een niet gepreseede machine
 ```
-wget -qO- https://slspeek.github.io/debian/scripts.tar.gz | tar xvz -C /usr/local/bin
-
+curl https://slspeek.github.io/debian/scripts.tar.gz | sudo tar xvz -C /usr/local/bin
 ```
 ### Op een gepreseede machine
 ```
-update-scripts.sh
+sudo update-scripts.sh
 ```
 
 
