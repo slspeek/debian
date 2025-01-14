@@ -49,6 +49,7 @@ MINIMAL_LATE_CMDS=$(MINIMAL_LIVE_LATE_CMDS),$\
 	sudo-nopasswd
 COMPLETE_LIVE_LATE_CMDS=$(MINIMAL_LIVE_LATE_CMDS),$\
 	chrome-remote-desktop,$\
+	dart,$\
 	dotnet,$\
 	earth-pro,$\
 	element,$\
