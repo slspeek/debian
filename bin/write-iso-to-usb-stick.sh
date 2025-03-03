@@ -28,7 +28,7 @@ echo persistence: $PERSISTENCE;
 
 (readlink -e /dev/disk/by-id/usb*|grep -w -q ${USB_STICK}) || exit 3
 
-#sudo sh -c "pv $ISO_IMAGE > $USB_STICK; sync"
+sudo sh -c "pv $ISO_IMAGE > $USB_STICK; sync"
 if [ -n "$PERSISTENCE" ]; then
    MNT_TEMPDIR=$(mktemp -d)
    # create new partition and accept default three times
