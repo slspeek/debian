@@ -60,6 +60,12 @@ function google-chrome ()
    install-google-chrome.sh
 }
 
+function mattermost ()
+{
+   install-mattermost.sh
+  
+}
+
 function megasync ()
 {
    install-megasync.sh
