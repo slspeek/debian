@@ -46,7 +46,7 @@ MINIMAL_LATE_CMDS=$(MINIMAL_LIVE_LATE_CMDS),$\
 	google-chrome,$\
 	no-gnome-initial,$\
 	shortcuts,$\
-	short-grub-pause,$\
+	short-grub-timeout,$\
 	sudo-nopasswd
 COMPLETE_LIVE_LATE_CMDS=$(MINIMAL_LIVE_LATE_CMDS),$\
 	chrome-remote-desktop,$\
@@ -155,13 +155,13 @@ mate_personal: prepare
 	$(INTERPOLATION_CMD) -a -p $(MINIMAL_PACKAGE_LISTS) -o build/mate-personal.cfg -t mate -c  $(MINIMAL_LATE_CMDS)
 
 cursus: prepare
-	$(INTERPOLATION_CMD) -u $(DEFAULT_USER) -p essential-cli-tools,desktop,dutch-desktop -o build/cursus.cfg -t gnome -c prepare-education-box,error-prompt,short-grub-pause,tmux-conf,no-gnome-initial
+	$(INTERPOLATION_CMD) -u $(DEFAULT_USER) -p essential-cli-tools,desktop,dutch-desktop -o build/cursus.cfg -t gnome -c prepare-education-box,error-prompt,short-grub-timeout,tmux-conf,no-gnome-initial
 
 tutor: prepare
-	$(INTERPOLATION_CMD) -u $(DEFAULT_USER) -p essential-cli-tools,cli-tools,desktop,developer-cli,docker,dutch-desktop,video-editing -o build/tutor.cfg -t gnome -c error-prompt,gists,prepare-education-box,tmux-conf,no-gnome-initial,short-grub-pause,vscode,docker
+	$(INTERPOLATION_CMD) -u $(DEFAULT_USER) -p essential-cli-tools,cli-tools,desktop,developer-cli,docker,dutch-desktop,video-editing -o build/tutor.cfg -t gnome -c error-prompt,gists,prepare-education-box,tmux-conf,no-gnome-initial,short-grub-timeout,vscode,docker
 
 server: prepare
-	$(INTERPOLATION_CMD) -r -u $(DEFAULT_USER) -p essential-cli-tools,cli-tools,developer-cli,docker,server -o build/server.cfg -t standard -c error-prompt,short-grub-pause,sudo-nopasswd,tmux-conf,docker
+	$(INTERPOLATION_CMD) -r -u $(DEFAULT_USER) -p essential-cli-tools,cli-tools,developer-cli,docker,server -o build/server.cfg -t standard -c error-prompt,short-grub-timeout,sudo-nopasswd,tmux-conf,docker
 
 gnome_complete: prepare
 	$(INTERPOLATION_CMD) -u $(DEFAULT_USER) -p $(ALL_PACKAGE_LISTS) -o build/gnome-complete.cfg -t gnome -c $(COMPLETE_LATE_CMDS),shortcuts
