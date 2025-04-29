@@ -97,9 +97,9 @@ function raspberry-pi-imager ()
    install-raspberry-pi-imager.sh
 }
 
-function short-grub-pause ()
+function short-grub-timeout ()
 {
-   short-grub-pause.sh
+   set-grub-timeout.sh 1
 }
 
 function shortcuts ()
