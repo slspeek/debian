@@ -63,6 +63,7 @@ lb config noauto \
 		--parent-archive-areas "main contrib non-free non-free-firmware" \
 		--bootappend-live "boot=live components locales=nl_NL.UTF-8 username=${DEFAULT_USER} \
 							user-fullname=${DEFAULT_USER_FULLNAME} timezone=Europe/Amsterdam ${PERSISTENCE}" \
+    --debian-installer live \
 		"$@"
 EOF
 export DEFAULT_USER
@@ -77,11 +78,12 @@ set -e
 sudo rm -rfv  build|| exit 0
 mkdir build
 cd build
-mkdir -p config/{package-lists,hooks}
+mkdir -p config/{package-lists,hooks,includes.installer}
 mkdir -p config/hooks/live
 cp ../packages.lst config/package-lists/${LIVE_BUILD_NAME}.list.chroot
 cp ../tasks.packages.lst  config/package-lists/${LIVE_BUILD_NAME}-tasks.list.chroot
 cp ../late-cmds.hook.chroot config/hooks/live
+cp ../preseed.cfg config/includes.installer/
 cp -r ../includes.chroot config 
 cp -r ../auto .
 mkdir -p config/includes.chroot/etc/skel/.config && echo yes > config/includes.chroot/etc/skel/.config/gnome-initial-setup-done
@@ -95,11 +97,13 @@ chmod +x $LIVE_BUILD_SCRIPT
 cp -rv resource/live/includes.chroot $STAGE_AREA
 
 merge-packages.sh $PACKAGE_LISTS > $STAGE_AREA/packages.lst 
+# echo debian-installer-launcher >>  $STAGE_AREA/packages.lst 
+echo calamares-settings-debian >>  $STAGE_AREA/packages.lst 
 
 echo $TASKS|sed -E 's/^./task-&/' > $STAGE_AREA/tasks.packages.lst
 
 late-cmd-constructor.sh $LATE_CMDS $LATE_CMD_LOGGING_DIR ${PROFILE_NAME}.cfg > $STAGE_AREA/late-cmds.hook.chroot
-
+wget --no-verbose -O $STAGE_AREA/preseed.cfg https://slspeek.github.io/debian/${PROFILE_NAME}.cfg  
 pushd $STAGE_AREA/..
 tar czf $STAGE_AREA/../${LIVE_BUILD_NAME}.tar.gz  $(basename $STAGE_AREA)
 popd
