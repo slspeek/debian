@@ -23,9 +23,9 @@ do
 		t)
 			TASKS=$OPTARG
 			;;
-        n)
-            PROFILE_NAME=$OPTARG
-            ;;
+    n)
+        PROFILE_NAME=$OPTARG
+        ;;
 		?)
 			echo Invalid opt -${OPTARG}
 			;;
@@ -63,7 +63,7 @@ lb config noauto \
 		--parent-archive-areas "main contrib non-free non-free-firmware" \
 		--bootappend-live "boot=live components locales=nl_NL.UTF-8 username=${DEFAULT_USER} \
 							user-fullname=${DEFAULT_USER_FULLNAME} timezone=Europe/Amsterdam ${PERSISTENCE}" \
-    --debian-installer live \
+    --debian-installer cdrom \
 		"$@"
 EOF
 export DEFAULT_USER
