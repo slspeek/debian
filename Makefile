@@ -58,6 +58,8 @@ COMPLETE_LIVE_LATE_CMDS=$(MINIMAL_LIVE_LATE_CMDS),$\
 	golang,$\
 	google-chrome,$\
 	mattermost,$\
+	megasync,$\
+	prepare-education-box,$\
 	popcorntime,$\
 	teamviewer,$\
 	vscode
@@ -221,6 +223,18 @@ live_iso_gnome_complete: live_gnome_complete
 	time sudo lb build
 
 .ONESHELL:
+live_iso_gnome: live_gnome
+	mkdir -p live-isos && \
+	cd live-isos && \
+	tar xvzf ../build/gnome-live.tar.gz && \
+	cd gnome-live && \
+	./build.sh && \
+	cd build && \
+	lb config --mirror-bootstrap http://mirrors.xtom.nl/debian/ && \
+	time sudo lb build
+
+
+.ONESHELL:
 run_live_gnome_complete: live_iso_gnome_complete
 	cd live-isos/gnome-complete-live/build && \
 	virt-install --name live-gnome-complete-test \
@@ -232,6 +246,19 @@ run_live_gnome_complete: live_iso_gnome_complete
 				 --vcpu 2
 	virsh destroy live-gnome-complete-test
 	virsh undefine live-gnome-complete-test
+
+.ONESHELL:
+run_live_gnome: live_iso_gnome
+	cd live-isos/gnome-live/build && \
+	virt-install --name live-gnome-test \
+	 			 --osinfo debian11 \
+				 --boot cdrom \
+				 --video virtio \
+				 --cdrom live-image-amd64.hybrid.iso \
+				 --memory 3048 \
+				 --vcpu 2
+	virsh destroy live-gnome-test
+	virsh undefine live-gnome-test
 
 .ONESHELL:
 validate_preseeds:
