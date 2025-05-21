@@ -63,7 +63,6 @@ function google-chrome ()
 function mattermost ()
 {
    install-mattermost.sh
-  
 }
 
 function megasync ()
@@ -84,7 +83,6 @@ function no-gnome-initial ()
 function popcorntime ()
 {
    install-popcorntime.sh
-  
 }
 
 function prepare-education-box ()
