@@ -31,7 +31,6 @@ ALL_PACKAGE_LISTS=$(MINIMAL_PACKAGE_LISTS),$\
 	printing,$\
 	photography,$\
 	stress-test,$\
-	upgrades,$\
 	video-editing,$\
 	virusscanner,$\
 	virtmanager
@@ -75,8 +74,6 @@ COMPLETE_LATE_CMDS=$(MINIMAL_LATE_CMDS),$\
 	prepare-education-box,$\
 	popcorntime,$\
 	teamviewer,$\
-	uu-add-origins,$\
-	uu-activate,$\
 	vscode
 
 INTERPOLATION_CMD=LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) interpolate-preseed.sh
@@ -178,14 +175,21 @@ mate_complete_personal: prepare
 	$(INTERPOLATION_CMD) -a -p $(ALL_PACKAGE_LISTS) -o build/mate-complete-personal.cfg -t mate -c $(COMPLETE_LATE_CMDS)
 
 lxde: prepare
-	$(INTERPOLATION_CMD) -u $(DEFAULT_USER) -p $(MINIMAL_PACKAGE_LISTS) -o build/lxde.cfg -t lxde -c $(MINIMAL_LATE_CMDS)
+	$(INTERPOLATION_CMD) -u $(DEFAULT_USER) -p $(MINIMAL_PACKAGE_LISTS),upgrades \
+ 		-o build/lxde.cfg -t lxde -c $(MINIMAL_LATE_CMDS),uu-add-origins,uu-activate
 
 lxde_personal: prepare
-	$(INTERPOLATION_CMD) -a -p $(MINIMAL_PACKAGE_LISTS) -o build/lxde-personal.cfg -t lxde -c  $(MINIMAL_LATE_CMDS)
+	$(INTERPOLATION_CMD) -a \
+		-p $(MINIMAL_PACKAGE_LISTS),upgrades \
+		-o build/lxde-personal.cfg \
+		-t lxde -c $(MINIMAL_LATE_CMDS),uu-add-origins,uu-activate
 
 lxde_complete_personal: prepare
-	$(INTERPOLATION_CMD) -a -p $(ALL_PACKAGE_LISTS) -o build/lxde-complete-personal.cfg -t lxde -c $(COMPLETE_LATE_CMDS)
-
+	$(INTERPOLATION_CMD) -a \
+		-p $(ALL_PACKAGE_LISTS),upgrades \
+		-o build/lxde-complete-personal.cfg \
+		-t lxde -c $(COMPLETE_LATE_CMDS),uu-add-origins,uu-activate
+	
 steven: prepare
 	$(INTERPOLATION_CMD) -r -u steven -p $(ALL_PACKAGE_LISTS) -o build/steven.cfg -t gnome -c $(COMPLETE_LATE_CMDS),shortcuts
 
