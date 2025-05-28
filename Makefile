@@ -78,6 +78,8 @@ COMPLETE_LATE_CMDS=$(MINIMAL_LATE_CMDS),$\
 
 INTERPOLATION_CMD=LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) interpolate-preseed.sh
 LIVE_BUILD_CMD=LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) live-build.sh
+LIVE_STAGE_DIR=live-isos
+LIVE_ISO_DESTINATION=$(LIVE_ISO_DESTINATION)
 DEFAULT_USER=$(shell cat default-user)
 
 default: clean all
@@ -215,54 +217,17 @@ lives: live_server\
 	live_gnome live_mate\
 	live_mate_complete
 
-.ONESHELL:
 live_iso_gnome_complete: live_gnome_complete
-	mkdir -p live-isos && \
-	cd live-isos && \
-	tar xvzf ../build/gnome-complete-live.tar.gz && \
-	cd gnome-complete-live && \
-	./build.sh && \
-	cd build && \
-	lb config --mirror-bootstrap http://mirrors.xtom.nl/debian/ && \
-	time sudo lb build
+	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) -p gnome-complete
 
-.ONESHELL:
 live_iso_gnome: live_gnome
-	mkdir -p live-isos && \
-	cd live-isos && \
-	tar xvzf ../build/gnome-live.tar.gz && \
-	cd gnome-live && \
-	./build.sh && \
-	cd build && \
-	lb config --mirror-bootstrap http://mirrors.xtom.nl/debian/ && \
-	time sudo lb build
+	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) -p gnome
 
-
-.ONESHELL:
 run_live_gnome_complete: live_iso_gnome_complete
-	cd live-isos/gnome-complete-live/build && \
-	virt-install --name live-gnome-complete-test \
-	 			 --osinfo debian11 \
-				 --boot cdrom \
-				 --video virtio \
-				 --cdrom live-image-amd64.hybrid.iso \
-				 --memory 3048 \
-				 --vcpu 2
-	virsh destroy live-gnome-complete-test
-	virsh undefine live-gnome-complete-test
+	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/gnome-complete-live.iso
 
-.ONESHELL:
 run_live_gnome: live_iso_gnome
-	cd live-isos/gnome-live/build && \
-	virt-install --name live-gnome-test \
-	 			 --osinfo debian11 \
-				 --boot cdrom \
-				 --video virtio \
-				 --cdrom live-image-amd64.hybrid.iso \
-				 --memory 3048 \
-				 --vcpu 2
-	virsh destroy live-gnome-test
-	virsh undefine live-gnome-test
+	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/gnome-live.iso
 
 .ONESHELL:
 validate_preseeds:

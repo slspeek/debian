@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
-while getopts "s:p:" opt 
+KEEP=false
+
+while getopts "s:p:d:k" opt 
 do
 	case $opt in
 		s)
@@ -9,6 +11,12 @@ do
 			;;
 		p)
 			PROFILE_NAME=$OPTARG
+			;;
+    d)
+			DESTINATION=$OPTARG
+			;;
+    k)
+			KEEP=true
 			;;
 		?)
 			echo Invalid opt -${OPTARG}
@@ -20,15 +28,23 @@ done
 echo;
 echo Profile name: $PROFILE_NAME;
 echo Stage directory: $STAGE_DIR;
+echo Destination: $DESTINATION;
+echo Keep build directory: $KEEP;
 )|boxes -d ada-box
 
 LIVE_PROFILE_NAME=${PROFILE_NAME}-live
-mkdir -p $STAGE_DIR && \
-cd $STAGE_DIR && \
-tar xvzf ../build/${LIVE_PROFILE_NAME}.tar.gz && \
-cd $LIVE_PROFILE_NAME && \
-./build.sh && \
-cd build && \
-lb config --mirror-bootstrap http://mirrors.xtom.nl/debian/ && \
+mkdir -p $STAGE_DIR $DESTINATION
+cd $STAGE_DIR 
+tar xvzf ../build/${LIVE_PROFILE_NAME}.tar.gz
+cd $LIVE_PROFILE_NAME
+./build.sh
+cd build
+lb config --mirror-bootstrap http://mirrors.xtom.nl/debian/
 time sudo lb build
-mv live-image-amd64.hybrid.iso ${LIVE_PROFILE_NAME}.iso
+mv live-image-amd64.hybrid.iso ${DESTINATION}/${LIVE_PROFILE_NAME}.iso
+cd ..
+if [ "$KEEP" = "false" ]; 
+then
+  echo Cleaning up build directory ..
+  sudo rm -rf build
+fi
