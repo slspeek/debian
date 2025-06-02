@@ -78,8 +78,8 @@ COMPLETE_LATE_CMDS=$(MINIMAL_LATE_CMDS),$\
 
 INTERPOLATION_CMD=LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) interpolate-preseed.sh
 LIVE_BUILD_CMD=LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) live-build.sh
-LIVE_STAGE_DIR=live-isos
-LIVE_ISO_DESTINATION=$(LIVE_ISO_DESTINATION)
+LIVE_STAGE_DIR=$(shell pwd)/live-isos
+LIVE_ISO_DESTINATION=$(LIVE_STAGE_DIR)
 DEFAULT_USER=$(shell cat default-user)
 
 default: clean all
@@ -223,11 +223,17 @@ live_iso_gnome_complete: live_gnome_complete
 live_iso_gnome: live_gnome
 	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) -p gnome
 
+live_iso_mate: live_mate
+	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) -p mate
+
 run_live_gnome_complete: live_iso_gnome_complete
 	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/gnome-complete-live.iso
 
 run_live_gnome: live_iso_gnome
 	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/gnome-live.iso
+
+run_live_mate: live_iso_mate
+	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/mate-live.iso
 
 .ONESHELL:
 validate_preseeds:
