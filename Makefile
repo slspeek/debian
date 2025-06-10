@@ -164,6 +164,9 @@ tutor: prepare
 server: prepare
 	$(INTERPOLATION_CMD) -r -u $(DEFAULT_USER) -p essential-cli-tools,cli-tools,developer-cli,docker,server -o build/server.cfg -t standard -c error-prompt,short-grub-timeout,sudo-nopasswd,tmux-conf,docker
 
+server_personal: prepare
+	$(INTERPOLATION_CMD) -r -a -p essential-cli-tools,cli-tools,developer-cli,docker,server -o build/server-personal.cfg -t standard -c error-prompt,short-grub-timeout,sudo-nopasswd,tmux-conf,docker
+
 gnome_complete: prepare
 	$(INTERPOLATION_CMD) -u $(DEFAULT_USER) -p $(ALL_PACKAGE_LISTS) -o build/gnome-complete.cfg -t gnome -c $(COMPLETE_LATE_CMDS),shortcuts
 
