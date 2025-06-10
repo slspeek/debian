@@ -90,6 +90,7 @@ preseeds: gnome\
 	cursus\
 	tutor\
 	server\
+	server_personal\
 	gnome_complete\
 	gnome_complete_personal\
 	lxde\
