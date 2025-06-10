@@ -221,6 +221,9 @@ lives: live_server\
 	live_gnome live_mate\
 	live_mate_complete
 
+live_iso_server: live_server
+	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) -p server
+
 live_iso_gnome_complete: live_gnome_complete
 	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) -p gnome-complete
 
@@ -229,6 +232,9 @@ live_iso_gnome: live_gnome
 
 live_iso_mate: live_mate
 	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) -p mate
+
+run_live_server: live_iso_server
+	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/server-live.iso
 
 run_live_gnome_complete: live_iso_gnome_complete
 	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/gnome-complete-live.iso
