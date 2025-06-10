@@ -29,6 +29,7 @@ jobs:
             ./build/cursus.cfg
             ./build/tutor.cfg
             ./build/server.cfg
+            ./build/server-personal.cfg
             ./build/gnome-complete-personal.cfg
             ./build/lxde-complete-personal.cfg
             ./build/lxde-personal.cfg
