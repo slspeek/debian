@@ -25,9 +25,9 @@ do
 		t)
 			TASKS=$OPTARG
 			;;
-        o)
-            OUT_FILE=$OPTARG
-            ;;
+    o)
+      OUT_FILE=$OPTARG
+      ;;
 		?)
 			echo Invalid opt -${OPTARG}
 			;;
