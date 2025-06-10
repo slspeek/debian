@@ -104,7 +104,7 @@ echo calamares-settings-debian >>  $STAGE_AREA/packages.lst
 echo $TASKS|sed -E 's/^./task-&/' > $STAGE_AREA/tasks.packages.lst
 
 late-cmd-constructor.sh $LATE_CMDS $LATE_CMD_LOGGING_DIR ${PROFILE_NAME}.cfg > $STAGE_AREA/late-cmds.hook.chroot
-wget --no-verbose -O $STAGE_AREA/preseed.cfg https://slspeek.github.io/debian/${PROFILE_NAME}.cfg  
+wget --no-verbose -O $STAGE_AREA/preseed.cfg https://slspeek.github.io/debian/${PROFILE_NAME}-personal.cfg  
 pushd $STAGE_AREA/..
 tar czf $STAGE_AREA/../${LIVE_BUILD_NAME}.tar.gz  $(basename $STAGE_AREA)
 popd
