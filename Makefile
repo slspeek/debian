@@ -366,6 +366,14 @@ lxde_personal: prepare
 		-o build/lxde-personal.cfg \
 		-t lxde -c $(MINIMAL_LATE_CMDS),uu-add-origins,uu-activate
 
+lxde_complete: prepare
+	$(INTERPOLATION_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(ALL_PACKAGE_LISTS) \
+		-o build/lxde-complete.cfg \
+		-t lxde \
+		-c $(COMPLETE_LATE_CMDS)
+
 lxde_complete_personal: prepare
 	$(INTERPOLATION_CMD) \
 		-a \
@@ -484,6 +492,24 @@ live_mate_complete: prepare
 		-t mate \
 		-c $(COMPLETE_LIVE_LATE_CMDS)
 
+# LXDE
+
+live_lxde: prepare
+	$(LIVE_BUILD_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(MINIMAL_PACKAGE_LISTS) \
+		-n lxde \
+		-t lxde \
+		-c $(MINIMAL_LIVE_LATE_CMDS)
+
+live_lxde_complete: prepare
+	$(LIVE_BUILD_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(ALL_PACKAGE_LISTS) \
+		-n lxde-complete \
+		-t lxde \
+		-c $(COMPLETE_LIVE_LATE_CMDS)
+
 # Server 
 
 live_server: prepare
@@ -496,7 +522,6 @@ live_server: prepare
 
 
 lives: \
-	live_server\
 	live_gnome_complete\
 	live_gnome \
 	live_kde \
@@ -506,7 +531,11 @@ lives: \
 	live_cinnamon \
 	live_cinnamon_complete \
 	live_mate\
-	live_mate_complete
+	live_mate_complete\
+	live_lxde\
+	live_lxde_complete\
+	live_server
+	
 
 # Live ISO building
 
@@ -539,6 +568,12 @@ live_iso_mate: live_mate
 
 live_iso_mate_complete: live_mate_complete
 	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) $(LIVE_ISO_KEEP) -p mate-complete
+
+live_iso_lxde: live_lxde
+	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) $(LIVE_ISO_KEEP) -p lxde
+
+live_iso_lxde_complete: live_lxde_complete
+	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) $(LIVE_ISO_KEEP) -p lxde-complete
 
 live_iso_server: live_server
 	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) $(LIVE_ISO_KEEP) -p server
@@ -574,6 +609,12 @@ run_live_mate: live_iso_mate
 
 run_live_mate_complete: live_iso_mate_complete
 	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/mate-complete-live.iso
+
+run_live_lxde: live_iso_lxde
+	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/lxde-live.iso
+
+run_live_lxde_complete: live_iso_lxde_complete
+	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/lxde-complete-live.iso
 
 run_live_server: live_iso_server
 	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/server-live.iso
