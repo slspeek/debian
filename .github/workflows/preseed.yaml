@@ -26,17 +26,18 @@ jobs:
             ./build/gnome.cfg
             ./build/gnome-live.tar.gz
             ./build/gnome-personal.cfg
+            ./build/gnome-complete-personal.cfg
             ./build/cursus.cfg
             ./build/tutor.cfg
-            ./build/server.cfg
-            ./build/server-personal.cfg
-            ./build/gnome-complete-personal.cfg
-            ./build/lxde-complete-personal.cfg
-            ./build/lxde-personal.cfg
-            ./build/lxde.cfg
             ./build/steven.cfg
             ./build/gnome-complete.cfg
             ./build/gnome-complete-live.tar.gz
+            ./build/lxde-complete.cfg
+            ./build/lxde-live.tar.gz
+            ./build/lxde-complete-live.tar.gz
+            ./build/lxde.cfg
+            ./build/lxde-complete-personal.cfg
+            ./build/lxde-personal.cfg
             ./build/xfce.cfg
             ./build/xfce-live.tar.gz
             ./build/xfce-complete.cfg
@@ -61,4 +62,7 @@ jobs:
             ./build/mate-complete-live.tar.gz
             ./build/mate-personal.cfg
             ./build/mate-complete-personal.cfg
+            ./build/server.cfg
+            ./build/server-live.tar.gz
+            ./build/server-personal.cfg
             ./build/scripts.tar.gz

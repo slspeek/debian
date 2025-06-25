@@ -42,7 +42,7 @@
 - [lxde-complete-personal.cfg](lxde-complete-personal.cfg) alles erop en eraan LXDE installatie waarbij u de gebruiker mag definiëren tijdens de installatie
 
 ### Geen desktop
-- [server.cfg](server.cfg) een simpele server met gebruiker 'tux'
+- [server.cfg](server.cfg) [server-live.tar.gz](server-live.tar.gz) een simpele server met gebruiker 'tux'
 - [server-personal.cfg](server-personal.cfg) een simpele server waarbij u de gebruiker mag definiëren tijdens de installatie
 
 ## Gebruik
