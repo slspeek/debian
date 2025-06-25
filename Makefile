@@ -92,13 +92,17 @@ preseeds: gnome\
 	tutor\
 	server\
 	server_personal\
-	gnome_complete\
-	gnome_complete_personal\
 	lxde\
 	lxde_personal\
 	lxde_complete_personal\
-	steven\
+	gnome_complete\
+	gnome_complete_personal\
 	gnome_personal\
+	steven\
+	cinnamon\
+	cinnamon_personal\
+	cinnamon_complete\
+	cinnamon_complete_personal\
 	mate\
 	mate_personal\
 	mate_complete\
@@ -145,81 +149,233 @@ scripts: prepare generate_install_scripts generate_late_cmd_script
 	tar rf scripts.tar late-cmds.sh --owner=0 --group=0
 	gzip scripts.tar
 
+# Preseed generation
+
 gnome: prepare
-	$(INTERPOLATION_CMD) -u $(DEFAULT_USER) -p $(MINIMAL_PACKAGE_LISTS),gnome-extensions -o build/gnome.cfg -t gnome -c $(MINIMAL_LATE_CMDS),shortcuts
+	$(INTERPOLATION_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(MINIMAL_PACKAGE_LISTS),gnome-extensions \
+		-o build/gnome.cfg \
+		-t gnome \
+		-c $(MINIMAL_LATE_CMDS),shortcuts
 
 gnome_personal: prepare
-	$(INTERPOLATION_CMD) -a -p $(MINIMAL_PACKAGE_LISTS),gnome-extensions -o build/gnome-personal.cfg -t gnome -c $(MINIMAL_LATE_CMDS),shortcuts
+	$(INTERPOLATION_CMD) \
+		-a \
+		-p $(MINIMAL_PACKAGE_LISTS),gnome-extensions \
+		-o build/gnome-personal.cfg \
+		-t gnome \
+		-c $(MINIMAL_LATE_CMDS),shortcuts
+
+cinnamon: prepare
+	$(INTERPOLATION_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(MINIMAL_PACKAGE_LISTS) \
+		-o build/cinnamon.cfg \
+		-t cinnamon \
+		-c $(MINIMAL_LATE_CMDS)
+
+cinnamon_personal: prepare
+	$(INTERPOLATION_CMD) \
+		-a \
+		-p $(MINIMAL_PACKAGE_LISTS) \
+		-o build/cinnamon-personal.cfg \
+		-t cinnamon \
+		-c  $(MINIMAL_LATE_CMDS)
 
 mate: prepare
-	$(INTERPOLATION_CMD) -u $(DEFAULT_USER) -p $(MINIMAL_PACKAGE_LISTS) -o build/mate.cfg -t mate -c $(MINIMAL_LATE_CMDS)
+	$(INTERPOLATION_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(MINIMAL_PACKAGE_LISTS) \
+		-o build/mate.cfg \
+		-t mate \
+		-c $(MINIMAL_LATE_CMDS)
 
 mate_personal: prepare
-	$(INTERPOLATION_CMD) -a -p $(MINIMAL_PACKAGE_LISTS) -o build/mate-personal.cfg -t mate -c  $(MINIMAL_LATE_CMDS)
+	$(INTERPOLATION_CMD) \
+		-a \
+		-p $(MINIMAL_PACKAGE_LISTS) \
+		-o build/mate-personal.cfg \
+		-t mate \
+		-c  $(MINIMAL_LATE_CMDS)
 
 cursus: prepare
-	$(INTERPOLATION_CMD) -u $(DEFAULT_USER) -p essential-cli-tools,desktop,dutch-desktop -o build/cursus.cfg -t gnome -c prepare-education-box,error-prompt,short-grub-timeout,tmux-conf,no-gnome-initial
+	$(INTERPOLATION_CMD) \
+		-u $(DEFAULT_USER) \
+		-p essential-cli-tools,desktop,dutch-desktop \
+		-o build/cursus.cfg \
+		-t gnome \
+		-c prepare-education-box,error-prompt,short-grub-timeout,tmux-conf,no-gnome-initial
 
 tutor: prepare
-	$(INTERPOLATION_CMD) -u $(DEFAULT_USER) -p essential-cli-tools,cli-tools,desktop,developer-cli,docker,dutch-desktop,video-editing -o build/tutor.cfg -t gnome -c error-prompt,gists,prepare-education-box,tmux-conf,no-gnome-initial,short-grub-timeout,vscode,docker
+	$(INTERPOLATION_CMD) \
+		-u $(DEFAULT_USER) \
+		-p essential-cli-tools,cli-tools,desktop,developer-cli,docker,dutch-desktop,video-editing \
+		-o build/tutor.cfg \
+		-t gnome \
+		-c error-prompt,gists,prepare-education-box,tmux-conf,no-gnome-initial,short-grub-timeout,vscode,docker
 
 server: prepare
-	$(INTERPOLATION_CMD) -r -u $(DEFAULT_USER) -p essential-cli-tools,cli-tools,developer-cli,docker,server -o build/server.cfg -t standard -c error-prompt,short-grub-timeout,sudo-nopasswd,tmux-conf,docker
+	$(INTERPOLATION_CMD) -r \
+		-u $(DEFAULT_USER) \
+		-p essential-cli-tools,cli-tools,developer-cli,docker,server \
+		-o build/server.cfg \
+		-t standard \
+		-c error-prompt,short-grub-timeout,sudo-nopasswd,tmux-conf,docker
 
 server_personal: prepare
-	$(INTERPOLATION_CMD) -r -a -p essential-cli-tools,cli-tools,developer-cli,docker,server -o build/server-personal.cfg -t standard -c error-prompt,short-grub-timeout,sudo-nopasswd,tmux-conf,docker
+	$(INTERPOLATION_CMD) \
+		-r \
+		-a \
+		-p essential-cli-tools,cli-tools,developer-cli,docker,server \
+		-o build/server-personal.cfg \
+		-t standard \
+		-c error-prompt,short-grub-timeout,sudo-nopasswd,tmux-conf,docker
 
 gnome_complete: prepare
-	$(INTERPOLATION_CMD) -u $(DEFAULT_USER) -p $(ALL_PACKAGE_LISTS) -o build/gnome-complete.cfg -t gnome -c $(COMPLETE_LATE_CMDS),shortcuts
+	$(INTERPOLATION_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(ALL_PACKAGE_LISTS) \
+		-o build/gnome-complete.cfg \
+		-t gnome \
+		-c $(COMPLETE_LATE_CMDS),shortcuts
+
+cinnamon_complete: prepare
+	$(INTERPOLATION_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(ALL_PACKAGE_LISTS) \
+		-o build/cinnamon-complete.cfg \
+		-t cinnamon \
+		-c $(COMPLETE_LATE_CMDS)
 
 mate_complete: prepare
-	$(INTERPOLATION_CMD) -u $(DEFAULT_USER) -p $(ALL_PACKAGE_LISTS) -o build/mate-complete.cfg -t mate -c $(COMPLETE_LATE_CMDS)
+	$(INTERPOLATION_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(ALL_PACKAGE_LISTS) \
+		-o build/mate-complete.cfg \
+		-t mate \
+		-c $(COMPLETE_LATE_CMDS)
 
 gnome_complete_personal: prepare
-	$(INTERPOLATION_CMD) -a -p $(ALL_PACKAGE_LISTS) -o build/gnome-complete-personal.cfg -t gnome -c $(COMPLETE_LATE_CMDS)
+	$(INTERPOLATION_CMD) \
+		-a \
+		-p $(ALL_PACKAGE_LISTS) \
+		-o build/gnome-complete-personal.cfg \
+		-t gnome \
+		-c $(COMPLETE_LATE_CMDS)
+
+cinnamon_complete_personal: prepare
+	$(INTERPOLATION_CMD) \
+		-a \
+		-p $(ALL_PACKAGE_LISTS) \
+		-o build/cinnamon-complete-personal.cfg \
+		-t cinnamon \
+		-c $(COMPLETE_LATE_CMDS)
 
 mate_complete_personal: prepare
-	$(INTERPOLATION_CMD) -a -p $(ALL_PACKAGE_LISTS) -o build/mate-complete-personal.cfg -t mate -c $(COMPLETE_LATE_CMDS)
+	$(INTERPOLATION_CMD) \
+		-a \
+		-p $(ALL_PACKAGE_LISTS) \
+		-o build/mate-complete-personal.cfg \
+		-t mate \
+		-c $(COMPLETE_LATE_CMDS)
 
 lxde: prepare
-	$(INTERPOLATION_CMD) -u $(DEFAULT_USER) -p $(MINIMAL_PACKAGE_LISTS),upgrades \
- 		-o build/lxde.cfg -t lxde -c $(MINIMAL_LATE_CMDS),uu-add-origins,uu-activate
+	$(INTERPOLATION_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(MINIMAL_PACKAGE_LISTS),upgrades \
+ 		-o build/lxde.cfg \
+		-t lxde \
+		-c $(MINIMAL_LATE_CMDS),uu-add-origins,uu-activate
 
 lxde_personal: prepare
-	$(INTERPOLATION_CMD) -a \
+	$(INTERPOLATION_CMD) \
+		-a \
 		-p $(MINIMAL_PACKAGE_LISTS),upgrades \
 		-o build/lxde-personal.cfg \
 		-t lxde -c $(MINIMAL_LATE_CMDS),uu-add-origins,uu-activate
 
 lxde_complete_personal: prepare
-	$(INTERPOLATION_CMD) -a \
+	$(INTERPOLATION_CMD) \
+		-a \
 		-p $(ALL_PACKAGE_LISTS),upgrades \
 		-o build/lxde-complete-personal.cfg \
 		-t lxde -c $(COMPLETE_LATE_CMDS),uu-add-origins,uu-activate
 	
 steven: prepare
-	$(INTERPOLATION_CMD) -r -u steven -p $(ALL_PACKAGE_LISTS) -o build/steven.cfg -t gnome -c $(COMPLETE_LATE_CMDS),shortcuts
+	$(INTERPOLATION_CMD) \
+		-r \
+		-u steven \
+		-p $(ALL_PACKAGE_LISTS) \
+		-o build/steven.cfg \
+		-t gnome \
+		-c $(COMPLETE_LATE_CMDS),shortcuts
+
+
+# Live configuration generation
 
 live_server: prepare
-	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p essential-cli-tools -n server -t standard -c error-prompt,golang,gists,tmux-conf
+	$(LIVE_BUILD_CMD) \
+		-u $(DEFAULT_USER) \
+		-p essential-cli-tools \
+		-n server \
+		-t standard \
+		-c error-prompt,golang,gists,tmux-conf
 
 live_gnome_complete: prepare
-	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p $(ALL_PACKAGE_LISTS) -n gnome-complete -t gnome \
-	-c $(COMPLETE_LIVE_LATE_CMDS)
+	$(LIVE_BUILD_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(ALL_PACKAGE_LISTS) \
+		-n gnome-complete \
+		-t gnome \
+		-c $(COMPLETE_LIVE_LATE_CMDS)
 
 live_gnome: prepare
-	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p $(MINIMAL_PACKAGE_LISTS),gnome-extensions -n gnome -t gnome -c $(MINIMAL_LIVE_LATE_CMDS)
+	$(LIVE_BUILD_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(MINIMAL_PACKAGE_LISTS),gnome-extensions \
+		-n gnome \
+		-t gnome \
+		-c $(MINIMAL_LIVE_LATE_CMDS)
+
+live_cinnamon: prepare
+	$(LIVE_BUILD_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(MINIMAL_PACKAGE_LISTS) \
+		-n cinnamon \
+		-t cinnamon \
+		-c $(MINIMAL_LIVE_LATE_CMDS)
+
+live_cinnamon_complete: prepare
+	$(LIVE_BUILD_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(ALL_PACKAGE_LISTS) \
+		-n cinnamon-complete \
+		-t cinnamon \
+		-c $(COMPLETE_LIVE_LATE_CMDS)
 
 live_mate: prepare
-	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p $(MINIMAL_PACKAGE_LISTS) -n mate -t mate -c $(MINIMAL_LIVE_LATE_CMDS)
+	$(LIVE_BUILD_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(MINIMAL_PACKAGE_LISTS) \
+		-n mate \
+		-t mate \
+		-c $(MINIMAL_LIVE_LATE_CMDS)
 
 live_mate_complete: prepare
-	$(LIVE_BUILD_CMD) -u $(DEFAULT_USER) -p $(ALL_PACKAGE_LISTS) -n mate-complete -t mate \
-	-c $(COMPLETE_LIVE_LATE_CMDS)
+	$(LIVE_BUILD_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(ALL_PACKAGE_LISTS) \
+		-n mate-complete \
+		-t mate \
+		-c $(COMPLETE_LIVE_LATE_CMDS)
 
 lives: live_server\
 	live_gnome_complete\
-	live_gnome live_mate\
+	live_gnome \
+	live_cinnamon \
+	live_cinnamon_complete \
+	live_mate\
 	live_mate_complete
 
 live_iso_server: live_server
@@ -231,8 +387,17 @@ live_iso_gnome_complete: live_gnome_complete
 live_iso_gnome: live_gnome
 	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) $(LIVE_ISO_KEEP) -p gnome
 
+live_iso_cinnamon: live_cinnamon
+	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) $(LIVE_ISO_KEEP) -p cinnamon
+
+live_iso_cinnamon_complete: live_cinnamon_complete
+	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) $(LIVE_ISO_KEEP) -p cinnamon-complete
+
 live_iso_mate: live_mate
 	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) $(LIVE_ISO_KEEP) -p mate
+
+live_iso_mate_complete: live_mate_complete
+	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) $(LIVE_ISO_KEEP) -p mate-complete
 
 run_live_server: live_iso_server
 	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/server-live.iso
@@ -243,8 +408,17 @@ run_live_gnome_complete: live_iso_gnome_complete
 run_live_gnome: live_iso_gnome
 	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/gnome-live.iso
 
+run_live_cinnamon: live_iso_cinnamon
+	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/cinnamon-live.iso
+
+run_live_cinnamon_complete: live_iso_cinnamon_complete
+	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/cinnamon-complete-live.iso
+
 run_live_mate: live_iso_mate
 	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/mate-live.iso
+
+run_live_mate_complete: live_iso_mate_complete
+	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/mate-complete-live.iso
 
 .ONESHELL:
 validate_preseeds:

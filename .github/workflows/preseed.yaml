@@ -37,6 +37,12 @@ jobs:
             ./build/steven.cfg
             ./build/gnome-complete.cfg
             ./build/gnome-complete-live.tar.gz
+            ./build/cinnamon.cfg
+            ./build/cinnamon-live.tar.gz
+            ./build/cinnamon-complete.cfg
+            ./build/cinnamon-complete-live.tar.gz
+            ./build/cinnamon-personal.cfg
+            ./build/cinnamon-complete-personal.cfg
             ./build/mate.cfg
             ./build/mate-live.tar.gz
             ./build/mate-complete.cfg

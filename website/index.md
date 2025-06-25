@@ -11,6 +11,12 @@
 - [gnome-complete-personal.cfg](gnome-complete-personal.cfg) alles erop en eraan GNOME installatie waarbij u de gebruiker mag definiëren tijdens de installatie
 - [steven.cfg](steven.cfg) alles erop en eraan GNOME installatie met gebruiker 'steven'
 
+### Cinnamon
+- [cinnamon.cfg](cinnamon.cfg) [cinnamon-live.tar.gz](cinnamon-live.tar.gz) een cinnamon installatie
+- [cinnamon-personal.cfg](cinnamon-personal.cfg) een cinnamon installatie waarbij u de gebruiker mag definiëren tijdens de installatie
+- [cinnamon-complete.cfg](cinnamon-complete.cfg) [cinnamon-complete-live.tar.gz](cinnamon-complete-live.tar.gz) een cinnamon installatie met alles erop en eraan
+- [cinnamon-complete-personal.cfg](cinnamon-complete-personal.cfg) een cinnamon installatie met alles erop en eraan waarbij u de gebruiker mag definiëren tijdens de installatie
+
 ### MATE
 - [mate.cfg](mate.cfg) [mate-live.tar.gz](mate-live.tar.gz) een MATE installatie
 - [mate-personal.cfg](mate-personal.cfg) een MATE installatie waarbij u de gebruiker mag definiëren tijdens de installatie
