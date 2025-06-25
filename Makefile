@@ -212,6 +212,41 @@ steven: prepare
 		-t gnome \
 		-c $(COMPLETE_LATE_CMDS),shortcuts
 
+# KDE
+
+kde: prepare
+	$(INTERPOLATION_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(MINIMAL_PACKAGE_LISTS) \
+		-o build/kde.cfg \
+		-t kde \
+		-c $(MINIMAL_LATE_CMDS)
+
+kde_personal: prepare
+	$(INTERPOLATION_CMD) \
+		-a \
+		-p $(MINIMAL_PACKAGE_LISTS) \
+		-o build/kde-personal.cfg \
+		-t kde \
+		-c  $(MINIMAL_LATE_CMDS)
+
+kde_complete: prepare
+	$(INTERPOLATION_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(ALL_PACKAGE_LISTS) \
+		-o build/kde-complete.cfg \
+		-t kde \
+		-c $(COMPLETE_LATE_CMDS)
+
+kde_complete_personal: prepare
+	$(INTERPOLATION_CMD) \
+		-a \
+		-p $(ALL_PACKAGE_LISTS) \
+		-o build/kde-complete-personal.cfg \
+		-t kde \
+		-c $(COMPLETE_LATE_CMDS)
+
+
 # Cinnamon
 
 cinnamon: prepare
@@ -343,6 +378,24 @@ live_gnome: prepare
 		-t gnome \
 		-c $(MINIMAL_LIVE_LATE_CMDS)
 
+# KDE
+
+live_kde: prepare
+	$(LIVE_BUILD_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(MINIMAL_PACKAGE_LISTS) \
+		-n kde \
+		-t kde \
+		-c $(MINIMAL_LIVE_LATE_CMDS)
+
+live_kde_complete: prepare
+	$(LIVE_BUILD_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(ALL_PACKAGE_LISTS) \
+		-n kde-complete \
+		-t kde \
+		-c $(COMPLETE_LIVE_LATE_CMDS)
+
 # Cinnamon
 
 live_cinnamon: prepare
@@ -394,6 +447,8 @@ lives: \
 	live_server\
 	live_gnome_complete\
 	live_gnome \
+	live_kde \
+	live_kde_complete \
 	live_cinnamon \
 	live_cinnamon_complete \
 	live_mate\
@@ -406,6 +461,12 @@ live_iso_gnome_complete: live_gnome_complete
 
 live_iso_gnome: live_gnome
 	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) $(LIVE_ISO_KEEP) -p gnome
+
+live_iso_kde: live_kde
+	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) $(LIVE_ISO_KEEP) -p kde
+
+live_iso_kde_complete: live_kde_complete
+	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) $(LIVE_ISO_KEEP) -p kde-complete
 
 live_iso_cinnamon: live_cinnamon
 	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) $(LIVE_ISO_KEEP) -p cinnamon
@@ -424,14 +485,17 @@ live_iso_server: live_server
 
 # Running live ISO
 
-run_live_server: live_iso_server
-	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/server-live.iso
-
 run_live_gnome_complete: live_iso_gnome_complete
 	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/gnome-complete-live.iso
 
 run_live_gnome: live_iso_gnome
 	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/gnome-live.iso
+
+run_live_kde: live_iso_kde
+	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/kde-live.iso
+
+run_live_kde_complete: live_iso_kde_complete
+	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/kde-complete-live.iso
 
 run_live_cinnamon: live_iso_cinnamon
 	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/cinnamon-live.iso
@@ -444,6 +508,9 @@ run_live_mate: live_iso_mate
 
 run_live_mate_complete: live_iso_mate_complete
 	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/mate-complete-live.iso
+
+run_live_server: live_iso_server
+	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/server-live.iso
 
 .ONESHELL:
 validate_preseeds:

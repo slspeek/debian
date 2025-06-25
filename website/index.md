@@ -11,6 +11,12 @@
 - [gnome-complete-personal.cfg](gnome-complete-personal.cfg) alles erop en eraan GNOME installatie waarbij u de gebruiker mag definiëren tijdens de installatie
 - [steven.cfg](steven.cfg) alles erop en eraan GNOME installatie met gebruiker 'steven'
 
+### KDE
+- [kde.cfg](kde.cfg) [kde-live.tar.gz](kde-live.tar.gz) een kde installatie
+- [kde-personal.cfg](kde-personal.cfg) een kde installatie waarbij u de gebruiker mag definiëren tijdens de installatie
+- [kde-complete.cfg](kde-complete.cfg) [kde-complete-live.tar.gz](kde-complete-live.tar.gz) een kde installatie met alles erop en eraan
+- [kde-complete-personal.cfg](kde-complete-personal.cfg) een kde installatie met alles erop en eraan waarbij u de gebruiker mag definiëren tijdens de installatie
+
 ### Cinnamon
 - [cinnamon.cfg](cinnamon.cfg) [cinnamon-live.tar.gz](cinnamon-live.tar.gz) een cinnamon installatie
 - [cinnamon-personal.cfg](cinnamon-personal.cfg) een cinnamon installatie waarbij u de gebruiker mag definiëren tijdens de installatie

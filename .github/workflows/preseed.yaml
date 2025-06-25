@@ -37,6 +37,12 @@ jobs:
             ./build/steven.cfg
             ./build/gnome-complete.cfg
             ./build/gnome-complete-live.tar.gz
+            ./build/kde.cfg
+            ./build/kde-live.tar.gz
+            ./build/kde-complete.cfg
+            ./build/kde-complete-live.tar.gz
+            ./build/kde-personal.cfg
+            ./build/kde-complete-personal.cfg
             ./build/cinnamon.cfg
             ./build/cinnamon-live.tar.gz
             ./build/cinnamon-complete.cfg
