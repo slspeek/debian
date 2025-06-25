@@ -246,6 +246,40 @@ kde_complete_personal: prepare
 		-t kde \
 		-c $(COMPLETE_LATE_CMDS)
 
+# XFCE
+
+xfce: prepare
+	$(INTERPOLATION_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(MINIMAL_PACKAGE_LISTS) \
+		-o build/xfce.cfg \
+		-t xfce \
+		-c $(MINIMAL_LATE_CMDS)
+
+xfce_personal: prepare
+	$(INTERPOLATION_CMD) \
+		-a \
+		-p $(MINIMAL_PACKAGE_LISTS) \
+		-o build/xfce-personal.cfg \
+		-t xfce \
+		-c  $(MINIMAL_LATE_CMDS)
+
+xfce_complete: prepare
+	$(INTERPOLATION_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(ALL_PACKAGE_LISTS) \
+		-o build/xfce-complete.cfg \
+		-t xfce \
+		-c $(COMPLETE_LATE_CMDS)
+
+xfce_complete_personal: prepare
+	$(INTERPOLATION_CMD) \
+		-a \
+		-p $(ALL_PACKAGE_LISTS) \
+		-o build/xfce-complete-personal.cfg \
+		-t xfce \
+		-c $(COMPLETE_LATE_CMDS)
+
 
 # Cinnamon
 
@@ -396,6 +430,24 @@ live_kde_complete: prepare
 		-t kde \
 		-c $(COMPLETE_LIVE_LATE_CMDS)
 
+# XFCE
+
+live_xfce: prepare
+	$(LIVE_BUILD_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(MINIMAL_PACKAGE_LISTS) \
+		-n xfce \
+		-t xfce \
+		-c $(MINIMAL_LIVE_LATE_CMDS)
+
+live_xfce_complete: prepare
+	$(LIVE_BUILD_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(ALL_PACKAGE_LISTS) \
+		-n xfce-complete \
+		-t xfce \
+		-c $(COMPLETE_LIVE_LATE_CMDS)
+
 # Cinnamon
 
 live_cinnamon: prepare
@@ -449,6 +501,8 @@ lives: \
 	live_gnome \
 	live_kde \
 	live_kde_complete \
+	live_xfce \
+	live_xfce_complete \
 	live_cinnamon \
 	live_cinnamon_complete \
 	live_mate\
@@ -467,6 +521,12 @@ live_iso_kde: live_kde
 
 live_iso_kde_complete: live_kde_complete
 	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) $(LIVE_ISO_KEEP) -p kde-complete
+
+live_iso_xfce: live_xfce
+	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) $(LIVE_ISO_KEEP) -p xfce
+
+live_iso_xfce_complete: live_xfce_complete
+	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) $(LIVE_ISO_KEEP) -p xfce-complete
 
 live_iso_cinnamon: live_cinnamon
 	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) $(LIVE_ISO_KEEP) -p cinnamon
@@ -496,6 +556,12 @@ run_live_kde: live_iso_kde
 
 run_live_kde_complete: live_iso_kde_complete
 	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/kde-complete-live.iso
+
+run_live_xfce: live_iso_xfce
+	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/xfce-live.iso
+
+run_live_xfce_complete: live_iso_xfce_complete
+	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/xfce-complete-live.iso
 
 run_live_cinnamon: live_iso_cinnamon
 	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/cinnamon-live.iso

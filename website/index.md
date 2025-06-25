@@ -17,6 +17,13 @@
 - [kde-complete.cfg](kde-complete.cfg) [kde-complete-live.tar.gz](kde-complete-live.tar.gz) een kde installatie met alles erop en eraan
 - [kde-complete-personal.cfg](kde-complete-personal.cfg) een kde installatie met alles erop en eraan waarbij u de gebruiker mag definiëren tijdens de installatie
 
+### XFCE
+- [xfce.cfg](xfce.cfg) [xfce-live.tar.gz](xfce-live.tar.gz) een xfce installatie
+- [xfce-personal.cfg](xfce-personal.cfg) een xfce installatie waarbij u de gebruiker mag definiëren tijdens de installatie
+- [xfce-complete.cfg](xfce-complete.cfg) [xfce-complete-live.tar.gz](xfce-complete-live.tar.gz) een xfce installatie met alles erop en eraan
+- [xfce-complete-personal.cfg](xfce-complete-personal.cfg) een xfce installatie met alles erop en eraan waarbij u de gebruiker mag definiëren tijdens de installatie
+
+
 ### Cinnamon
 - [cinnamon.cfg](cinnamon.cfg) [cinnamon-live.tar.gz](cinnamon-live.tar.gz) een cinnamon installatie
 - [cinnamon-personal.cfg](cinnamon-personal.cfg) een cinnamon installatie waarbij u de gebruiker mag definiëren tijdens de installatie

@@ -37,6 +37,12 @@ jobs:
             ./build/steven.cfg
             ./build/gnome-complete.cfg
             ./build/gnome-complete-live.tar.gz
+            ./build/xfce.cfg
+            ./build/xfce-live.tar.gz
+            ./build/xfce-complete.cfg
+            ./build/xfce-complete-live.tar.gz
+            ./build/xfce-personal.cfg
+            ./build/xfce-complete-personal.cfg
             ./build/kde.cfg
             ./build/kde-live.tar.gz
             ./build/kde-complete.cfg
