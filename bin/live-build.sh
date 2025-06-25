@@ -59,6 +59,7 @@ TEMP_CONFIG=$(mktemp)
 
 cat > $TEMP_CONFIG <<'EOF'
 lb config noauto \
+    --verbose \
 		--distribution bookworm \
 		--parent-archive-areas "main contrib non-free non-free-firmware" \
 		--bootappend-live "boot=live components locales=nl_NL.UTF-8 username=${DEFAULT_USER} \
@@ -83,7 +84,7 @@ mkdir -p config/hooks/live
 cp ../packages.lst config/package-lists/${LIVE_BUILD_NAME}.list.chroot
 cp ../tasks.packages.lst  config/package-lists/${LIVE_BUILD_NAME}-tasks.list.chroot
 cp ../late-cmds.hook.chroot config/hooks/live
-cp ../preseed.cfg config/includes.installer/
+# cp ../preseed.cfg config/includes.installer/
 cp -r ../includes.chroot config
 cp -r ../hooks config 
 cp -r ../auto .
