@@ -48,7 +48,7 @@ cd $LIVE_PROFILE_NAME
 ./build.sh
 cd build
 lb config --mirror-bootstrap http://mirrors.xtom.nl/debian/
-sudo sh -c 'command time lb build 2>&1 | tee ../build.log'
+sudo bash -c 'time lb build 2>&1 | tee ../build.log'
 mv live-image-amd64.hybrid.iso ${DESTINATION}/${LIVE_PROFILE_NAME}-$(get_tag).iso
 cd ..
 if [ "$KEEP" = "false" ]; 
