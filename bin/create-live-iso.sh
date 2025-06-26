@@ -50,6 +50,7 @@ cd build
 lb config --mirror-bootstrap http://mirrors.xtom.nl/debian/
 sudo bash -c 'time lb build 2>&1 | tee ../build.log'
 mv live-image-amd64.hybrid.iso ${DESTINATION}/${LIVE_PROFILE_NAME}-$(get_tag).iso
+gzip --stdout ../build.log > ${DESTINATION}/${LIVE_PROFILE_NAME}-$(get_tag)_build-log.gz
 cd ..
 if [ "$KEEP" = "false" ]; 
 then
