@@ -87,18 +87,22 @@ default: clean all
 
 all: precommit scripts preseeds validate_preseeds lives website
 
-preseeds: gnome\
-	cursus\
-	tutor\
-	server\
-	server_personal\
-	lxde\
-	lxde_personal\
-	lxde_complete_personal\
+preseeds: \
+	gnome\
+	gnome_personal\
 	gnome_complete\
 	gnome_complete_personal\
-	gnome_personal\
+	cursus\
+	tutor\
 	steven\
+	kde\
+	kde_personal\
+	kde_complete\
+	kde_complete_personal\
+	xfce\
+	xfce_personal\
+	xfce_complete\
+	xfce_complete_personal\
 	cinnamon\
 	cinnamon_personal\
 	cinnamon_complete\
@@ -106,7 +110,13 @@ preseeds: gnome\
 	mate\
 	mate_personal\
 	mate_complete\
-	mate_complete_personal
+	mate_complete_personal\
+	lxde\
+	lxde_personal\
+	lxde_complete\
+	lxde_complete_personal\
+	server\
+	server_personal
 
 clean:
 	rm -rf build
