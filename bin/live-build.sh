@@ -44,7 +44,6 @@ echo tasks: $TASKS;
 )|boxes -d ada-box
 
 DEFAULT_USER_FULLNAME=${DEFAULT_USER^}
-export TASKS="$(cat tasks/$TASKS|grep -v 'standard')"
 LIVE_BUILD_NAME=${PROFILE_NAME}-live
 
 STAGE_AREA=$(mktemp -d)/$LIVE_BUILD_NAME
@@ -101,7 +100,7 @@ cp -rv resource/live/hooks $STAGE_AREA
 merge-packages.sh $PACKAGE_LISTS > $STAGE_AREA/packages.lst 
 echo calamares-settings-debian >>  $STAGE_AREA/packages.lst 
 
-echo $TASKS|sed -E 's/^./task-&/' > $STAGE_AREA/tasks.packages.lst
+cat tasks/$TASKS|grep -v 'standard'|sed -E 's/^./task-&/' > $STAGE_AREA/tasks.packages.lst
 
 late-cmd-constructor.sh $LATE_CMDS $LATE_CMD_LOGGING_DIR ${PROFILE_NAME}.cfg > $STAGE_AREA/late-cmds.hook.chroot
 # 'Live' installer type should not use a preseed, only 'normal' type installers,
