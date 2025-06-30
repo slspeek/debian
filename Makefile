@@ -115,6 +115,10 @@ preseeds: \
 	lxde_personal\
 	lxde_complete\
 	lxde_complete_personal\
+	multi\
+	multi_personal\
+	multi_complete\
+	multi_complete_personal\
 	server\
 	server_personal
 
@@ -390,7 +394,41 @@ lxde_complete_personal: prepare
 		-p $(ALL_PACKAGE_LISTS),upgrades \
 		-o build/lxde-complete-personal.cfg \
 		-t lxde -c $(COMPLETE_LATE_CMDS),uu-add-origins,uu-activate
-	
+
+# Multi desktop environment	
+
+multi: prepare
+	$(INTERPOLATION_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(MINIMAL_PACKAGE_LISTS),gnome-extensions \
+		-o build/multi.cfg \
+		-t multi \
+		-c $(MINIMAL_LATE_CMDS),shortcuts
+
+multi_personal: prepare
+	$(INTERPOLATION_CMD) \
+		-a \
+		-p $(MINIMAL_PACKAGE_LISTS),gnome-extensions \
+		-o build/multi-personal.cfg \
+		-t multi \
+		-c $(MINIMAL_LATE_CMDS),shortcuts
+
+multi_complete: prepare
+	$(INTERPOLATION_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(ALL_PACKAGE_LISTS) \
+		-o build/multi-complete.cfg \
+		-t multi \
+		-c $(COMPLETE_LATE_CMDS),shortcuts
+
+multi_complete_personal: prepare
+	$(INTERPOLATION_CMD) \
+		-a \
+		-p $(ALL_PACKAGE_LISTS) \
+		-o build/multi-complete-personal.cfg \
+		-t multi \
+		-c $(COMPLETE_LATE_CMDS)
+
 # Server
 
 server: prepare
@@ -520,6 +558,24 @@ live_lxde_complete: prepare
 		-t lxde \
 		-c $(COMPLETE_LIVE_LATE_CMDS)
 
+# multi
+
+live_multi: prepare
+	$(LIVE_BUILD_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(MINIMAL_PACKAGE_LISTS) \
+		-n multi \
+		-t multi \
+		-c $(MINIMAL_LIVE_LATE_CMDS)
+
+live_multi_complete: prepare
+	$(LIVE_BUILD_CMD) \
+		-u $(DEFAULT_USER) \
+		-p $(ALL_PACKAGE_LISTS) \
+		-n multi-complete \
+		-t multi \
+		-c $(COMPLETE_LIVE_LATE_CMDS)
+
 # Server 
 
 live_server: prepare
@@ -544,6 +600,8 @@ lives: \
 	live_mate_complete\
 	live_lxde\
 	live_lxde_complete\
+	live_multi\
+	live_multi_complete\
 	live_server
 	
 
@@ -585,6 +643,12 @@ live_iso_lxde: live_lxde
 live_iso_lxde_complete: live_lxde_complete
 	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) $(LIVE_ISO_KEEP) -p lxde-complete
 
+live_iso_multi: live_multi
+	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) $(LIVE_ISO_KEEP) -p multi
+
+live_iso_multi_complete: live_multi_complete
+	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) $(LIVE_ISO_KEEP) -p multi-complete
+
 live_iso_server: live_server
 	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) $(LIVE_ISO_KEEP) -p server
 
@@ -625,6 +689,12 @@ run_live_lxde: live_iso_lxde
 
 run_live_lxde_complete: live_iso_lxde_complete
 	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/lxde-complete-live.iso
+
+run_live_multi: live_iso_multi
+	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/multi-live.iso
+
+run_live_multi_complete: live_iso_multi_complete
+	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/multi-complete-live.iso
 
 run_live_server: live_iso_server
 	test-live-iso.sh -i $(LIVE_ISO_DESTINATION)/server-live.iso

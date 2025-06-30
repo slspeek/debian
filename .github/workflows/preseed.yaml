@@ -62,6 +62,12 @@ jobs:
             ./build/mate-complete-live.tar.gz
             ./build/mate-personal.cfg
             ./build/mate-complete-personal.cfg
+            ./build/multi.cfg
+            ./build/multi-live.tar.gz
+            ./build/multi-complete.cfg
+            ./build/multi-complete-live.tar.gz
+            ./build/multi-personal.cfg
+            ./build/multi-complete-personal.cfg
             ./build/server.cfg
             ./build/server-live.tar.gz
             ./build/server-personal.cfg

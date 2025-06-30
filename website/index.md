@@ -41,6 +41,12 @@
 - [lxde-complete.cfg](lxde-complete.cfg) [lxde-complete-live.tar.gz](lxde-complete-live.tar.gz) een LXDE installatie met alles erop en eraan
 - [lxde-complete-personal.cfg](lxde-complete-personal.cfg) alles erop en eraan LXDE installatie waarbij u de gebruiker mag definiëren tijdens de installatie
 
+### Multi desktop omgeving (GNOME, KDE, Mate, Cinnamon, XFCE, LXDE)
+- [multi.cfg](multi.cfg) [multi-live.tar.gz](multi-live.tar.gz) standaard multi desktop installatie 
+- [multi-personal.cfg](multi-personal.cfg) multi desktop installatie waarbij u de gebruiker mag definiëren tijdens de installatie
+- [multi-complete.cfg](multi-complete.cfg) [multi-complete-live.tar.gz](multi-complete-live.tar.gz) een multi desktop installatie met alles erop en eraan
+- [multi-complete-personal.cfg](multi-complete-personal.cfg) alles erop en eraan multi desktop installatie waarbij u de gebruiker mag definiëren tijdens de installatie
+
 ### Geen desktop
 - [server.cfg](server.cfg) [server-live.tar.gz](server-live.tar.gz) een simpele server met gebruiker 'tux'
 - [server-personal.cfg](server-personal.cfg) een simpele server waarbij u de gebruiker mag definiëren tijdens de installatie
