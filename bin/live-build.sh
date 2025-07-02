@@ -111,7 +111,11 @@ cp -rv resource/live/includes.chroot $STAGE_AREA
 cp -rv resource/live/hooks $STAGE_AREA
 
 merge-packages.sh $PACKAGE_LISTS > $STAGE_AREA/packages.lst 
-echo calamares-settings-debian >>  $STAGE_AREA/packages.lst 
+
+if [ -n "$INSTALLER" ]
+then
+  echo calamares-settings-debian >>  $STAGE_AREA/packages.lst 
+fi
 
 cat tasks/$TASKS|grep -v 'standard'|sed -E 's/^./task-&/' > $STAGE_AREA/tasks.packages.lst
 
