@@ -449,6 +449,7 @@ server_personal: prepare
 		-c error-prompt,short-grub-timeout,sudo-nopasswd,tmux-conf,docker
 
 # Live configuration generation
+DEFAULT_LIVE_COMPONENTS=-l components
 
 # GNOME
 
@@ -456,6 +457,8 @@ live_gnome_complete: prepare
 	$(LIVE_BUILD_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(ALL_PACKAGE_LISTS) \
+		$(DEFAULT_LIVE_COMPONENTS) \
+		-i \
 		-n gnome-complete \
 		-t gnome \
 		-c $(COMPLETE_LIVE_LATE_CMDS)
@@ -464,6 +467,8 @@ live_gnome: prepare
 	$(LIVE_BUILD_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(MINIMAL_PACKAGE_LISTS),gnome-extensions \
+		$(DEFAULT_LIVE_COMPONENTS) \
+		-i \
 		-n gnome \
 		-t gnome \
 		-c $(MINIMAL_LIVE_LATE_CMDS)
@@ -474,6 +479,8 @@ live_kde: prepare
 	$(LIVE_BUILD_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(MINIMAL_PACKAGE_LISTS) \
+		$(DEFAULT_LIVE_COMPONENTS) \
+		-i \
 		-n kde \
 		-t kde \
 		-c $(MINIMAL_LIVE_LATE_CMDS)
@@ -482,6 +489,8 @@ live_kde_complete: prepare
 	$(LIVE_BUILD_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(ALL_PACKAGE_LISTS) \
+		$(DEFAULT_LIVE_COMPONENTS) \
+		-i \
 		-n kde-complete \
 		-t kde \
 		-c $(COMPLETE_LIVE_LATE_CMDS)
@@ -492,6 +501,8 @@ live_xfce: prepare
 	$(LIVE_BUILD_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(MINIMAL_PACKAGE_LISTS) \
+		$(DEFAULT_LIVE_COMPONENTS) \
+		-i \
 		-n xfce \
 		-t xfce \
 		-c $(MINIMAL_LIVE_LATE_CMDS)
@@ -500,6 +511,8 @@ live_xfce_complete: prepare
 	$(LIVE_BUILD_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(ALL_PACKAGE_LISTS) \
+		$(DEFAULT_LIVE_COMPONENTS) \
+		-i \
 		-n xfce-complete \
 		-t xfce \
 		-c $(COMPLETE_LIVE_LATE_CMDS)
@@ -510,6 +523,8 @@ live_cinnamon: prepare
 	$(LIVE_BUILD_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(MINIMAL_PACKAGE_LISTS) \
+		$(DEFAULT_LIVE_COMPONENTS) \
+		-i \
 		-n cinnamon \
 		-t cinnamon \
 		-c $(MINIMAL_LIVE_LATE_CMDS)
@@ -518,6 +533,8 @@ live_cinnamon_complete: prepare
 	$(LIVE_BUILD_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(ALL_PACKAGE_LISTS) \
+		$(DEFAULT_LIVE_COMPONENTS) \
+		-i \
 		-n cinnamon-complete \
 		-t cinnamon \
 		-c $(COMPLETE_LIVE_LATE_CMDS)
@@ -528,6 +545,8 @@ live_mate: prepare
 	$(LIVE_BUILD_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(MINIMAL_PACKAGE_LISTS) \
+		$(DEFAULT_LIVE_COMPONENTS) \
+		-i \
 		-n mate \
 		-t mate \
 		-c $(MINIMAL_LIVE_LATE_CMDS)
@@ -536,6 +555,8 @@ live_mate_complete: prepare
 	$(LIVE_BUILD_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(ALL_PACKAGE_LISTS) \
+		$(DEFAULT_LIVE_COMPONENTS) \
+		-i \
 		-n mate-complete \
 		-t mate \
 		-c $(COMPLETE_LIVE_LATE_CMDS)
@@ -546,6 +567,8 @@ live_lxde: prepare
 	$(LIVE_BUILD_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(MINIMAL_PACKAGE_LISTS) \
+		$(DEFAULT_LIVE_COMPONENTS) \
+		-i \
 		-n lxde \
 		-t lxde \
 		-c $(MINIMAL_LIVE_LATE_CMDS)
@@ -554,6 +577,8 @@ live_lxde_complete: prepare
 	$(LIVE_BUILD_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(ALL_PACKAGE_LISTS) \
+		$(DEFAULT_LIVE_COMPONENTS) \
+		-i \
 		-n lxde-complete \
 		-t lxde \
 		-c $(COMPLETE_LIVE_LATE_CMDS)
@@ -564,6 +589,7 @@ live_multi: prepare
 	$(LIVE_BUILD_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(MINIMAL_PACKAGE_LISTS) \
+		-l nocomponents=gdm3 \
 		-n multi \
 		-t multi \
 		-c $(MINIMAL_LIVE_LATE_CMDS)
@@ -572,6 +598,7 @@ live_multi_complete: prepare
 	$(LIVE_BUILD_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(ALL_PACKAGE_LISTS) \
+		-l nocomponents=gdm3 \
 		-n multi-complete \
 		-t multi \
 		-c $(COMPLETE_LIVE_LATE_CMDS)
@@ -582,6 +609,7 @@ live_server: prepare
 	$(LIVE_BUILD_CMD) \
 		-u $(DEFAULT_USER) \
 		-p essential-cli-tools \
+		$(DEFAULT_LIVE_COMPONENTS) \
 		-n server \
 		-t standard \
 		-c error-prompt,golang,gists,tmux-conf

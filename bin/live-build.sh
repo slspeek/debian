@@ -5,12 +5,22 @@ PERSISTENCE=persistence
 
 ENABLE_ROOT_LOGIN_OPT=false
 
-while getopts "ru:p:t:n:c:o:" opt 
+INSTALLER=
+
+LIVE_COMPONENTS=
+
+while getopts "ril:u:p:t:n:c:o:" opt 
 do
 	case $opt in
 		r)
 			ENABLE_ROOT_LOGIN_OPT=true
 			;;
+    l)
+      LIVE_COMPONENTS=$OPTARG
+      ;;
+    i)
+      INSTALLER="--debian-installer=live"
+      ;;
 		u)
 			DEFAULT_USER=$OPTARG
 			;;
@@ -33,11 +43,14 @@ do
 done
 
 
+
 (echo $(basename ${0^^});
 echo;
 echo profile name: $PROFILE_NAME;
+echo live components: $LIVE_COMPONENTS;
 echo default user: $DEFAULT_USER;
 echo enable root login: $ENABLE_ROOT_LOGIN_OPT;
+echo installer: $INSTALLER;
 echo packages: $PACKAGE_LISTS;
 echo scripts: $LATE_CMDS;
 echo tasks: $TASKS;
@@ -61,9 +74,9 @@ lb config noauto \
     --verbose \
 		--distribution bookworm \
 		--parent-archive-areas "main contrib non-free non-free-firmware" \
-		--bootappend-live "boot=live components locales=nl_NL.UTF-8 username=${DEFAULT_USER} \
+		--bootappend-live "boot=live ${COMPONENTS} locales=nl_NL.UTF-8 username=${DEFAULT_USER} \
 							user-fullname=${DEFAULT_USER_FULLNAME} timezone=Europe/Amsterdam ${PERSISTENCE}" \
-    --debian-installer live \
+    ${INSTALLER} \
 		"$@"
 EOF
 export DEFAULT_USER
