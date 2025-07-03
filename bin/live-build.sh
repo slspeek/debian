@@ -74,15 +74,17 @@ lb config noauto \
     --verbose \
 		--distribution bookworm \
 		--parent-archive-areas "main contrib non-free non-free-firmware" \
-		--bootappend-live "boot=live ${COMPONENTS} locales=nl_NL.UTF-8 username=${DEFAULT_USER} \
+		--bootappend-live "boot=live ${LIVE_COMPONENTS} locales=nl_NL.UTF-8 username=${DEFAULT_USER} \
 							user-fullname=${DEFAULT_USER_FULLNAME} timezone=Europe/Amsterdam ${PERSISTENCE}" \
     ${INSTALLER} \
 		"$@"
 EOF
 export DEFAULT_USER
 export DEFAULT_USER_FULLNAME
+export INSTALLER
+export LIVE_COMPONENTS
 export PERSISTENCE
-envsubst '$DEFAULT_USER $DEFAULT_USER_FULLNAME $PERSISTENCE'< $TEMP_CONFIG > $STAGE_AREA/auto/config
+envsubst '$DEFAULT_USER $DEFAULT_USER_FULLNAME $INSTALLER $LIVE_COMPONENTS $PERSISTENCE'< $TEMP_CONFIG > $STAGE_AREA/auto/config
 chmod +x $STAGE_AREA/auto/config
 
 cat >  $LIVE_BUILD_SCRIPT <<EOF
