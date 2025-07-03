@@ -680,6 +680,32 @@ live_iso_multi_complete: live_multi_complete
 live_iso_server: live_server
 	create-live-iso.sh -d $(LIVE_ISO_DESTINATION) -s $(LIVE_STAGE_DIR) $(LIVE_ISO_KEEP) -p server
 
+live_isos: \
+	live_iso_gnome \
+	live_iso_kde \
+	live_iso_xfce \
+	live_iso_cinnamon \
+	live_iso_mate \
+	live_iso_lxde \
+	live_iso_multi \
+	live_iso_server
+
+live_modern_complete_isos: \
+	live_iso_gnome_complete \
+	live_iso_kde_complete \
+	live_iso_cinnamon_complete \
+	live_iso_multi_complete 
+
+live_complete_isos: \
+	live_modern_complete_isos \
+	live_iso_xfce_complete \
+	live_iso_mate_complete \
+	live_iso_lxde_complete \
+
+live_isos_all:
+	live_isos \
+	live_complete_isos
+
 # Running live ISO
 
 run_live_gnome_complete: live_iso_gnome_complete
