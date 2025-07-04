@@ -700,9 +700,9 @@ live_complete_isos: \
 	live_modern_complete_isos \
 	live_iso_xfce_complete \
 	live_iso_mate_complete \
-	live_iso_lxde_complete \
+	live_iso_lxde_complete 
 
-live_isos_all:
+live_isos_all: \
 	live_isos \
 	live_complete_isos
 
