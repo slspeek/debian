@@ -125,7 +125,7 @@ preseeds: \
 clean:
 	rm -rf build
 
-clean-isos:
+clean_isos:
 	sudo rm -rf live-isos
 
 prepare: validate
