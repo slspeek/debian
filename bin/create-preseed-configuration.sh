@@ -71,9 +71,12 @@ export DEFAULT_USER_FULLNAME=${DEFAULT_USER^}
 export PACKAGES="$(merge-packages.sh $PACKAGE_LISTS|sed  -e 's/\(.*\)/        \1 \\/g'|sed -e '$ s/\\//')"
 export TASKS="$(cat tasks/$TASKS|tr '\n' ',')"
 export LATE_CMDS
-export LATE_CMD_STANZA="$(late-cmd-constructor.sh $LATE_CMDS $LATE_CMD_LOGGING_DIR $PRESEED_NAME)"
+export LATE_CMD_STANZA="$(late-cmd-constructor.sh $LATE_CMDS $LATE_CMD_LOGGING_DIR $PRESEED_NAME $GH_PAGES)"
 export ASK_FOR_USER
 export LATE_CMD_LOGGING_DIR
+export GIT_DESCRIBE=$(git describe)
+export REPO_URL
+export SUITE
 
 envsubst < preseed.cfg > build/preseed.cfg.1
 

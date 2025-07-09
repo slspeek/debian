@@ -1,8 +1,15 @@
 SHELL=/bin/bash
 export PATH:=$(PWD)/bin:$(PATH)
 
-USER_ID=$(shell id -u):$(shell id -g)
+SUITE=bookworm
 
+GITHUB_USER=slspeek
+GITHUB_REPO_NAME=debian
+REPO_URL=https://github.com/$(GITHUB_USER)/$(GITHUB_REPO_NAME)
+GH_PAGES_WOP=$(GITHUB_USER).github.io/$(GITHUB_REPO_NAME)
+GH_PAGES=https://$(GH_PAGES_WOP)
+
+USER_ID=$(shell id -u):$(shell id -g)
 
 PANDOC_IMAGE=pandoc/latex:2.9
 PANDOC_HTML_CMD=docker run --rm --init -v "$(PWD):/data" -u $(USER_ID) $(PANDOC_IMAGE) --standalone --from markdown --to html
@@ -76,8 +83,13 @@ COMPLETE_LATE_CMDS=$(MINIMAL_LATE_CMDS),$\
 	teamviewer,$\
 	vscode
 
-PRESEED_CREATION_CMD=LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) create-preseed-configuration.sh
-LIVE_BUILD_CMD=LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) live-build.sh
+PRESEED_CREATION_CMD=\
+	SUITE=$(SUITE) \
+	REPO_URL=$(REPO_URL) \
+	LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) \
+	GH_PAGES=$(GH_PAGES) \
+	create-preseed-configuration.sh
+LIVE_BUILD_CMD=GH_PAGES=$(GH_PAGES) LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) live-build.sh
 LIVE_STAGE_DIR=$(shell pwd)/live-isos
 LIVE_ISO_DESTINATION=$(LIVE_STAGE_DIR)
 LIVE_ISO_KEEP=

@@ -4,6 +4,7 @@ set -e
 LATE_CMDS=$1
 LATE_CMD_LOGGING_DIR=$2
 PRESEED_NAME=$3
+GH_PAGES=$4
 
 SCRIPTS_TMPFILE=$(mktemp)
 # echo foo
@@ -13,7 +14,7 @@ CMDS=$(cat $SCRIPTS_TMPFILE)
 
 cat - << EOF
 /bin/sh -c ' \\
-wget --directory-prefix=/tmp --no-verbose https://slspeek.github.io/debian/scripts.tar.gz && \\
+wget --directory-prefix=/tmp --no-verbose $GH_PAGES/scripts.tar.gz && \\
 tar -C /usr/local/bin -xzf /tmp/scripts.tar.gz && \\
 /usr/local/bin/download-preseed.sh $PRESEED_NAME && \\
 mkdir -p $LATE_CMD_LOGGING_DIR/failed && \\
