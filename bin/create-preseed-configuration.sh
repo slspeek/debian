@@ -74,7 +74,7 @@ export LATE_CMDS
 export LATE_CMD_STANZA="$(late-cmd-constructor.sh $LATE_CMDS $LATE_CMD_LOGGING_DIR $PRESEED_NAME $GH_PAGES)"
 export ASK_FOR_USER
 export LATE_CMD_LOGGING_DIR
-export GIT_DESCRIBE=$(git describe)
+export GIT_DESCRIBE=$(git describe --tags)
 export REPO_URL
 export SUITE
 
