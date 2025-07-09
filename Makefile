@@ -76,7 +76,7 @@ COMPLETE_LATE_CMDS=$(MINIMAL_LATE_CMDS),$\
 	teamviewer,$\
 	vscode
 
-INTERPOLATION_CMD=LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) interpolate-preseed.sh
+PRESEED_CREATION_CMD=LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) create-preseed-configuration.sh
 LIVE_BUILD_CMD=LATE_CMD_LOGGING_DIR=$(LATE_CMD_LOGGING_DIR) live-build.sh
 LIVE_STAGE_DIR=$(shell pwd)/live-isos
 LIVE_ISO_DESTINATION=$(LIVE_STAGE_DIR)
@@ -170,7 +170,7 @@ scripts: prepare generate_install_scripts generate_late_cmd_script
 # GNOME
 
 gnome: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(MINIMAL_PACKAGE_LISTS),gnome-extensions \
 		-o build/gnome.cfg \
@@ -178,7 +178,7 @@ gnome: prepare
 		-c $(MINIMAL_LATE_CMDS),shortcuts
 
 gnome_personal: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(MINIMAL_PACKAGE_LISTS),gnome-extensions \
 		-o build/gnome-personal.cfg \
@@ -186,7 +186,7 @@ gnome_personal: prepare
 		-c $(MINIMAL_LATE_CMDS),shortcuts
 
 gnome_complete: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(ALL_PACKAGE_LISTS) \
 		-o build/gnome-complete.cfg \
@@ -194,7 +194,7 @@ gnome_complete: prepare
 		-c $(COMPLETE_LATE_CMDS),shortcuts
 
 gnome_complete_personal: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(ALL_PACKAGE_LISTS) \
 		-o build/gnome-complete-personal.cfg \
@@ -202,7 +202,7 @@ gnome_complete_personal: prepare
 		-c $(COMPLETE_LATE_CMDS)
 
 cursus: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p essential-cli-tools,desktop,dutch-desktop \
 		-o build/cursus.cfg \
@@ -210,7 +210,7 @@ cursus: prepare
 		-c prepare-education-box,error-prompt,short-grub-timeout,tmux-conf,no-gnome-initial
 
 tutor: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p essential-cli-tools,cli-tools,desktop,developer-cli,docker,dutch-desktop,video-editing \
 		-o build/tutor.cfg \
@@ -218,7 +218,7 @@ tutor: prepare
 		-c error-prompt,gists,prepare-education-box,tmux-conf,no-gnome-initial,short-grub-timeout,vscode,docker
 
 steven: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-r \
 		-u steven \
 		-p $(ALL_PACKAGE_LISTS) \
@@ -229,7 +229,7 @@ steven: prepare
 # KDE
 
 kde: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(MINIMAL_PACKAGE_LISTS) \
 		-o build/kde.cfg \
@@ -237,7 +237,7 @@ kde: prepare
 		-c $(MINIMAL_LATE_CMDS)
 
 kde_personal: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(MINIMAL_PACKAGE_LISTS) \
 		-o build/kde-personal.cfg \
@@ -245,7 +245,7 @@ kde_personal: prepare
 		-c  $(MINIMAL_LATE_CMDS)
 
 kde_complete: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(ALL_PACKAGE_LISTS) \
 		-o build/kde-complete.cfg \
@@ -253,7 +253,7 @@ kde_complete: prepare
 		-c $(COMPLETE_LATE_CMDS)
 
 kde_complete_personal: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(ALL_PACKAGE_LISTS) \
 		-o build/kde-complete-personal.cfg \
@@ -263,7 +263,7 @@ kde_complete_personal: prepare
 # XFCE
 
 xfce: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(MINIMAL_PACKAGE_LISTS) \
 		-o build/xfce.cfg \
@@ -271,7 +271,7 @@ xfce: prepare
 		-c $(MINIMAL_LATE_CMDS)
 
 xfce_personal: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(MINIMAL_PACKAGE_LISTS) \
 		-o build/xfce-personal.cfg \
@@ -279,7 +279,7 @@ xfce_personal: prepare
 		-c  $(MINIMAL_LATE_CMDS)
 
 xfce_complete: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(ALL_PACKAGE_LISTS) \
 		-o build/xfce-complete.cfg \
@@ -287,7 +287,7 @@ xfce_complete: prepare
 		-c $(COMPLETE_LATE_CMDS)
 
 xfce_complete_personal: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(ALL_PACKAGE_LISTS) \
 		-o build/xfce-complete-personal.cfg \
@@ -298,7 +298,7 @@ xfce_complete_personal: prepare
 # Cinnamon
 
 cinnamon: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(MINIMAL_PACKAGE_LISTS) \
 		-o build/cinnamon.cfg \
@@ -306,7 +306,7 @@ cinnamon: prepare
 		-c $(MINIMAL_LATE_CMDS)
 
 cinnamon_personal: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(MINIMAL_PACKAGE_LISTS) \
 		-o build/cinnamon-personal.cfg \
@@ -314,7 +314,7 @@ cinnamon_personal: prepare
 		-c  $(MINIMAL_LATE_CMDS)
 
 cinnamon_complete: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(ALL_PACKAGE_LISTS) \
 		-o build/cinnamon-complete.cfg \
@@ -322,7 +322,7 @@ cinnamon_complete: prepare
 		-c $(COMPLETE_LATE_CMDS)
 
 cinnamon_complete_personal: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(ALL_PACKAGE_LISTS) \
 		-o build/cinnamon-complete-personal.cfg \
@@ -332,7 +332,7 @@ cinnamon_complete_personal: prepare
 # Mate
 
 mate: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(MINIMAL_PACKAGE_LISTS) \
 		-o build/mate.cfg \
@@ -340,7 +340,7 @@ mate: prepare
 		-c $(MINIMAL_LATE_CMDS)
 
 mate_personal: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(MINIMAL_PACKAGE_LISTS) \
 		-o build/mate-personal.cfg \
@@ -348,7 +348,7 @@ mate_personal: prepare
 		-c  $(MINIMAL_LATE_CMDS)
 
 mate_complete: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(ALL_PACKAGE_LISTS) \
 		-o build/mate-complete.cfg \
@@ -356,7 +356,7 @@ mate_complete: prepare
 		-c $(COMPLETE_LATE_CMDS)
 
 mate_complete_personal: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(ALL_PACKAGE_LISTS) \
 		-o build/mate-complete-personal.cfg \
@@ -366,7 +366,7 @@ mate_complete_personal: prepare
 # LXDE
 
 lxde: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(MINIMAL_PACKAGE_LISTS),upgrades \
  		-o build/lxde.cfg \
@@ -374,14 +374,14 @@ lxde: prepare
 		-c $(MINIMAL_LATE_CMDS),uu-add-origins,uu-activate
 
 lxde_personal: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(MINIMAL_PACKAGE_LISTS),upgrades \
 		-o build/lxde-personal.cfg \
 		-t lxde -c $(MINIMAL_LATE_CMDS),uu-add-origins,uu-activate
 
 lxde_complete: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(ALL_PACKAGE_LISTS) \
 		-o build/lxde-complete.cfg \
@@ -389,7 +389,7 @@ lxde_complete: prepare
 		-c $(COMPLETE_LATE_CMDS)
 
 lxde_complete_personal: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(ALL_PACKAGE_LISTS),upgrades \
 		-o build/lxde-complete-personal.cfg \
@@ -398,7 +398,7 @@ lxde_complete_personal: prepare
 # Multi desktop environment	
 
 multi: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(MINIMAL_PACKAGE_LISTS),gnome-extensions \
 		-o build/multi.cfg \
@@ -406,7 +406,7 @@ multi: prepare
 		-c $(MINIMAL_LATE_CMDS),shortcuts
 
 multi_personal: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(MINIMAL_PACKAGE_LISTS),gnome-extensions \
 		-o build/multi-personal.cfg \
@@ -414,7 +414,7 @@ multi_personal: prepare
 		-c $(MINIMAL_LATE_CMDS),shortcuts
 
 multi_complete: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(ALL_PACKAGE_LISTS) \
 		-o build/multi-complete.cfg \
@@ -422,7 +422,7 @@ multi_complete: prepare
 		-c $(COMPLETE_LATE_CMDS),shortcuts
 
 multi_complete_personal: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(ALL_PACKAGE_LISTS) \
 		-o build/multi-complete-personal.cfg \
@@ -432,7 +432,7 @@ multi_complete_personal: prepare
 # Server
 
 server: prepare
-	$(INTERPOLATION_CMD) -r \
+	$(PRESEED_CREATION_CMD) -r \
 		-u $(DEFAULT_USER) \
 		-p essential-cli-tools,cli-tools,developer-cli,docker,server \
 		-o build/server.cfg \
@@ -440,7 +440,7 @@ server: prepare
 		-c error-prompt,short-grub-timeout,sudo-nopasswd,tmux-conf,docker
 
 server_personal: prepare
-	$(INTERPOLATION_CMD) \
+	$(PRESEED_CREATION_CMD) \
 		-r \
 		-a \
 		-p essential-cli-tools,cli-tools,developer-cli,docker,server \
