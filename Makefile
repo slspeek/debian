@@ -1,5 +1,14 @@
+# Makefile for Debian preseeds and live-build configurations
 SHELL=/bin/bash
 export PATH:=$(PWD)/bin:$(PATH)
+
+BUILD_DIR=build
+WEBSITE_SUBDIR=website
+WEBSITE_DIR=$(BUILD_DIR)/$(WEBSITE_SUBDIR)
+# PRINT_SUBDIR=print
+# PRINT_DIR=$(BUILD_DIR)/$(PRINT_SUBDIR)
+PP_SUBDIR=preprocessed
+PP_DIR=$(BUILD_DIR)/$(PP_SUBDIR)
 
 SUITE=bookworm
 
@@ -135,13 +144,13 @@ preseeds: \
 	server_personal
 
 clean:
-	rm -rf build
+	rm -rf $(BUILD_DIR)
 
 clean_isos:
-	sudo rm -rf live-isos
+	sudo rm -rf $(LIVE_STAGE_DIR)
 
 prepare: validate
-	mkdir -p build/install-scripts
+	mkdir -p $(BUILD_DIR)/install-scripts
 	if ! which boxes; then
 		sudo apt-get install -y boxes
 	fi
@@ -164,9 +173,9 @@ bash_tests:
 scripts: prepare generate_install_scripts generate_late_cmd_script
 	cd scripts
 	chmod +x *.sh *.py
-	tar cf ../build/scripts.tar --owner=0 --group=0 *.sh *.py
+	tar cf ../$(BUILD_DIR)/scripts.tar --owner=0 --group=0 *.sh *.py
 	cd ..
-	cd build/install-scripts
+	cd $(BUILD_DIR)/install-scripts
 	chmod +x *.sh
 	tar rf ../scripts.tar --owner=0 --group=0 *.sh
 	cd ..
@@ -185,7 +194,7 @@ gnome: prepare
 	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(MINIMAL_PACKAGE_LISTS),gnome-extensions \
-		-o build/gnome.cfg \
+		-o $(BUILD_DIR)/gnome.cfg \
 		-t gnome \
 		-c $(MINIMAL_LATE_CMDS),shortcuts
 
@@ -193,7 +202,7 @@ gnome_personal: prepare
 	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(MINIMAL_PACKAGE_LISTS),gnome-extensions \
-		-o build/gnome-personal.cfg \
+		-o $(BUILD_DIR)/gnome-personal.cfg \
 		-t gnome \
 		-c $(MINIMAL_LATE_CMDS),shortcuts
 
@@ -201,7 +210,7 @@ gnome_complete: prepare
 	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(ALL_PACKAGE_LISTS) \
-		-o build/gnome-complete.cfg \
+		-o $(BUILD_DIR)/gnome-complete.cfg \
 		-t gnome \
 		-c $(COMPLETE_LATE_CMDS),shortcuts
 
@@ -209,7 +218,7 @@ gnome_complete_personal: prepare
 	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(ALL_PACKAGE_LISTS) \
-		-o build/gnome-complete-personal.cfg \
+		-o $(BUILD_DIR)/gnome-complete-personal.cfg \
 		-t gnome \
 		-c $(COMPLETE_LATE_CMDS)
 
@@ -217,7 +226,7 @@ cursus: prepare
 	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p essential-cli-tools,desktop,dutch-desktop \
-		-o build/cursus.cfg \
+		-o $(BUILD_DIR)/cursus.cfg \
 		-t gnome \
 		-c prepare-education-box,error-prompt,short-grub-timeout,tmux-conf,no-gnome-initial
 
@@ -225,7 +234,7 @@ tutor: prepare
 	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p essential-cli-tools,cli-tools,desktop,developer-cli,docker,dutch-desktop,video-editing \
-		-o build/tutor.cfg \
+		-o $(BUILD_DIR)/tutor.cfg \
 		-t gnome \
 		-c error-prompt,gists,prepare-education-box,tmux-conf,no-gnome-initial,short-grub-timeout,vscode,docker
 
@@ -234,7 +243,7 @@ steven: prepare
 		-r \
 		-u steven \
 		-p $(ALL_PACKAGE_LISTS) \
-		-o build/steven.cfg \
+		-o $(BUILD_DIR)/steven.cfg \
 		-t gnome \
 		-c $(COMPLETE_LATE_CMDS),shortcuts
 
@@ -244,7 +253,7 @@ kde: prepare
 	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(MINIMAL_PACKAGE_LISTS) \
-		-o build/kde.cfg \
+		-o $(BUILD_DIR)/kde.cfg \
 		-t kde \
 		-c $(MINIMAL_LATE_CMDS)
 
@@ -252,7 +261,7 @@ kde_personal: prepare
 	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(MINIMAL_PACKAGE_LISTS) \
-		-o build/kde-personal.cfg \
+		-o $(BUILD_DIR)/kde-personal.cfg \
 		-t kde \
 		-c  $(MINIMAL_LATE_CMDS)
 
@@ -260,7 +269,7 @@ kde_complete: prepare
 	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(ALL_PACKAGE_LISTS) \
-		-o build/kde-complete.cfg \
+		-o $(BUILD_DIR)/kde-complete.cfg \
 		-t kde \
 		-c $(COMPLETE_LATE_CMDS)
 
@@ -268,7 +277,7 @@ kde_complete_personal: prepare
 	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(ALL_PACKAGE_LISTS) \
-		-o build/kde-complete-personal.cfg \
+		-o $(BUILD_DIR)/kde-complete-personal.cfg \
 		-t kde \
 		-c $(COMPLETE_LATE_CMDS)
 
@@ -278,7 +287,7 @@ xfce: prepare
 	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(MINIMAL_PACKAGE_LISTS) \
-		-o build/xfce.cfg \
+		-o $(BUILD_DIR)/xfce.cfg \
 		-t xfce \
 		-c $(MINIMAL_LATE_CMDS)
 
@@ -286,7 +295,7 @@ xfce_personal: prepare
 	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(MINIMAL_PACKAGE_LISTS) \
-		-o build/xfce-personal.cfg \
+		-o $(BUILD_DIR)/xfce-personal.cfg \
 		-t xfce \
 		-c  $(MINIMAL_LATE_CMDS)
 
@@ -294,7 +303,7 @@ xfce_complete: prepare
 	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(ALL_PACKAGE_LISTS) \
-		-o build/xfce-complete.cfg \
+		-o $(BUILD_DIR)/xfce-complete.cfg \
 		-t xfce \
 		-c $(COMPLETE_LATE_CMDS)
 
@@ -302,7 +311,7 @@ xfce_complete_personal: prepare
 	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(ALL_PACKAGE_LISTS) \
-		-o build/xfce-complete-personal.cfg \
+		-o $(BUILD_DIR)/xfce-complete-personal.cfg \
 		-t xfce \
 		-c $(COMPLETE_LATE_CMDS)
 
@@ -313,7 +322,7 @@ cinnamon: prepare
 	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(MINIMAL_PACKAGE_LISTS) \
-		-o build/cinnamon.cfg \
+		-o $(BUILD_DIR)/cinnamon.cfg \
 		-t cinnamon \
 		-c $(MINIMAL_LATE_CMDS)
 
@@ -321,7 +330,7 @@ cinnamon_personal: prepare
 	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(MINIMAL_PACKAGE_LISTS) \
-		-o build/cinnamon-personal.cfg \
+		-o $(BUILD_DIR)/cinnamon-personal.cfg \
 		-t cinnamon \
 		-c  $(MINIMAL_LATE_CMDS)
 
@@ -329,7 +338,7 @@ cinnamon_complete: prepare
 	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(ALL_PACKAGE_LISTS) \
-		-o build/cinnamon-complete.cfg \
+		-o $(BUILD_DIR)/cinnamon-complete.cfg \
 		-t cinnamon \
 		-c $(COMPLETE_LATE_CMDS)
 
@@ -337,7 +346,7 @@ cinnamon_complete_personal: prepare
 	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(ALL_PACKAGE_LISTS) \
-		-o build/cinnamon-complete-personal.cfg \
+		-o $(BUILD_DIR)/cinnamon-complete-personal.cfg \
 		-t cinnamon \
 		-c $(COMPLETE_LATE_CMDS)
 
@@ -347,7 +356,7 @@ mate: prepare
 	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(MINIMAL_PACKAGE_LISTS) \
-		-o build/mate.cfg \
+		-o $(BUILD_DIR)/mate.cfg \
 		-t mate \
 		-c $(MINIMAL_LATE_CMDS)
 
@@ -355,7 +364,7 @@ mate_personal: prepare
 	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(MINIMAL_PACKAGE_LISTS) \
-		-o build/mate-personal.cfg \
+		-o $(BUILD_DIR)/mate-personal.cfg \
 		-t mate \
 		-c  $(MINIMAL_LATE_CMDS)
 
@@ -363,7 +372,7 @@ mate_complete: prepare
 	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(ALL_PACKAGE_LISTS) \
-		-o build/mate-complete.cfg \
+		-o $(BUILD_DIR)/mate-complete.cfg \
 		-t mate \
 		-c $(COMPLETE_LATE_CMDS)
 
@@ -371,7 +380,7 @@ mate_complete_personal: prepare
 	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(ALL_PACKAGE_LISTS) \
-		-o build/mate-complete-personal.cfg \
+		-o $(BUILD_DIR)/mate-complete-personal.cfg \
 		-t mate \
 		-c $(COMPLETE_LATE_CMDS)
 
@@ -381,7 +390,7 @@ lxde: prepare
 	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(MINIMAL_PACKAGE_LISTS),upgrades \
- 		-o build/lxde.cfg \
+ 		-o $(BUILD_DIR)/lxde.cfg \
 		-t lxde \
 		-c $(MINIMAL_LATE_CMDS),uu-add-origins,uu-activate
 
@@ -389,14 +398,14 @@ lxde_personal: prepare
 	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(MINIMAL_PACKAGE_LISTS),upgrades \
-		-o build/lxde-personal.cfg \
+		-o $(BUILD_DIR)/lxde-personal.cfg \
 		-t lxde -c $(MINIMAL_LATE_CMDS),uu-add-origins,uu-activate
 
 lxde_complete: prepare
 	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(ALL_PACKAGE_LISTS) \
-		-o build/lxde-complete.cfg \
+		-o $(BUILD_DIR)/lxde-complete.cfg \
 		-t lxde \
 		-c $(COMPLETE_LATE_CMDS)
 
@@ -404,7 +413,7 @@ lxde_complete_personal: prepare
 	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(ALL_PACKAGE_LISTS),upgrades \
-		-o build/lxde-complete-personal.cfg \
+		-o $(BUILD_DIR)/lxde-complete-personal.cfg \
 		-t lxde -c $(COMPLETE_LATE_CMDS),uu-add-origins,uu-activate
 
 # Multi desktop environment	
@@ -413,7 +422,7 @@ multi: prepare
 	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(MINIMAL_PACKAGE_LISTS),gnome-extensions \
-		-o build/multi.cfg \
+		-o $(BUILD_DIR)/multi.cfg \
 		-t multi \
 		-c $(MINIMAL_LATE_CMDS),shortcuts
 
@@ -421,7 +430,7 @@ multi_personal: prepare
 	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(MINIMAL_PACKAGE_LISTS),gnome-extensions \
-		-o build/multi-personal.cfg \
+		-o $(BUILD_DIR)/multi-personal.cfg \
 		-t multi \
 		-c $(MINIMAL_LATE_CMDS),shortcuts
 
@@ -429,7 +438,7 @@ multi_complete: prepare
 	$(PRESEED_CREATION_CMD) \
 		-u $(DEFAULT_USER) \
 		-p $(ALL_PACKAGE_LISTS) \
-		-o build/multi-complete.cfg \
+		-o $(BUILD_DIR)/multi-complete.cfg \
 		-t multi \
 		-c $(COMPLETE_LATE_CMDS),shortcuts
 
@@ -437,7 +446,7 @@ multi_complete_personal: prepare
 	$(PRESEED_CREATION_CMD) \
 		-a \
 		-p $(ALL_PACKAGE_LISTS) \
-		-o build/multi-complete-personal.cfg \
+		-o $(BUILD_DIR)/multi-complete-personal.cfg \
 		-t multi \
 		-c $(COMPLETE_LATE_CMDS)
 
@@ -447,7 +456,7 @@ server: prepare
 	$(PRESEED_CREATION_CMD) -r \
 		-u $(DEFAULT_USER) \
 		-p essential-cli-tools,cli-tools,developer-cli,docker,server \
-		-o build/server.cfg \
+		-o $(BUILD_DIR)/server.cfg \
 		-t standard \
 		-c error-prompt,short-grub-timeout,sudo-nopasswd,tmux-conf,docker
 
@@ -456,7 +465,7 @@ server_personal: prepare
 		-r \
 		-a \
 		-p essential-cli-tools,cli-tools,developer-cli,docker,server \
-		-o build/server-personal.cfg \
+		-o $(BUILD_DIR)/server-personal.cfg \
 		-t standard \
 		-c error-prompt,short-grub-timeout,sudo-nopasswd,tmux-conf,docker
 
@@ -767,7 +776,7 @@ run_live_server: live_iso_server
 
 .ONESHELL:
 validate_preseeds:
-	@for FILE in $(wildcard build/*.cfg)
+	@for FILE in $(wildcard $(BUILD_DIR)/*.cfg)
 	do
 		 test $$(debconf-set-selections --checkonly $${FILE} 2>&1 |grep 'warning:'|wc -l) -eq 0 || \
 		 (echo $${FILE} is not a valid preseed file:;debconf-set-selections --checkonly $${FILE}; exit 1)
@@ -802,7 +811,7 @@ generate_install_scripts: prepare
 	done
 
 website: prepare
-	$(PANDOC_HTML_CMD) --metadata title="Nederlandse Debian preseeds en live-build configuraties" website/index.md -o build/index.html
+	$(PANDOC_HTML_CMD) --metadata title="Nederlandse Debian preseeds en live-build configuraties" website/index.md -o $(BUILD_DIR)/index.html
 	
 precommit: sort_package_lists
 
@@ -824,7 +833,7 @@ check_package_names:
 
 .ONESHELL:
 generate_late_cmd_script:
-	LATE_CMD_SCRIPT=build/late-cmds.sh
+	LATE_CMD_SCRIPT=$(BUILD_DIR)/late-cmds.sh
 	(echo '#!/usr/bin/env bash'; echo) > $${LATE_CMD_SCRIPT}
 	for LATE_CMD in $$(ls late-cmds);
 	do
