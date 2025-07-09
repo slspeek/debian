@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-head -15 /var/log/installer-preseed/profile.cfg|tail -13|cut -c 4-
+grep '^##' /var/log/installer-preseed/profile.cfg|cut -c 4-
 echo
 echo Logs:
 echo -----

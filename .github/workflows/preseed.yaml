@@ -12,10 +12,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Git describe
-        run: git describe --tags
-      - name: Git tags
-        run: git tag
       - name: Make all targets
         run: make all
       - name: Deploy to github pages
