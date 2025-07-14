@@ -811,7 +811,10 @@ generate_install_scripts: prepare
 	done
 
 website: prepare
-	$(PANDOC_HTML_CMD) --metadata title="Nederlandse Debian preseeds en live-build configuraties" website/index.md -o $(BUILD_DIR)/index.html
+	mkdir -p $(PP_DIR)
+	REPO_URL=$(REPO_URL) GH_PAGES=$(GH_PAGES) envsubst < website/index.md > $(PP_DIR)/index.md
+	$(PANDOC_HTML_CMD) --metadata title="Nederlandse Debian preseeds en live-build configuraties" $(PP_DIR)/index.md -o $(BUILD_DIR)/index.html
+	rm -rf $(PP_DIR)
 	
 precommit: sort_package_lists
 

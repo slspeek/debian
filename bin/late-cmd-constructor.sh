@@ -16,7 +16,7 @@ cat - << EOF
 /bin/sh -c ' \\
 wget --directory-prefix=/tmp --no-verbose $GH_PAGES/scripts.tar.gz && \\
 tar -C /usr/local/bin -xzf /tmp/scripts.tar.gz && \\
-/usr/local/bin/download-preseed.sh $PRESEED_NAME && \\
+/usr/local/bin/download-preseed.sh $GH_PAGES $PRESEED_NAME && \\
 mkdir -p $LATE_CMD_LOGGING_DIR/failed && \\
 $CMDS
 /usr/local/bin/console-large-font.sh && \\

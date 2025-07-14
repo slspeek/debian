@@ -1,4 +1,4 @@
-<style>#forkongithub a{background:#3d9435;color:#fff;text-decoration:none;font-family:arial,sans-serif;text-align:center;font-weight:bold;padding:5px 40px;font-size:1rem;line-height:2rem;position:relative;transition:0.5s;}#forkongithub a:hover{background:#34d126;color:#fff;}#forkongithub a::before,#forkongithub a::after{content:"";width:100%;display:block;position:absolute;top:1px;left:0;height:1px;background:#fff;}#forkongithub a::after{bottom:1px;top:auto;}@media screen and (min-width:800px){#forkongithub{position:fixed;display:block;top:0;right:0;width:200px;overflow:hidden;height:200px;z-index:9999;}#forkongithub a{width:200px;position:absolute;top:60px;right:-60px;transform:rotate(45deg);-webkit-transform:rotate(45deg);-ms-transform:rotate(45deg);-moz-transform:rotate(45deg);-o-transform:rotate(45deg);box-shadow:4px 4px 10px rgba(0,0,0,0.8);}}</style><span id="forkongithub"><a href="https://github.com/slspeek/debian">Fork me on GitHub</a></span>
+<style>#forkongithub a{background:#3d9435;color:#fff;text-decoration:none;font-family:arial,sans-serif;text-align:center;font-weight:bold;padding:5px 40px;font-size:1rem;line-height:2rem;position:relative;transition:0.5s;}#forkongithub a:hover{background:#34d126;color:#fff;}#forkongithub a::before,#forkongithub a::after{content:"";width:100%;display:block;position:absolute;top:1px;left:0;height:1px;background:#fff;}#forkongithub a::after{bottom:1px;top:auto;}@media screen and (min-width:800px){#forkongithub{position:fixed;display:block;top:0;right:0;width:200px;overflow:hidden;height:200px;z-index:9999;}#forkongithub a{width:200px;position:absolute;top:60px;right:-60px;transform:rotate(45deg);-webkit-transform:rotate(45deg);-ms-transform:rotate(45deg);-moz-transform:rotate(45deg);-o-transform:rotate(45deg);box-shadow:4px 4px 10px rgba(0,0,0,0.8);}}</style><span id="forkongithub"><a href="${REPO_URL}">Fork me on GitHub</a></span>
 
 ## Profielen
 
@@ -59,7 +59,7 @@ Boot de [Debian installer](https://cdimage.debian.org/debian-cd/current/amd64/is
 Vul:
 
 ```
-https://slspeek.github.io/debian/gnome-personal.cfg
+${GH_PAGES}/gnome-personal.cfg
 ```
 
 in in het veld "Location of initial preconfiguration file".
@@ -92,7 +92,7 @@ Als alles goed is gegaan staat er in ```build``` een bestand ```live-image-amd64
 
 ### Op een niet gepreseede machine
 ```
-curl https://slspeek.github.io/debian/scripts.tar.gz | sudo tar xvz -C /usr/local/bin
+curl ${GH_PAGES}/scripts.tar.gz | sudo tar xvz -C /usr/local/bin
 ```
 ### Op een gepreseede machine
 ```
