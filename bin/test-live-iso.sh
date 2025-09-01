@@ -25,7 +25,6 @@ VM_NAME=${PROFILE_NAME}-test
 virt-install \
         --name $VM_NAME \
         --osinfo debian11 \
-        --boot cdrom \
         --video virtio \
         --cdrom $LIVE_ISO_PATH \
         --memory 3048 \
