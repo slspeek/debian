@@ -75,7 +75,6 @@ COMPLETE_LIVE_LATE_CMDS=$(MINIMAL_LIVE_LATE_CMDS),$\
 	mattermost,$\
 	megasync,$\
 	prepare-education-box,$\
-	popcorntime,$\
 	teamviewer,$\
 	vscode
 COMPLETE_LATE_CMDS=$(MINIMAL_LATE_CMDS),$\
@@ -88,7 +87,6 @@ COMPLETE_LATE_CMDS=$(MINIMAL_LATE_CMDS),$\
 	mattermost,$\
 	megasync,$\
 	prepare-education-box,$\
-	popcorntime,$\
 	teamviewer,$\
 	vscode
 
