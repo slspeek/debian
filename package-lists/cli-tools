@@ -12,7 +12,7 @@ curl
 debconf-utils
 entr
 espeak
-exa
+eza
 fd-find
 figlet
 fzf
@@ -44,7 +44,6 @@ ripgrep
 rsync
 sl
 tcpdump
-tldr
 traceroute
 unrar
 whois
