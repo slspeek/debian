@@ -5,12 +5,10 @@ curl
 debconf-utils
 extrepo
 fonts-terminus
-friendly-recovery
 info
 memtest86+
 netselect-apt
 patch
-software-properties-common
 sudo
 tmux
 tree
