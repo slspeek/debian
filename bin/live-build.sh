@@ -72,7 +72,7 @@ TEMP_CONFIG=$(mktemp)
 cat > $TEMP_CONFIG <<'EOF'
 lb config noauto \
   --verbose \
-  --distribution bookworm \
+  --distribution trixie \
   --parent-archive-areas "main contrib non-free non-free-firmware" \
   --bootappend-live "boot=live ${LIVE_COMPONENTS} locales=nl_NL.UTF-8 username=${DEFAULT_USER} \
   user-fullname=${DEFAULT_USER_FULLNAME} timezone=Europe/Amsterdam ${PERSISTENCE}" \

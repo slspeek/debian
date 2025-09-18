@@ -10,7 +10,7 @@ WEBSITE_DIR=$(BUILD_DIR)/$(WEBSITE_SUBDIR)
 PP_SUBDIR=preprocessed
 PP_DIR=$(BUILD_DIR)/$(PP_SUBDIR)
 
-SUITE=bookworm
+SUITE=trixie
 
 GITHUB_USER=slspeek
 GITHUB_REPO_NAME=debian
@@ -52,7 +52,6 @@ ALL_PACKAGE_LISTS=$(MINIMAL_PACKAGE_LISTS),$\
 	virtmanager
 MINIMAL_LIVE_LATE_CMDS=firefox-extensions,$\
 	error-prompt,$\
-	netselect-apt,$\
 	tmux-conf
 MINIMAL_LATE_CMDS=$(MINIMAL_LIVE_LATE_CMDS),$\
 	chrome-remote-desktop,$\
