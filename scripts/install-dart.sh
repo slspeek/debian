@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -e
-
+export DEBIAN_FRONTEND=noninteractive 
 apt-get update ||true
 apt-get install -y apt-transport-https
 wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | \
