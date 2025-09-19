@@ -121,7 +121,7 @@ fi
 
 cat tasks/$TASKS|grep -v 'standard'|sed -E 's/^./task-&/' > $STAGE_AREA/tasks.packages.lst
 
-late-cmd-constructor.sh $LATE_CMDS $LATE_CMD_LOGGING_DIR ${PROFILE_NAME}.cfg > $STAGE_AREA/late-cmds.hook.chroot
+late-cmd-constructor.sh $LATE_CMDS $LATE_CMD_LOGGING_DIR ${PROFILE_NAME}.cfg ${GH_PAGES}> $STAGE_AREA/late-cmds.hook.chroot
 # 'Live' installer type should not use a preseed, only 'normal' type installers,
 # but https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1051721 prevents using this option.
 # wget --no-verbose -O $STAGE_AREA/preseed.cfg ${GH_PAGES}/${PROFILE_NAME}-personal.cfg  
